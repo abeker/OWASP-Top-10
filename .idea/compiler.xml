@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Zuul" />
+        <module name="Eureka" />
+        <module name="authentication-service" />
+        <module name="auth-service (1) (com.owasp)" />
+        <module name="ad-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="ad-service" target="1.8" />
+      <module name="authentication-service" target="1.8" />
+      <module name="Eureka" target="1.8" />
+      <module name="Owasp-Microservices" target="1.8" />
+      <module name="Zuul" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Eureka" options="-parameters" />
+      <module name="Zuul" options="-parameters" />
+      <module name="ad-service" options="-parameters" />
+      <module name="auth-service" options="-parameters" />
+      <module name="auth-service (1) (com.owasp)" options="-parameters" />
+      <module name="authentication-service" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Eureka/Eureka.iml" filepath="$PROJECT_DIR$/Eureka/Eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Owasp-Microservices.iml" filepath="$PROJECT_DIR$/Owasp-Microservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zuul/Zuul.iml" filepath="$PROJECT_DIR$/Zuul/Zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ad-service/ad-service.iml" filepath="$PROJECT_DIR$/ad-service/ad-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/auth-service.iml" filepath="$PROJECT_DIR$/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/auth-service/auth-service (1) (com.owasp).iml" filepath="$PROJECT_DIR$/auth-service/auth-service (1) (com.owasp).iml" />
+      <module fileurl="file://$PROJECT_DIR$/authentication-service/authentication-service.iml" filepath="$PROJECT_DIR$/authentication-service/authentication-service.iml" />
+    </modules>
+  </component>
+</project>
