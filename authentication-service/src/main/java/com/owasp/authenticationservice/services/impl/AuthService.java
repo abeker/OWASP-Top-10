@@ -10,19 +10,19 @@ import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.IAuthService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.enums.UserStatus;
-import com.owasp.authenticationservice.util.exception.GeneralException;
+import com.owasp.authenticationservice.util.exceptions.GeneralException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 
 @Service
 public class AuthService implements IAuthService {
@@ -50,6 +50,17 @@ public class AuthService implements IAuthService {
         checkSimpleUserStatus(user);
         Authentication authentication = loginSimpleUser(request.getUsername(), request.getPassword());
         return createLoginUserResponse(authentication, user);
+    }
+
+    @Override
+    public String getPermission(String token) {
+        String username = _tokenUtils.getUsernameFromToken(token);
+        User user = _userRepository.findOneByUsername(username);
+        String retVal = "";
+        for (GrantedAuthority authority : user.getAuthorities()) {
+            retVal += authority.getAuthority()+",";
+        }
+        return retVal.substring(0,retVal.length()-1);
     }
 
     private UserResponse createLoginUserResponse(Authentication authentication, User user) {

@@ -1,4 +1,4 @@
-package com.owasp.authenticationservice.util.exception;
+package com.owasp.authenticationservice.util.exceptions;
 
 import org.springframework.http.HttpStatus;
 

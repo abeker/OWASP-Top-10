@@ -9,4 +9,6 @@ public interface IAuthService {
 
     UserResponse login(LoginCredentialsDTO request, HttpServletRequest httpServletRequest);
 
+    String getPermission(String token);
+
 }
