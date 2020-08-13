@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -45,5 +47,15 @@ public class UserController {
     @PutMapping("/login")
     public UserResponse login(@RequestBody LoginCredentialsDTO request, HttpServletRequest httpServletRequest) throws GeneralException {
         return _authService.login(request, httpServletRequest);
+    }
+
+    @GetMapping("/{id}")
+    public UserResponse getUser(@PathVariable("id") UUID userId) throws GeneralException {
+        return _authService.getUser(userId);
+    }
+
+    @GetMapping("/{email}/mail")
+    public UserResponse getUserByEmail(@PathVariable("email") String userEmail) throws GeneralException {
+        return _authService.getUserByEmail(userEmail);
     }
 }

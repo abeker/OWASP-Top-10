@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 @Service
 public class AuthService implements IAuthService {
@@ -61,6 +62,26 @@ public class AuthService implements IAuthService {
             retVal += authority.getAuthority()+",";
         }
         return retVal.substring(0,retVal.length()-1);
+    }
+
+    @Override
+    public UserResponse getUser(UUID userId) {
+        User user = _userRepository.findOneById(userId);
+        throwErrorIfUserNull(user);
+        return mapUserToUserResponse(user);
+    }
+
+    @Override
+    public UserResponse getUserByEmail(String userEmail) {
+        User user = _userRepository.findOneByUsername(userEmail);
+        throwErrorIfUserNull(user);
+        return mapUserToUserResponse(user);
+    }
+
+    private void throwErrorIfUserNull(User user) throws GeneralException {
+        if(user == null) {
+            throw new GeneralException("This user doesn't exist.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     private UserResponse createLoginUserResponse(Authentication authentication, User user) {
