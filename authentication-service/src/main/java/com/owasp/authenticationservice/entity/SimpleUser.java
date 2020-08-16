@@ -17,12 +17,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class SimpleUser extends User {
 
-    private String ssn;                 //jmbg
+    private String ssn;                 // jmbg
 
     private String address;
 
     @Enumerated(EnumType.STRING)
-    private UserStatus userStatus;
+    private UserStatus userStatus = UserStatus.PENDING;
 
     private LocalDateTime confirmationTime;
 

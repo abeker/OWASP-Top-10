@@ -1,25 +1,19 @@
-package com.owasp.authenticationservice.util.exception;
+package com.owasp.authenticationservice.util.exceptions;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class GeneralException extends RuntimeException {
 
     private HttpStatus httpStatus;
 
-    public GeneralException() {
-    }
-
     public GeneralException(String message, HttpStatus httpStatus) {
-
         super(message);
-        this.httpStatus = httpStatus;
-    }
-
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
-    }
-
-    public void setHttpStatus(HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
     }
 }
