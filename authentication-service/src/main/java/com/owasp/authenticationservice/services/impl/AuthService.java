@@ -21,6 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
@@ -41,9 +42,9 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public UserResponse login(LoginCredentialsDTO request, HttpServletRequest httpServletRequest) {
+    public UserResponse login(LoginCredentialsDTO request, HttpServletRequest httpServletRequest) throws GeneralException {
         User user = _userRepository.findOneByUsername(request.getUsername());
-        
+
         if(!isUserFound(user, request)) {
             throw new GeneralException("Bad credentials.", HttpStatus.BAD_REQUEST);
         }
