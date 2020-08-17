@@ -24,7 +24,7 @@ import java.util.Set;
 public class User extends BaseEntity implements Serializable {
 
     @Column(unique = true, nullable = false)
-    private String username; //email
+    private String username;                    //email
 
     @Column(nullable = false)
     private String password;
@@ -33,12 +33,12 @@ public class User extends BaseEntity implements Serializable {
 
     private String lastName;
 
-    private boolean deleted;
+    private boolean deleted = false;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    private Timestamp lastPasswordResetDate;
+    private Timestamp lastPasswordResetDate = new Timestamp(System.currentTimeMillis());
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_authority",
