@@ -1,5 +1,5 @@
 insert into permission (name) values
-    ('CREATE_AD'), ('VIEW_AD'), ('UPDATE_AD'), ('DELETE_AD'), ('UPLOAD_PHOTO'),           -- 1, 2, 3, 4, 5
+    ('CREATE_AD'), ('VIEW_AD'), ('UPDATE_AD'), ('DELETE_AD'), ('UPLOAD_PHOTO'),     -- 1, 2, 3, 4, 5
     ('POST_COMMENT'), ('VIEW_COMMENT'),  ('DENY_COMMENT'), ('APPROVE_COMMENT'),     -- 6, 7, 8, 9
     ('POST_RATE'), ('VIEW_RATE'), ('UPDATE_RATE'),      -- 10, 11, 12
     ('LOGIN'), ('REGISTER'), ('SEARCH'),    -- 13, 14, 15

@@ -1,6 +1,9 @@
 package com.owasp.authenticationservice.services;
 
-import org.springframework.stereotype.Service;
+import com.owasp.authenticationservice.dto.request.CreateSimpleUserRequest;
+import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
+import com.owasp.authenticationservice.dto.response.UserResponse;
 
 public interface IUserService {
+
 }
