@@ -4,6 +4,7 @@ public enum NumberOfGears {
 
     FOUR,
     FIVE,
+    SIX,
     SEVEN,
     EIGHT,
     NINE,

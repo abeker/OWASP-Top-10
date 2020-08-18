@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,8 +31,8 @@ public class Car extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private FuelType fuelType;
 
-    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Ad ad;
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Ad> ad;
 
     private String kilometersTraveled;
 

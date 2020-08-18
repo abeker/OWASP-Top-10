@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AgentService implements IAgentService {
@@ -46,6 +47,12 @@ public class AgentService implements IAgentService {
         Agent savedAgent = _agentRepository.save(agent);
 
         return mapAgentToAgentResponse(savedAgent);
+    }
+
+    @Override
+    public AgentResponse getAgent(UUID id) {
+        Agent agent = _agentRepository.findOneById(id);
+        return mapAgentToAgentResponse(agent);
     }
 
     private AgentResponse mapAgentToAgentResponse(Agent savedAgent) {

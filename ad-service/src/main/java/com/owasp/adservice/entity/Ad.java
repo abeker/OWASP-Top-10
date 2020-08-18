@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Ad extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
