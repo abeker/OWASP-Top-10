@@ -1,8 +1,16 @@
 package com.owasp.adservice.controller;
 
+import com.owasp.adservice.dto.AddAdRequest;
+import com.owasp.adservice.dto.response.AdResponse;
 import com.owasp.adservice.services.impl.AdService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.owasp.adservice.util.exceptions.GeneralException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/ads")
@@ -12,5 +20,16 @@ public class AdController {
 
     public AdController(AdService adService) {
         _adService = adService;
+    }
+
+    @GetMapping
+    public List<AdResponse> getAds() throws GeneralException {
+        return _adService.getAds(false, null);
+    }
+
+    @PostMapping(consumes = { "multipart/form-data" })
+    @PreAuthorize("hasAuthority('CREATE_AD')")
+    public ResponseEntity<?> createAd(@RequestPart("imageFile") List<MultipartFile> fileList, @RequestPart("request") AddAdRequest request) throws Exception{
+        return new ResponseEntity<>(_adService.createAd(fileList, request), HttpStatus.CREATED);
     }
 }

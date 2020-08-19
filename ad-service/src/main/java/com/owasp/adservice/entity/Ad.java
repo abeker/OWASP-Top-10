@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Ad extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
@@ -32,9 +32,6 @@ public class Ad extends BaseEntity {
 
     @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Photo> adPhotos;
-
-    @OneToMany(mappedBy = "ad")
-    private Set<RequestAd> adRequests = new HashSet<RequestAd>();
 
     private LocalDate creationDate = LocalDate.now(); //date when ad was created
 

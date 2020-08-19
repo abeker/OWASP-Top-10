@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -29,8 +30,17 @@ public class Request extends BaseEntity {
 
     private String pickUpAddress;
 
-    private boolean deleted;
+    private boolean deleted = false;
 
-    @OneToMany(mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<RequestAd> requestAds = new HashSet<RequestAd>();
+    private LocalDate pickUpDate;          // datum preuzimanja
+
+    private LocalTime pickUpTime;           // vreme preuzimanja
+
+    private LocalDate returnDate;           // datum vracanja
+
+    private LocalTime returnTime;           // vreme vracanja
+
+    @ManyToOne
+    @JoinColumn(name = "ad_id")
+    private Ad ad;
 }

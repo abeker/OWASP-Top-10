@@ -1,5 +1,6 @@
 package com.owasp.adservice.repository;
 
+import com.owasp.adservice.entity.Ad;
 import com.owasp.adservice.entity.Request;
 import com.owasp.adservice.util.enums.RequestStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,5 +21,7 @@ public interface IRequestRepository extends JpaRepository<Request, UUID> {
     List<Request> findAllByDeleted(boolean deleted);
 
     List<Request> findAllByCustomerIDAndStatus(UUID id, RequestStatus status);
+
+    List<Request> findAllByAd(Ad ad);
 
 }

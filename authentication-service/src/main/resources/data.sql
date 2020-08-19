@@ -38,7 +38,7 @@ insert into user_authority (user_id, authority_id) values
 
 insert into admin (id) values ('924c26a6-d96b-4ffb-ab8b-250602c03f75');
 
-insert into agent (address, date_founded, id) values ('Rio Street', '2020-07-20T06:30:00', '602399f4-183a-4174-95ea-1b42940fa0a9');
+insert into agent (address, date_founded, id) values ('Rio Street, Novi Sad, Serbia', '2020-07-20T06:30:00', '602399f4-183a-4174-95ea-1b42940fa0a9');
 
 insert into simple_user (address, confirmation_time, ssn, user_status, id) values
     ('Townsville', '2020-07-20T06:30:00', '121206780062', 'APPROVED', 'f1aed848-878f-4d4a-b198-e707b5dd220c');
