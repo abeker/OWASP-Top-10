@@ -15,6 +15,8 @@ public class AgentResponse {
 
     private String lastName;
 
+    private String address;
+
     private String userRole;
 
 }

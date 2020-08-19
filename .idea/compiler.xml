@@ -7,10 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="auth-service (1) (com.owasp)" />
+        <module name="Zuul" />
         <module name="Eureka" />
         <module name="authentication-service" />
-        <module name="Zuul" />
+        <module name="auth-service (1) (com.owasp)" />
         <module name="ad-service" />
       </profile>
     </annotationProcessing>

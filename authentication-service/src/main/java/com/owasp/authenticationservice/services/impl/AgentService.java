@@ -62,6 +62,7 @@ public class AgentService implements IAgentService {
         agentResponse.setLastName(savedAgent.getLastName());
         agentResponse.setUsername(savedAgent.getUsername());
         agentResponse.setUserRole(savedAgent.getUserRole().toString());
+        agentResponse.setAddress(savedAgent.getAddress());
         return agentResponse;
     }
 

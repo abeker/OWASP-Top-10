@@ -33,9 +33,6 @@ public class Ad extends BaseEntity {
     @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Photo> adPhotos;
 
-    @OneToMany(mappedBy = "ad")
-    private Set<RequestAd> adRequests = new HashSet<RequestAd>();
-
     private LocalDate creationDate = LocalDate.now(); //date when ad was created
 
     private boolean deleted = false;
