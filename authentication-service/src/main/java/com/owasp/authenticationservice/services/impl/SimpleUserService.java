@@ -4,9 +4,11 @@ import com.owasp.authenticationservice.dto.request.CreateSimpleUserRequest;
 import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
 import com.owasp.authenticationservice.entity.Authority;
 import com.owasp.authenticationservice.entity.SimpleUser;
+import com.owasp.authenticationservice.entity.User;
 import com.owasp.authenticationservice.repository.IAuthorityRepository;
 import com.owasp.authenticationservice.repository.ISimpleUserRepository;
 import com.owasp.authenticationservice.repository.IUserRepository;
+import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.ISimpleUserService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.enums.UserStatus;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,12 +30,14 @@ public class SimpleUserService implements ISimpleUserService {
     private final IAuthorityRepository _authorityRepository;
     private final ISimpleUserRepository _simpleUserRepository;
     private final IUserRepository _userRepository;
+    private final TokenUtils _tokenUtils;
 
-    public SimpleUserService(PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, ISimpleUserRepository simpleUserRepository, IUserRepository userRepository) {
+    public SimpleUserService(PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, ISimpleUserRepository simpleUserRepository, IUserRepository userRepository, TokenUtils tokenUtils) {
         _passwordEncoder = passwordEncoder;
         _authorityRepository = authorityRepository;
         _simpleUserRepository = simpleUserRepository;
         _userRepository = userRepository;
+        _tokenUtils = tokenUtils;
     }
 
     @Override
@@ -62,6 +67,20 @@ public class SimpleUserService implements ISimpleUserService {
             simpleUserResponseList.add(mapSimpleUserToSimpleUserResponse(simpleUser));
         }
         return simpleUserResponseList;
+    }
+
+    @Override
+    public SimpleUserResponse getSimpleUser(UUID id) {
+        SimpleUser simpleUser = _simpleUserRepository.findOneById(id);
+        return mapSimpleUserToSimpleUserResponse(simpleUser);
+    }
+
+    @Override
+    public SimpleUserResponse getSimpleUserFromToken(String token) {
+        String simpleUserUsername = _tokenUtils.getUsernameFromToken(token);
+        User user = _userRepository.findOneByUsername(simpleUserUsername);
+
+        return getSimpleUser(user.getId());
     }
 
     private UserStatus getUserStatusFromString(String userStatusString) {

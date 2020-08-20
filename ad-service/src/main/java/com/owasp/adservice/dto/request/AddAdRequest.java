@@ -1,4 +1,4 @@
-package com.owasp.adservice.dto;
+package com.owasp.adservice.dto.request;
 
 import lombok.Data;
 
@@ -10,6 +10,8 @@ public class AddAdRequest {
     private String carModel;        // Audi A3
 
     private String gearshiftType;
+
+    private int numberOfGears;
 
     private String fuelType;
 
@@ -23,5 +25,4 @@ public class AddAdRequest {
 
     private int seats;
 
-    private boolean simpleUser;
 }

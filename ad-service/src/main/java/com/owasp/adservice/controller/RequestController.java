@@ -6,8 +6,12 @@ import com.owasp.adservice.dto.response.AdResponse;
 import com.owasp.adservice.services.impl.RequestService;
 import com.owasp.adservice.util.enums.RequestStatus;
 import com.owasp.adservice.util.exceptions.GeneralException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +39,26 @@ public class RequestController {
     @GetMapping("/{requestStatus}/simple-user/{id}")
     public List<AdRequestResponse> getSimpleUserRequestsByStatus(@PathVariable("requestStatus") String requestStatus, @PathVariable("id") UUID userId) throws GeneralException {
         return _requestService.getSimplUserRequestsByStatus(requestStatus, userId);
+    }
+
+    @PutMapping("/{requestId}/pay")
+    public ResponseEntity<Collection<AdRequestResponse>> userPay(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+        return new ResponseEntity<>(_requestService.payRequest(UUID.fromString(requestID), token), HttpStatus.OK);
+    }
+
+    @PutMapping("/{requestId}/drop")
+    public ResponseEntity<Collection<AdRequestResponse>> userDrop(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+        return new ResponseEntity<>(_requestService.dropRequest(UUID.fromString(requestID), token), HttpStatus.OK);
+    }
+
+    @PutMapping("/{requestID}/approve")
+    public ResponseEntity<Collection<AdRequestResponse>> approveRequest(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+        return new ResponseEntity<>(_requestService.approveRequest(UUID.fromString(requestID), token), HttpStatus.OK);
+    }
+
+    @PutMapping("/{requestID}/deny")
+    public ResponseEntity<Collection<AdRequestResponse>> denyRequest(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+        return new ResponseEntity<>(_requestService.denyRequest(UUID.fromString(requestID), token), HttpStatus.OK);
     }
 
 }

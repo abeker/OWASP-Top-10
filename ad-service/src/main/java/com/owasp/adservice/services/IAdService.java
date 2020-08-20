@@ -1,6 +1,6 @@
 package com.owasp.adservice.services;
 
-import com.owasp.adservice.dto.AddAdRequest;
+import com.owasp.adservice.dto.request.AddAdRequest;
 import com.owasp.adservice.dto.response.AdResponse;
 import com.owasp.adservice.entity.Ad;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,4 +15,6 @@ public interface IAdService {
     AdResponse mapAdToAdResponse(Ad ad);
 
     AdResponse createAd(List<MultipartFile> fileList, AddAdRequest request);
+
+    List<AdResponse> getAgentAds(boolean deleted, String token);
 }

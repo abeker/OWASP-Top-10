@@ -27,8 +27,14 @@ public class SimpleUserController {
         return _simpleUserService.createSimpleUser(request);
     }
 
-    @GetMapping("/{userStatus}")
+    @GetMapping("/{id}")
+    SimpleUserResponse getSimpleUser(@PathVariable("id") UUID id) {
+        return _simpleUserService.getSimpleUser(id);
+    }
+
+    @GetMapping("/{userStatus}/status")
     public List<SimpleUserResponse> getSimpleUserByStatus(@PathVariable("userStatus") String userStatus) {
         return _simpleUserService.getSimpleUserByStatus(userStatus);
     }
+
 }

@@ -1,6 +1,7 @@
 package com.owasp.authenticationservice.services.impl;
 
 import com.owasp.authenticationservice.dto.request.LoginCredentialsDTO;
+import com.owasp.authenticationservice.dto.response.AgentResponse;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 import com.owasp.authenticationservice.entity.SimpleUser;
 import com.owasp.authenticationservice.entity.User;

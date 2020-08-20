@@ -1,4 +1,4 @@
-package com.owasp.authenticationservice.dto.response;
+package com.owasp.adservice.dto.response;
 
 import lombok.Data;
 

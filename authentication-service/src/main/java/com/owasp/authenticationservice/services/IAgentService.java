@@ -10,4 +10,6 @@ public interface IAgentService {
     AgentResponse createAgent(CreateAgentRequest request);
 
     AgentResponse getAgent(UUID id);
+
+    AgentResponse getAgentFromToken(String token);
 }
