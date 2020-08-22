@@ -4,7 +4,10 @@ insert into permission (name) values
     ('POST_RATE'), ('VIEW_RATE'), ('UPDATE_RATE'),      -- 10, 11, 12
     ('LOGIN'), ('REGISTER'), ('SEARCH'),    -- 13, 14, 15
     ('CREATE_AGENT'), ('CHANGE_PERMISSION'),    -- 16, 17
-    ('RENT_A_CAR'), ('CREATE_REQUEST'), ('APPROVE_REQUEST');    -- 18, 19, 20
+    ('RENT_A_CAR'), ('CREATE_REQUEST'), ('APPROVE_REQUEST'),    -- 18, 19, 20
+    ('APPROVE_USER_REQUEST'), ('DENY_USER_REQUEST'),    -- 21, 22
+    ('VIEW_USER_REQUESTS'), ('VIEW_AGENT_REQUESTS'),    -- 23, 24
+    ('PAY_REQUEST'), ('DROP_REQUEST'), ('APPROVE_REQUEST'), ('DENY_REQUEST');    -- 25, 26, 27, 28
 
 insert into authority (name) values ('ROLE_ADMIN'), ('ROLE_AGENT'), ('ROLE_SIMPLE_USER'),
     ('ROLE_REVIEWER_USER'), ('ROLE_RENT_USER'), ('ROLE_COMMENT_USER'),
@@ -12,13 +15,13 @@ insert into authority (name) values ('ROLE_ADMIN'), ('ROLE_AGENT'), ('ROLE_SIMPL
 
 insert into authorities_permissions (authority_id, permission_id) values
     (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (1, 15), (1, 16),
-    (1, 17), (1, 18), (1, 19), (1, 20),
-    (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 11), (2, 20),
+    (1, 17), (1, 18), (1, 19), (1, 20), (1, 21), (1, 22),
+    (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 11), (2, 20), (2, 24), (2, 27), (2, 28),
     (3, 13), (3, 14), (3, 15),
     (4, 10), (4, 11), (4, 12),
     (5, 18),
     (6, 6), (6, 7),
-    (7, 19),
+    (7, 19), (7, 23), (7, 25), (7, 26),
     (8, 1), (8, 2), (8, 3), (8, 4), (8, 5);
 
 -- admin@gmail.com -> Admin123!!!
@@ -34,7 +37,9 @@ insert into user_authority (user_id, authority_id) values
     ('602399f4-183a-4174-95ea-1b42940fa0a9', 2),
     ('602399f4-183a-4174-95ea-1b42940fa0a9', 3),
     ('602399f4-183a-4174-95ea-1b42940fa0a9', 8),
-    ('f1aed848-878f-4d4a-b198-e707b5dd220c', 3);
+    ('f1aed848-878f-4d4a-b198-e707b5dd220c', 3),
+    ('f1aed848-878f-4d4a-b198-e707b5dd220c', 5),
+    ('f1aed848-878f-4d4a-b198-e707b5dd220c', 7);
 
 insert into admin (id) values ('924c26a6-d96b-4ffb-ab8b-250602c03f75');
 

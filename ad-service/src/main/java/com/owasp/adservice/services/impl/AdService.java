@@ -1,22 +1,15 @@
 package com.owasp.adservice.services.impl;
 
 import com.owasp.adservice.client.AuthClient;
-import com.owasp.adservice.dto.AddAdRequest;
-import com.owasp.adservice.dto.response.AdResponse;
-import com.owasp.adservice.dto.response.CarModelResponse;
-import com.owasp.adservice.dto.response.CarResponse;
-import com.owasp.adservice.dto.response.PhotoResponse;
-import com.owasp.adservice.entity.Ad;
-import com.owasp.adservice.entity.Car;
-import com.owasp.adservice.entity.CarModel;
-import com.owasp.adservice.entity.Photo;
-import com.owasp.adservice.repository.IAdRepository;
-import com.owasp.adservice.repository.ICarModelRepository;
-import com.owasp.adservice.repository.ICarRepository;
-import com.owasp.adservice.repository.IPhotoRepository;
+import com.owasp.adservice.dto.request.AddAdRequest;
+import com.owasp.adservice.dto.response.*;
+import com.owasp.adservice.entity.*;
+import com.owasp.adservice.repository.*;
 import com.owasp.adservice.services.IAdService;
 import com.owasp.adservice.util.enums.FuelType;
 import com.owasp.adservice.util.enums.GearshiftType;
+import com.owasp.adservice.util.enums.NumberOfGears;
+import com.owasp.adservice.util.enums.RequestStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 @Service
 public class AdService implements IAdService {
@@ -36,13 +31,15 @@ public class AdService implements IAdService {
     private final ICarModelRepository _carModelRepository;
     private final ICarRepository _carRepository;
     private final IPhotoRepository _photoRepository;
+    private final IRequestRepository _requestRepository;
 
-    public AdService(IAdRepository adRepository, AuthClient authClient, ICarModelRepository carModelRepository, ICarRepository carRepository, IPhotoRepository photoRepository) {
+    public AdService(IAdRepository adRepository, AuthClient authClient, ICarModelRepository carModelRepository, ICarRepository carRepository, IPhotoRepository photoRepository, IRequestRepository requestRepository) {
         _adRepository = adRepository;
         _authClient = authClient;
         _carModelRepository = carModelRepository;
         _carRepository = carRepository;
         _photoRepository = photoRepository;
+        _requestRepository = requestRepository;
     }
 
     @Override
@@ -69,9 +66,20 @@ public class AdService implements IAdService {
         adResponse.setCreationDate(ad.getCreationDate());
         adResponse.setLimitedDistance(ad.isLimitedDistance());
         adResponse.setSeats(ad.getSeats());
+        setNumberOfRequest(adResponse, ad);
         createPhotoResponse(ad, adResponse);
         createCarResponse(ad, adResponse);
         return adResponse;
+    }
+
+    private void setNumberOfRequest(AdResponse adResponse, Ad ad) {
+        List<Request> nonCanceledRequestsOfAd = _requestRepository.findAllByAd(ad)
+                .stream()
+                .filter(request -> !request.isDeleted())
+                .filter(request -> !request.getStatus().equals(RequestStatus.CANCELED))
+                .collect(Collectors.toList());
+
+        adResponse.setNumberOfRequests(nonCanceledRequestsOfAd.size());
     }
 
     @Override
@@ -86,6 +94,15 @@ public class AdService implements IAdService {
         return mapAdToAdResponse(savedAd);
     }
 
+    @Override
+    public List<AdResponse> getAgentAds(boolean deleted, String token) {
+        AgentResponse agentResponse = _authClient.getAgentFromToken(token);
+        List<Ad> activeAds = getAdsByStatus(deleted);
+        List<Ad> agentAds = getAgentAds(activeAds, agentResponse.getId());
+
+        return mapAdsToAdsResponse(agentAds);
+    }
+
     private Ad saveAd(AddAdRequest request, Car savedCar) {
         Ad ad = new Ad();
         ad.setAgent(request.getAgentId());
@@ -94,7 +111,6 @@ public class AdService implements IAdService {
         ad.setAvailableKilometersPerRent(request.getAvailableKilometersPerRent());
         ad.setSeats(request.getSeats());
 
-
         return ad;
     }
 
@@ -102,11 +118,14 @@ public class AdService implements IAdService {
         Car car = new Car();
         CarModel carModel = findCarModel(request.getCarModel());
         GearshiftType gearshiftType = findGearshiftType(request.getGearshiftType());
+        NumberOfGears numberOfGears = findNumberOFGears(request.getNumberOfGears());
         FuelType fuelType = findFuelType(request.getFuelType());
         car.setCarModel(carModel);
         car.setGearshiftType(gearshiftType);
+        car.setNumberOfGears(numberOfGears);
         car.setFuelType(fuelType);
         car.setKilometersTraveled(request.getKilometersTraveled());
+
         return car;
     }
 
@@ -148,6 +167,18 @@ public class AdService implements IAdService {
         }
     }
 
+    private NumberOfGears findNumberOFGears(int numberOfGears) {
+        switch (numberOfGears) {
+            case 4: return NumberOfGears.FOUR;
+            case 5: return NumberOfGears.FIVE;
+            case 6: return NumberOfGears.SIX;
+            case 7: return NumberOfGears.SEVEN;
+            case 8: return NumberOfGears.EIGHT;
+            case 10: return NumberOfGears.TEN;
+            default: return null;
+        }
+    }
+
     private FuelType findFuelType(String fuelTypeString) {
         if(fuelTypeString.trim().equalsIgnoreCase("DIESEL")) {
             return FuelType.DIESEL;
@@ -177,11 +208,11 @@ public class AdService implements IAdService {
 
     private void createPhotoResponse(Ad ad, AdResponse adResponse) {
         List<PhotoResponse> photosOfAd = new ArrayList<>();
-        for (Photo photo : ad.getAdPhotos()) {
+        for (Photo photo : _photoRepository.findAllByAd(ad)) {
             PhotoResponse photoResponse = new PhotoResponse();
             photoResponse.setId(photo.getId());
             photoResponse.setName(photo.getName());
-            photoResponse.setPicByte(photo.getPicByte());
+            photoResponse.setPicByte(decompressBytes(photo.getPicByte()));
             photoResponse.setType(photo.getType());
             photosOfAd.add(photoResponse);
         }
@@ -219,6 +250,22 @@ public class AdService implements IAdService {
         } catch (IOException ignored) {
         }
         System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+        return outputStream.toByteArray();
+    }
+
+    public static byte[] decompressBytes(byte[] data) {
+        Inflater inflater = new Inflater();
+        inflater.setInput(data);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        try {
+            while (!inflater.finished()) {
+                int count = inflater.inflate(buffer);
+                outputStream.write(buffer, 0, count);
+            }
+            outputStream.close();
+        } catch (IOException | DataFormatException ignored) {
+        }
         return outputStream.toByteArray();
     }
 

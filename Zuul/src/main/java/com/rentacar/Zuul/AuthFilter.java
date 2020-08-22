@@ -3,7 +3,6 @@ package com.rentacar.Zuul;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import feign.FeignException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +12,11 @@ import java.util.logging.Logger;
 @Component
 public class AuthFilter extends ZuulFilter {
 
-//    @Autowired
-//    private AuthClient authClient;
+    private final AuthClient authClient;
 
-    private Logger logger = Logger.getLogger("Zuul service");
+    public AuthFilter(AuthClient authClient) {
+        this.authClient = authClient;
+    }
 
     @Override
     public String filterType() {
@@ -52,12 +52,12 @@ public class AuthFilter extends ZuulFilter {
 
         String token = request.getHeader("Auth-Token");
         try {
-//            String username = authClient.verify(token);
-//            if(username != null) {
-//                String permissionList = authClient.getPermission(token);
-//                ctx.addZuulRequestHeader("roles", permissionList);
-//                ctx.addZuulRequestHeader("username", username);
-//            }
+            String username = authClient.verify(token);
+            if(username != null) {
+                String permissionList = authClient.getPermission(token);
+                ctx.addZuulRequestHeader("roles", permissionList);
+                ctx.addZuulRequestHeader("username", username);
+            }
         } catch (FeignException.NotFound e) {
             setFailedRequest("User does not exist!", 403);
         }

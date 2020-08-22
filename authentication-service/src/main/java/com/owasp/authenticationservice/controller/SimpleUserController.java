@@ -5,6 +5,7 @@ import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
 import com.owasp.authenticationservice.services.impl.SimpleUserService;
 import com.owasp.authenticationservice.services.impl.UserService;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,12 +24,24 @@ public class SimpleUserController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('REGISTER')")
     public SimpleUserResponse createSimpleUser(@RequestBody CreateSimpleUserRequest request) throws GeneralException {
         return _simpleUserService.createSimpleUser(request);
     }
 
-    @GetMapping("/{userStatus}")
+    @GetMapping("/{id}")
+    SimpleUserResponse getSimpleUser(@PathVariable("id") UUID id) {
+        return _simpleUserService.getSimpleUser(id);
+    }
+
+    @GetMapping("/{userStatus}/status")
     public List<SimpleUserResponse> getSimpleUserByStatus(@PathVariable("userStatus") String userStatus) {
         return _simpleUserService.getSimpleUserByStatus(userStatus);
     }
+
+    @PostMapping("/{id}/add-roles")
+    public void addRolesAfterPay(@PathVariable("id") UUID userId){
+        _simpleUserService.addRolesAfterPay(userId);
+    }
+
 }

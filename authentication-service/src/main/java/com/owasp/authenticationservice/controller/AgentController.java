@@ -6,6 +6,7 @@ import com.owasp.authenticationservice.dto.response.AgentResponse;
 import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
 import com.owasp.authenticationservice.services.impl.AgentService;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class AgentController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('CREATE_AGENT')")
     public AgentResponse createAgent(@RequestBody CreateAgentRequest request) throws GeneralException {
         return _agentService.createAgent(request);
     }

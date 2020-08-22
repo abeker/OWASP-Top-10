@@ -1,6 +1,6 @@
 package com.owasp.adservice.controller;
 
-import com.owasp.adservice.dto.AddAdRequest;
+import com.owasp.adservice.dto.request.AddAdRequest;
 import com.owasp.adservice.dto.response.AdResponse;
 import com.owasp.adservice.services.impl.AdService;
 import com.owasp.adservice.util.exceptions.GeneralException;
@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ads")
 public class AdController {
@@ -31,5 +33,11 @@ public class AdController {
     @PreAuthorize("hasAuthority('CREATE_AD')")
     public ResponseEntity<?> createAd(@RequestPart("imageFile") List<MultipartFile> fileList, @RequestPart("request") AddAdRequest request) throws Exception{
         return new ResponseEntity<>(_adService.createAd(fileList, request), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{agentId}/ads")
+    public List<AdResponse> getAgentAds(@RequestHeader("Auth-Token") String token,
+                                        @PathVariable("agentId") String agentId) throws GeneralException {
+        return _adService.getAgentAds(false, token);
     }
 }

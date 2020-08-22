@@ -1,8 +1,11 @@
 package com.owasp.adservice.services.impl;
 
+import com.owasp.adservice.client.AuthClient;
 import com.owasp.adservice.dto.request.AdRequestRequest;
 import com.owasp.adservice.dto.response.AdRequestResponse;
 import com.owasp.adservice.dto.response.AdResponse;
+import com.owasp.adservice.dto.response.AgentResponse;
+import com.owasp.adservice.dto.response.SimpleUserResponse;
 import com.owasp.adservice.entity.Ad;
 import com.owasp.adservice.entity.Request;
 import com.owasp.adservice.repository.IAdRepository;
@@ -19,17 +22,20 @@ import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("SameParameterValue")
 @Service
 public class RequestService implements IRequestService {
 
     private final IRequestRepository _requestRepository;
     private final IAdRepository _adRepository;
     private final IAdService _adService;
+    private final AuthClient _authClient;
 
-    public RequestService(IRequestRepository requestRepository, IAdRepository adRepository, IAdService adService) {
+    public RequestService(IRequestRepository requestRepository, IAdRepository adRepository, IAdService adService, AuthClient authClient) {
         _requestRepository = requestRepository;
         _adRepository = adRepository;
         _adService = adService;
+        _authClient = authClient;
     }
 
     @Override
@@ -65,8 +71,19 @@ public class RequestService implements IRequestService {
 
     private AdRequestResponse mapSingleRequestToAdRequestResponse(Request request) {
         AdRequestResponse createdRequestResponse = new AdRequestResponse();
+        createdRequestResponse.setId(request.getId());
         createdRequestResponse.setRequestStatus(request.getStatus().toString());
         createdRequestResponse.setPickUpAddress(request.getPickUpAddress());
+        createdRequestResponse.setPickUpDate(request.getPickUpDate().toString());
+        createdRequestResponse.setPickUpTime(request.getPickUpTime().toString());
+        createdRequestResponse.setReturnDate(request.getReturnDate().toString());
+        createdRequestResponse.setReturnTime(request.getReturnTime().toString());
+        createdRequestResponse.setAgent(_authClient.getAgent(request.getAd().getAgent()));
+        if(request.getCustomerID() != null) {
+            createdRequestResponse.setSimpleUser(_authClient.getSimpleUser(request.getCustomerID()));
+        } else {
+            createdRequestResponse.setSimpleUser(null);
+        }
         AdResponse adResponse = _adService.mapAdToAdResponse(request.getAd());
         createdRequestResponse.setAd(adResponse);
 
@@ -116,6 +133,101 @@ public class RequestService implements IRequestService {
         return mapRequestsToAdRequestResponse(simpleUserRequests);
     }
 
+    @Override
+    public Collection<AdRequestResponse> payRequest(UUID requestID, String token) {
+        SimpleUserResponse simpleUserResponse = _authClient.getSimpleUserFromToken(token);
+        Request request = _requestRepository.findOneById(requestID);
+        if(request.getStatus().equals(RequestStatus.RESERVED)) {
+            request.setStatus(RequestStatus.PAID);
+            _requestRepository.save(request);
+            _authClient.addRolesAfterPay(simpleUserResponse.getId());
+        }
+
+        changeStatusOfRequests(request, RequestStatus.RESERVED, RequestStatus.CANCELED);
+        return getSimplUserRequestsByStatus("RESERVED", simpleUserResponse.getId());
+    }
+
+    @Override
+    public Collection<AdRequestResponse> dropRequest(UUID requestID, String token) {
+        SimpleUserResponse simpleUserResponse = _authClient.getSimpleUserFromToken(token);
+        Request request = _requestRepository.findOneById(requestID);
+        RequestStatus retStatus = request.getStatus();
+        if(!request.getStatus().equals(RequestStatus.PAID)) {
+            request.setStatus(RequestStatus.CANCELED);
+            _requestRepository.save(request);
+        }
+
+        return getSimplUserRequestsByStatus(retStatus.toString(), simpleUserResponse.getId());
+    }
+
+    @Override
+    public Collection<AdRequestResponse> approveRequest(UUID requestID, String token) {
+        AgentResponse agentResponse = _authClient.getAgentFromToken(token);
+        Request request = _requestRepository.findOneById(requestID);
+        request.setStatus(RequestStatus.RESERVED);
+        _requestRepository.save(request);
+
+        TimerTask taskPaid = new TimerTask() {
+            public void run() {
+                System.out.println("Approved request performed on: " + LocalTime.now() + ", " +
+                        "Request id: " + Thread.currentThread().getName());
+                if(!request.getStatus().equals(RequestStatus.PAID)) {
+                    request.setStatus(RequestStatus.CANCELED);
+                    _requestRepository.save(request);
+                }
+            }
+        };
+        Timer timer = new Timer(request.getId().toString());
+        long delay = (12 * 60 * 60 * 1000);
+        System.out.println("Approved request received at: " + LocalTime.now());
+        timer.schedule(taskPaid, delay);
+
+        return getAgentRequestsByStatus("PENDING", agentResponse.getId());
+    }
+
+    @Override
+    public Collection<AdRequestResponse> denyRequest(UUID requestID, String token) {
+        AgentResponse agentResponse = _authClient.getAgentFromToken(token);
+        Request request = _requestRepository.findOneById(requestID);
+        if(request.getStatus().equals(RequestStatus.PENDING)) {
+            request.setStatus(RequestStatus.CANCELED);
+            _requestRepository.save(request);
+        }
+
+        return getAgentRequestsByStatus("PENDING", agentResponse.getId());
+    }
+
+    public void changeStatusOfRequests(Request baseRequest, RequestStatus wakeUpStatus, RequestStatus finalStatus) {
+        for (Request requestCheck : _requestRepository.findAll()) {
+            if (requestCheck.getStatus().equals(wakeUpStatus)
+                    && checkRequestMatching(baseRequest, requestCheck)) {
+                requestCheck.setStatus(finalStatus);
+                _requestRepository.save(requestCheck);
+            }
+        }
+    }
+
+    public boolean checkRequestMatching(Request requestFirst, Request requestSecond) {
+        if(requestFirst.getAd().getId().equals(requestSecond.getAd().getId())) {
+            if (requestFirst.getReturnDate().isBefore(requestSecond.getPickUpDate())) {
+                return false;
+            } else {
+                if (requestFirst.getPickUpDate().isAfter(requestSecond.getReturnDate())) {
+                    return false;
+                } else {
+                    if (requestFirst.getReturnDate().isEqual(requestSecond.getPickUpDate())) {
+                        return requestFirst.getReturnTime().isAfter(requestSecond.getPickUpTime());
+                    } else if (requestSecond.getReturnDate().isEqual(requestFirst.getPickUpDate())) {
+                        return requestFirst.getPickUpTime().isBefore(requestSecond.getReturnTime());
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     private List<Request> getSimpleUserRequests(List<Request> activeRequests, RequestStatus requestStatus, UUID userId) {
         List<Request> simpleUserRequests = new ArrayList<>();
         for (Request request : activeRequests) {
@@ -134,6 +246,9 @@ public class RequestService implements IRequestService {
     private boolean isCarAvailable(Ad ad, AdRequestRequest requestDTO) {
         List<Request> requestAdList = _requestRepository.findAllByAd(ad);
         for (Request request : requestAdList) {
+            if(request.getStatus().equals(RequestStatus.PAID)) {
+                return false;
+            }
             boolean startEndDate = request.getReturnDate().isBefore(LocalDate.parse(requestDTO.getPickUpDate()));
             if (!startEndDate) {
                 boolean endStartDate = LocalDate.parse(requestDTO.getReturnDate()).isBefore(request.getPickUpDate());
@@ -168,8 +283,6 @@ public class RequestService implements IRequestService {
         request.setCustomerID(simpleUserId);
         createRequestDetails(request, requestDTO);
         _requestRepository.save(request);
-
-        // TODO Implement Saga Pattern
 
         addTimer(24, request);
     }

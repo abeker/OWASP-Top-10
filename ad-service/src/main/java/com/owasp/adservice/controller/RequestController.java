@@ -6,8 +6,12 @@ import com.owasp.adservice.dto.response.AdResponse;
 import com.owasp.adservice.services.impl.RequestService;
 import com.owasp.adservice.util.enums.RequestStatus;
 import com.owasp.adservice.util.exceptions.GeneralException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,18 +27,45 @@ public class RequestController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('CREATE_REQUEST')")
     public void createRequest(@RequestBody List<AdRequestRequest> requestList) throws GeneralException {
         _requestService.proccessRequest(requestList);
     }
 
     @GetMapping("/{requestStatus}/agent/{id}")
+    @PreAuthorize("hasAuthority('VIEW_AGENT_REQUESTS')")
     public List<AdRequestResponse> getAgentRequestsByStatus(@PathVariable("requestStatus") String requestStatus, @PathVariable("id") UUID agentId) throws GeneralException {
         return _requestService.getAgentRequestsByStatus(requestStatus, agentId);
     }
 
     @GetMapping("/{requestStatus}/simple-user/{id}")
+    @PreAuthorize("hasAuthority('VIEW_USER_REQUESTS')")
     public List<AdRequestResponse> getSimpleUserRequestsByStatus(@PathVariable("requestStatus") String requestStatus, @PathVariable("id") UUID userId) throws GeneralException {
         return _requestService.getSimplUserRequestsByStatus(requestStatus, userId);
+    }
+
+    @PutMapping("/{requestId}/pay")
+    @PreAuthorize("hasAuthority('PAY_REQUEST')")
+    public ResponseEntity<Collection<AdRequestResponse>> userPay(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+        return new ResponseEntity<>(_requestService.payRequest(UUID.fromString(requestID), token), HttpStatus.OK);
+    }
+
+    @PutMapping("/{requestId}/drop")
+    @PreAuthorize("hasAuthority('DROP_REQUEST')")
+    public ResponseEntity<Collection<AdRequestResponse>> userDrop(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+        return new ResponseEntity<>(_requestService.dropRequest(UUID.fromString(requestID), token), HttpStatus.OK);
+    }
+
+    @PutMapping("/{requestID}/approve")
+    @PreAuthorize("hasAuthority('APPROVE_REQUEST')")
+    public ResponseEntity<Collection<AdRequestResponse>> approveRequest(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+        return new ResponseEntity<>(_requestService.approveRequest(UUID.fromString(requestID), token), HttpStatus.OK);
+    }
+
+    @PutMapping("/{requestID}/deny")
+    @PreAuthorize("hasAuthority('DENY_REQUEST')")
+    public ResponseEntity<Collection<AdRequestResponse>> denyRequest(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+        return new ResponseEntity<>(_requestService.denyRequest(UUID.fromString(requestID), token), HttpStatus.OK);
     }
 
 }

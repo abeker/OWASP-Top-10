@@ -4,9 +4,11 @@ import com.owasp.authenticationservice.dto.request.CreateAgentRequest;
 import com.owasp.authenticationservice.dto.response.AgentResponse;
 import com.owasp.authenticationservice.entity.Agent;
 import com.owasp.authenticationservice.entity.Authority;
+import com.owasp.authenticationservice.entity.User;
 import com.owasp.authenticationservice.repository.IAgentRepository;
 import com.owasp.authenticationservice.repository.IAuthorityRepository;
 import com.owasp.authenticationservice.repository.IUserRepository;
+import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.IAgentService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
@@ -26,12 +28,14 @@ public class AgentService implements IAgentService {
     private final IUserRepository _userRepository;
     private final PasswordEncoder _passwordEncoder;
     private final IAuthorityRepository _authorityRepository;
+    private final TokenUtils _tokenUtils;
 
-    public AgentService(IAgentRepository agentRepository, IUserRepository userRepository, PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository) {
+    public AgentService(IAgentRepository agentRepository, IUserRepository userRepository, PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, TokenUtils tokenUtils) {
         _agentRepository = agentRepository;
         _userRepository = userRepository;
         _passwordEncoder = passwordEncoder;
         _authorityRepository = authorityRepository;
+        _tokenUtils = tokenUtils;
     }
 
     @Override
@@ -53,6 +57,14 @@ public class AgentService implements IAgentService {
     public AgentResponse getAgent(UUID id) {
         Agent agent = _agentRepository.findOneById(id);
         return mapAgentToAgentResponse(agent);
+    }
+
+    @Override
+    public AgentResponse getAgentFromToken(String token) {
+        String agentUsername = _tokenUtils.getUsernameFromToken(token);
+        User user = _userRepository.findOneByUsername(agentUsername);
+
+        return getAgent(user.getId());
     }
 
     private AgentResponse mapAgentToAgentResponse(Agent savedAgent) {
