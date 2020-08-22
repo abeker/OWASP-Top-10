@@ -25,4 +25,6 @@ public class AdResponse {
 
     private LocalDate creationDate;
 
+    private int numberOfRequests;
+
 }

@@ -5,6 +5,7 @@ import com.owasp.adservice.dto.response.SimpleUserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.UUID;
@@ -23,5 +24,8 @@ public interface AuthClient {
 
     @GetMapping("/users/{token}/token-simple-user")
     SimpleUserResponse getSimpleUserFromToken(@PathVariable("token") String token);
+
+    @PostMapping("simple-users/{id}/add-roles")
+    void addRolesAfterPay(@PathVariable("id") UUID userId);
 
 }

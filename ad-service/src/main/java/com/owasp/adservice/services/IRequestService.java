@@ -2,6 +2,7 @@ package com.owasp.adservice.services;
 
 import com.owasp.adservice.dto.request.AdRequestRequest;
 import com.owasp.adservice.dto.response.AdRequestResponse;
+import com.owasp.adservice.util.exceptions.GeneralException;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,7 +12,7 @@ public interface IRequestService {
 
     void createRequest(AdRequestRequest requestList);
 
-    void proccessRequest(List<AdRequestRequest> requestList);
+    void proccessRequest(List<AdRequestRequest> requestList) throws GeneralException;
 
     List<AdRequestResponse> getAgentRequestsByStatus(String requestStatus, UUID agentId);
 

@@ -22,6 +22,7 @@ import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("SameParameterValue")
 @Service
 public class RequestService implements IRequestService {
 
@@ -139,6 +140,7 @@ public class RequestService implements IRequestService {
         if(request.getStatus().equals(RequestStatus.RESERVED)) {
             request.setStatus(RequestStatus.PAID);
             _requestRepository.save(request);
+            _authClient.addRolesAfterPay(simpleUserResponse.getId());
         }
 
         changeStatusOfRequests(request, RequestStatus.RESERVED, RequestStatus.CANCELED);
@@ -281,8 +283,6 @@ public class RequestService implements IRequestService {
         request.setCustomerID(simpleUserId);
         createRequestDetails(request, requestDTO);
         _requestRepository.save(request);
-
-        // TODO Implement Saga Pattern
 
         addTimer(24, request);
     }

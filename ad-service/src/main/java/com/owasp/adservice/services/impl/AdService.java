@@ -3,18 +3,13 @@ package com.owasp.adservice.services.impl;
 import com.owasp.adservice.client.AuthClient;
 import com.owasp.adservice.dto.request.AddAdRequest;
 import com.owasp.adservice.dto.response.*;
-import com.owasp.adservice.entity.Ad;
-import com.owasp.adservice.entity.Car;
-import com.owasp.adservice.entity.CarModel;
-import com.owasp.adservice.entity.Photo;
-import com.owasp.adservice.repository.IAdRepository;
-import com.owasp.adservice.repository.ICarModelRepository;
-import com.owasp.adservice.repository.ICarRepository;
-import com.owasp.adservice.repository.IPhotoRepository;
+import com.owasp.adservice.entity.*;
+import com.owasp.adservice.repository.*;
 import com.owasp.adservice.services.IAdService;
 import com.owasp.adservice.util.enums.FuelType;
 import com.owasp.adservice.util.enums.GearshiftType;
 import com.owasp.adservice.util.enums.NumberOfGears;
+import com.owasp.adservice.util.enums.RequestStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,13 +31,15 @@ public class AdService implements IAdService {
     private final ICarModelRepository _carModelRepository;
     private final ICarRepository _carRepository;
     private final IPhotoRepository _photoRepository;
+    private final IRequestRepository _requestRepository;
 
-    public AdService(IAdRepository adRepository, AuthClient authClient, ICarModelRepository carModelRepository, ICarRepository carRepository, IPhotoRepository photoRepository) {
+    public AdService(IAdRepository adRepository, AuthClient authClient, ICarModelRepository carModelRepository, ICarRepository carRepository, IPhotoRepository photoRepository, IRequestRepository requestRepository) {
         _adRepository = adRepository;
         _authClient = authClient;
         _carModelRepository = carModelRepository;
         _carRepository = carRepository;
         _photoRepository = photoRepository;
+        _requestRepository = requestRepository;
     }
 
     @Override
@@ -69,9 +66,20 @@ public class AdService implements IAdService {
         adResponse.setCreationDate(ad.getCreationDate());
         adResponse.setLimitedDistance(ad.isLimitedDistance());
         adResponse.setSeats(ad.getSeats());
+        setNumberOfRequest(adResponse, ad);
         createPhotoResponse(ad, adResponse);
         createCarResponse(ad, adResponse);
         return adResponse;
+    }
+
+    private void setNumberOfRequest(AdResponse adResponse, Ad ad) {
+        List<Request> nonCanceledRequestsOfAd = _requestRepository.findAllByAd(ad)
+                .stream()
+                .filter(request -> !request.isDeleted())
+                .filter(request -> !request.getStatus().equals(RequestStatus.CANCELED))
+                .collect(Collectors.toList());
+
+        adResponse.setNumberOfRequests(nonCanceledRequestsOfAd.size());
     }
 
     @Override

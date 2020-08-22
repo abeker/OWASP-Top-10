@@ -15,4 +15,6 @@ public interface ISimpleUserService {
     SimpleUserResponse getSimpleUser(UUID id);
 
     SimpleUserResponse getSimpleUserFromToken(String token);
+
+    void addRolesAfterPay(UUID userId);
 }

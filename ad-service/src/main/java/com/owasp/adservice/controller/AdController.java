@@ -30,7 +30,7 @@ public class AdController {
     }
 
     @PostMapping(consumes = { "multipart/form-data" })
-//    @PreAuthorize("hasAuthority('CREATE_AD')")
+    @PreAuthorize("hasAuthority('CREATE_AD')")
     public ResponseEntity<?> createAd(@RequestPart("imageFile") List<MultipartFile> fileList, @RequestPart("request") AddAdRequest request) throws Exception{
         return new ResponseEntity<>(_adService.createAd(fileList, request), HttpStatus.CREATED);
     }

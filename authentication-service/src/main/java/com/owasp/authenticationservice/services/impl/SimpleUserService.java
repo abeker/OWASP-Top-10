@@ -17,10 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,6 +80,17 @@ public class SimpleUserService implements ISimpleUserService {
         return getSimpleUser(user.getId());
     }
 
+    @Override
+    public void addRolesAfterPay(UUID userId) {
+        SimpleUser simpleUser = _simpleUserRepository.findOneById(userId);
+        if(simpleUser != null) {
+            Set<Authority> authorities = simpleUser.getRoles();
+            authorities.add(_authorityRepository.findByName("ROLE_COMMENT_USER"));
+            authorities.add(_authorityRepository.findByName("ROLE_REVIEWER_USER"));
+            _simpleUserRepository.save(simpleUser);
+        }
+    }
+
     private UserStatus getUserStatusFromString(String userStatusString) {
         UserStatus userStatus;
         switch (userStatusString) {
@@ -132,9 +140,6 @@ public class SimpleUserService implements ISimpleUserService {
         authorities.add(_authorityRepository.findByName("ROLE_SIMPLE_USER"));
         authorities.add(_authorityRepository.findByName("ROLE_RENT_USER"));
         authorities.add(_authorityRepository.findByName("ROLE_REQUEST"));       // treba dda se dodaje kada se rentira
-//        authorities.add(_authorityRepository.findByName("ROLE_COMMENT_USER"));  // treba da se dodaje kada se rentira
-//        authorities.add(_authorityRepository.findByName("ROLE_MESSAGE_USER"));  // treba da se dodaje kada se rentira
-//        authorities.add(_authorityRepository.findByName("ROLE_REVIEWER_USER")); // treba da se dodaje kada se rentira
         user.setAuthorities(new HashSet<>(authorities));
     }
 
