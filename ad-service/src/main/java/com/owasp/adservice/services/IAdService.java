@@ -17,4 +17,6 @@ public interface IAdService {
     AdResponse createAd(List<MultipartFile> fileList, AddAdRequest request);
 
     List<AdResponse> getAgentAds(boolean deleted, String token);
+
+    String getAverageRateOfAd(Ad ad);
 }

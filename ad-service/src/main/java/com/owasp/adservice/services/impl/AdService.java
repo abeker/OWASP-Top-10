@@ -32,14 +32,16 @@ public class AdService implements IAdService {
     private final ICarRepository _carRepository;
     private final IPhotoRepository _photoRepository;
     private final IRequestRepository _requestRepository;
+    private final IRatingRepository _ratingRepository;
 
-    public AdService(IAdRepository adRepository, AuthClient authClient, ICarModelRepository carModelRepository, ICarRepository carRepository, IPhotoRepository photoRepository, IRequestRepository requestRepository) {
+    public AdService(IAdRepository adRepository, AuthClient authClient, ICarModelRepository carModelRepository, ICarRepository carRepository, IPhotoRepository photoRepository, IRequestRepository requestRepository, IRatingRepository ratingRepository) {
         _adRepository = adRepository;
         _authClient = authClient;
         _carModelRepository = carModelRepository;
         _carRepository = carRepository;
         _photoRepository = photoRepository;
         _requestRepository = requestRepository;
+        _ratingRepository = ratingRepository;
     }
 
     @Override
@@ -66,10 +68,41 @@ public class AdService implements IAdService {
         adResponse.setCreationDate(ad.getCreationDate());
         adResponse.setLimitedDistance(ad.isLimitedDistance());
         adResponse.setSeats(ad.getSeats());
+        adResponse.setAverageRate(getAverageRateOfAd(ad));
+        adResponse.setComments(mapCommentsToCommentResponse(ad.getComments()));
         setNumberOfRequest(adResponse, ad);
         createPhotoResponse(ad, adResponse);
         createCarResponse(ad, adResponse);
         return adResponse;
+    }
+
+    private List<CommentResponse> mapCommentsToCommentResponse(List<Comment> comments) {
+        List<CommentResponse> commentResponseList = new ArrayList<>();
+        for (Comment comment : comments) {
+            commentResponseList.add(mapSingleCommentToCommentResponse(comment));
+        }
+        return commentResponseList;
+    }
+
+    private CommentResponse mapSingleCommentToCommentResponse(Comment comment) {
+        CommentResponse commentResponse = new CommentResponse();
+        commentResponse.setId(comment.getId());
+        commentResponse.setSimpleUserId(comment.getSimpleUser());
+        commentResponse.setCommentStatus(comment.getStatus().toString());
+        commentResponse.setText(comment.getText());
+        return commentResponse;
+    }
+
+    @Override
+    public String getAverageRateOfAd(Ad ad) {
+        int sumRate = 0;
+        List<Rating> ratingsFromAd = _ratingRepository.findAllByAd_Id(ad.getId());
+        for (Rating rating : ratingsFromAd) {
+            sumRate += Integer.parseInt(rating.getGrade());
+        }
+
+        int averageRate = sumRate / (ratingsFromAd.size() == 0 ? 1 : ratingsFromAd.size());
+        return Integer.toString(averageRate);
     }
 
     private void setNumberOfRequest(AdResponse adResponse, Ad ad) {

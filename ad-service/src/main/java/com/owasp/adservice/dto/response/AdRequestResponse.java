@@ -27,4 +27,6 @@ public class AdRequestResponse {
 
     private SimpleUserResponse simpleUser;
 
+    private String averageRate;
+
 }
