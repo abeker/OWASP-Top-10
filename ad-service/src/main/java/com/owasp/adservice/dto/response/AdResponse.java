@@ -17,6 +17,8 @@ public class AdResponse {
 
     private List<PhotoResponse> photos;
 
+    private List<CommentResponse> comments;
+
     private boolean limitedDistance;
 
     private String availableKilometersPerRent;
@@ -27,4 +29,5 @@ public class AdResponse {
 
     private int numberOfRequests;
 
+    private String averageRate;
 }

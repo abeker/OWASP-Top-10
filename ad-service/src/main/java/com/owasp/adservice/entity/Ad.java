@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -36,5 +37,8 @@ public class Ad extends BaseEntity {
     private LocalDate creationDate = LocalDate.now(); //date when ad was created
 
     private boolean deleted = false;
+
+    @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comment> comments;
 
 }

@@ -18,8 +18,6 @@ public class Comment extends BaseEntity {
 
     private String text;
 
-    private UUID agent;
-
     private UUID simpleUser;
 
     @Enumerated(EnumType.STRING)

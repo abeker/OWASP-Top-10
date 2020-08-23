@@ -79,6 +79,7 @@ public class RequestService implements IRequestService {
         createdRequestResponse.setReturnDate(request.getReturnDate().toString());
         createdRequestResponse.setReturnTime(request.getReturnTime().toString());
         createdRequestResponse.setAgent(_authClient.getAgent(request.getAd().getAgent()));
+        createdRequestResponse.setAverageRate(_adService.getAverageRateOfAd(request.getAd()));
         if(request.getCustomerID() != null) {
             createdRequestResponse.setSimpleUser(_authClient.getSimpleUser(request.getCustomerID()));
         } else {
