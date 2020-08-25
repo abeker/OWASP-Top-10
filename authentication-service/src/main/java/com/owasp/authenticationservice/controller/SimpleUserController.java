@@ -24,7 +24,6 @@ public class SimpleUserController {
     }
 
     @PostMapping("")
-    @PreAuthorize("hasAuthority('REGISTER')")
     public SimpleUserResponse createSimpleUser(@RequestBody CreateSimpleUserRequest request) throws GeneralException {
         return _simpleUserService.createSimpleUser(request);
     }
