@@ -28,6 +28,7 @@ insert into authorities_permissions (authority_id, permission_id) values
 -- agent@gmail.com -> Agent123!!!
 -- customer@gmail.com -> Customer123!!!
 insert into user_entity (id, deleted, first_name, last_name, last_password_reset_date, password, username, user_role) values
+    ('e47ca3f0-4906-495f-b508-4d9af7013575', false, 'Fake', 'Admin', '2020-06-12 21:58:58.508-07', 'admin', 'fakeadmin@gmail.com', 'ADMIN'),
     ('924c26a6-d96b-4ffb-ab8b-250602c03f75', false, 'Ed', 'Snowden', '2020-06-12 21:58:58.508-07', '$2y$10$UFTyoDVYFFUqlb0lnKfoKe7H/EbQOqZH.ZYHf6sOYiOWSRCmpcJ5K', 'admin@gmail.com', 'ADMIN'),
     ('602399f4-183a-4174-95ea-1b42940fa0a9', false, 'Glenn', 'Greenwald', '2020-06-12 21:58:58.508-07', '$2a$10$zQU7XEdDSMvxt13Xkjs3X.CCY64edvCS0ZXcgqPtU8FhSYVUhtnau', 'agent@gmail.com', 'AGENT'),
     ('f1aed848-878f-4d4a-b198-e707b5dd220c', false, 'Julian', 'Assange', '2020-06-12 21:58:58.508-07', '$2a$10$UJEbOrAMWN/bh8tEPHt.Z.fD2RX.T0e0MXNuZEFCEFTNAjHkdAVju', 'customer@gmail.com', 'SIMPLE_USER');
