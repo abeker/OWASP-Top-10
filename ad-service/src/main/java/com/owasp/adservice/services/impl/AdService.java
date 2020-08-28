@@ -13,6 +13,7 @@ import com.owasp.adservice.util.enums.RequestStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,8 +79,10 @@ public class AdService implements IAdService {
 
     private List<CommentResponse> mapCommentsToCommentResponse(List<Comment> comments) {
         List<CommentResponse> commentResponseList = new ArrayList<>();
-        for (Comment comment : comments) {
-            commentResponseList.add(mapSingleCommentToCommentResponse(comment));
+        if(comments != null) {
+            for (Comment comment : comments) {
+                commentResponseList.add(mapSingleCommentToCommentResponse(comment));
+            }
         }
         return commentResponseList;
     }
