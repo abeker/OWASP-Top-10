@@ -1,5 +1,6 @@
 package com.owasp.authenticationservice.dto.request;
 
+import com.owasp.authenticationservice.guard.SQLInjectionSafe;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -16,16 +17,19 @@ public class CreateSimpleUserRequest {
                 message = "Email must satisfy an email format."),
         @Pattern(regexp = "^(?!<.+?>).*$", message = "Username cannot contain html elements.")
     })
+    @SQLInjectionSafe
     private String username;
 
     @NotNull(message = "First name is mandatory")
     @Size(min=3, max=30, message = "First name length must be between 3 and 30 characters.")
     @Pattern(regexp = "^(?!<.+?>).*$", message = "First name cannot contain html elements.")
+    @SQLInjectionSafe
     private String firstName;
 
     @NotNull(message = "Last name is mandatory")
     @Size(min=3, max=30, message = "Last name length must be between 3 and 30 characters.")
     @Pattern(regexp = "^(?!<.+?>).*$", message = "Last name cannot contain html elements.")
+    @SQLInjectionSafe
     private String lastName;
 
     @NotNull(message = "Password is mandatory")
@@ -34,6 +38,7 @@ public class CreateSimpleUserRequest {
                 message = "Password must contain digit, special character, lowercase and uppercase letter. Min length is 9."),
         @Pattern(regexp = "^(?!<.+?>).*$", message = "Password cannot contain html elements.")
     })
+    @SQLInjectionSafe
     private String password;
 
     @NotNull(message = "Repeated password is mandatory")
@@ -43,6 +48,7 @@ public class CreateSimpleUserRequest {
                 message = "Password must contain digit, special character, lowercase and uppercase letter."),
         @Pattern(regexp = "^(?!<.+?>).*$", message = "Repeated password cannot contain html elements.")
     })
+    @SQLInjectionSafe
     private String rePassword;
 
     @NotNull(message = "SSN is mandatory")
@@ -51,10 +57,12 @@ public class CreateSimpleUserRequest {
         @Pattern(regexp = "^[0-9]*$", message = "SSN must contain only digits."),
         @Pattern(regexp = "^(?!<.+?>).*$", message = "SSN cannot contain html elements.")
     })
+    @SQLInjectionSafe
     private String ssn;
 
     @NotNull(message = "Address is mandatory")
     @Size(min=4, max=30, message = "Address length must be between 4 and 30 characters.")
     @Pattern(regexp = "^(?!<.+?>).*$", message = "Address cannot contain html elements.")
+    @SQLInjectionSafe
     private String address;
 }
