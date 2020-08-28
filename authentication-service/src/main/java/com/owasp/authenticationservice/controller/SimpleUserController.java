@@ -8,6 +8,7 @@ import com.owasp.authenticationservice.util.exceptions.GeneralException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class SimpleUserController {
     }
 
     @PostMapping("")
-    public SimpleUserResponse createSimpleUser(@RequestBody CreateSimpleUserRequest request) throws GeneralException {
+    public SimpleUserResponse createSimpleUser(@Valid @RequestBody CreateSimpleUserRequest request) throws GeneralException {
         return _simpleUserService.createSimpleUser(request);
     }
 

@@ -45,6 +45,7 @@ public class SimpleUserService implements ISimpleUserService {
         if (isSimpleUserExist(request.getUsername())) {
             throw new GeneralException("User already exist.", HttpStatus.BAD_REQUEST);
         }
+
         SimpleUser createdSimpleUser = createNewSimpleUser(request);
         SimpleUser savedSimpleUser = _simpleUserRepository.save(createdSimpleUser);
 
@@ -114,6 +115,21 @@ public class SimpleUserService implements ISimpleUserService {
         SimpleUser simpleUser = new SimpleUser();
         simpleUser.setUsername(request.getUsername());
         simpleUser.setPassword(_passwordEncoder.encode(request.getPassword()));
+        simpleUser.setUserStatus(UserStatus.PENDING);
+        simpleUser.setUserRole(UserRole.SIMPLE_USER);
+        simpleUser.setAddress(request.getAddress());
+        simpleUser.setFirstName(request.getFirstName());
+        simpleUser.setLastName(request.getLastName());
+        simpleUser.setSsn(request.getSsn());
+        addAuthoritiesSimpleUser(simpleUser);
+
+        return simpleUser;
+    }
+
+    private SimpleUser unsafeCreateNewSimpleUser(CreateSimpleUserRequest request) {
+        SimpleUser simpleUser = new SimpleUser();
+        simpleUser.setUsername(request.getUsername());
+        simpleUser.setPassword(request.getPassword());
         simpleUser.setUserStatus(UserStatus.PENDING);
         simpleUser.setUserRole(UserRole.SIMPLE_USER);
         simpleUser.setAddress(request.getAddress());

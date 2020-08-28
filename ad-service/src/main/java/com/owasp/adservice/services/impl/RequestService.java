@@ -17,6 +17,10 @@ import com.owasp.adservice.util.exceptions.GeneralException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -30,12 +34,14 @@ public class RequestService implements IRequestService {
     private final IAdRepository _adRepository;
     private final IAdService _adService;
     private final AuthClient _authClient;
+    private final DataSource _dataSource;
 
-    public RequestService(IRequestRepository requestRepository, IAdRepository adRepository, IAdService adService, AuthClient authClient) {
+    public RequestService(IRequestRepository requestRepository, IAdRepository adRepository, IAdService adService, AuthClient authClient, DataSource dataSource) {
         _requestRepository = requestRepository;
         _adRepository = adRepository;
         _adService = adService;
         _authClient = authClient;
+        _dataSource = dataSource;
     }
 
     @Override
@@ -126,7 +132,41 @@ public class RequestService implements IRequestService {
     }
 
     @Override
-    public List<AdRequestResponse> getSimplUserRequestsByStatus(String requestStatusString, UUID userId) {
+    public List<AdRequestResponse> getSimpleUserRequestsByStatus(String requestStatusString, UUID userId) {
+        return unsafeRetrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
+//        return retrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
+    }
+
+    private List<AdRequestResponse> unsafeRetrieveSimpleUserRequestsFromStatus(String requestStatusString, UUID userId) {
+        String sql = "select * from request where status = '" + requestStatusString + "' and customer_id = '" + userId + "'";
+        List<AdRequestResponse> requestList = new ArrayList<>();
+        try (Connection c = _dataSource.getConnection();
+             ResultSet rs = c.createStatement().executeQuery(sql)) {
+            if (rs.next()) {
+                AdRequestResponse request = new AdRequestResponse();
+                request.setId(UUID.fromString(rs.getString("id")));
+                request.setPickUpTime(rs.getString("pick_up_time"));
+                request.setPickUpDate(rs.getString("pick_up_date"));
+                request.setReturnTime(rs.getString("return_time"));
+                request.setReturnDate(rs.getString("return_date"));
+                request.setRequestStatus(rs.getString("status"));
+                request.setPickUpAddress(rs.getString("pick_up_address"));
+                request.setSimpleUser(_authClient.getSimpleUser(UUID.fromString(rs.getString("customer_id"))));
+                Ad ad = _adRepository.findOneById(UUID.fromString(rs.getString("ad_id")));
+                request.setAverageRate(_adService.getAverageRateOfAd(ad));
+                request.setAgent(_authClient.getAgent(ad.getAgent()));
+                AdResponse adResponse = _adService.mapAdToAdResponse(ad);
+                request.setAd(adResponse);
+
+                requestList.add(request);
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return requestList;
+    }
+
+    private List<AdRequestResponse> retrieveSimpleUserRequestsFromStatus(String requestStatusString, UUID userId) {
         RequestStatus requestStatus = getRequestStatusFromString(requestStatusString);
         List<Request> activeRequests = getActiveRequests();
         List<Request> simpleUserRequests = getSimpleUserRequests(activeRequests, requestStatus, userId);
@@ -145,7 +185,7 @@ public class RequestService implements IRequestService {
         }
 
         changeStatusOfRequests(request, RequestStatus.RESERVED, RequestStatus.CANCELED);
-        return getSimplUserRequestsByStatus("RESERVED", simpleUserResponse.getId());
+        return getSimpleUserRequestsByStatus("RESERVED", simpleUserResponse.getId());
     }
 
     @Override
@@ -158,7 +198,7 @@ public class RequestService implements IRequestService {
             _requestRepository.save(request);
         }
 
-        return getSimplUserRequestsByStatus(retStatus.toString(), simpleUserResponse.getId());
+        return getSimpleUserRequestsByStatus(retStatus.toString(), simpleUserResponse.getId());
     }
 
     @Override

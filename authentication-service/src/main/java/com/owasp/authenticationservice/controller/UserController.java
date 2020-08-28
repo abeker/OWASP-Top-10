@@ -1,6 +1,6 @@
 package com.owasp.authenticationservice.controller;
 
-import com.owasp.authenticationservice.dto.request.LoginCredentialsDTO;
+import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.AgentResponse;
 import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
 import com.owasp.authenticationservice.dto.response.UserResponse;
@@ -13,10 +13,10 @@ import com.owasp.authenticationservice.util.exceptions.GeneralException;
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.UUID;
 
 @RestController
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @PutMapping("/login")
-    public UserResponse login(@RequestBody LoginCredentialsDTO request, HttpServletRequest httpServletRequest) throws GeneralException {
+    public UserResponse login(@RequestBody LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
         return _authService.login(request, httpServletRequest);
     }
 

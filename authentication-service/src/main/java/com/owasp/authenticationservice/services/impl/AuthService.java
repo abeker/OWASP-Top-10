@@ -1,8 +1,8 @@
 package com.owasp.authenticationservice.services.impl;
 
-import com.owasp.authenticationservice.dto.request.LoginCredentialsDTO;
-import com.owasp.authenticationservice.dto.response.AgentResponse;
+import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.UserResponse;
+import com.owasp.authenticationservice.dto.response.UserResponseBuilder;
 import com.owasp.authenticationservice.entity.SimpleUser;
 import com.owasp.authenticationservice.entity.User;
 import com.owasp.authenticationservice.entity.UserDetailsImpl;
@@ -22,10 +22,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthService implements IAuthService {
@@ -34,16 +42,23 @@ public class AuthService implements IAuthService {
     private final TokenUtils _tokenUtils;
     private final PasswordEncoder _passwordEncoder;
     private final IUserRepository _userRepository;
+    private final DataSource _dataSource;
+    private final EntityManager _em;
 
-    public AuthService(AuthenticationManager authenticationManager, TokenUtils tokenUtils, PasswordEncoder passwordEncoder, IUserRepository userRepository) {
+    public AuthService(AuthenticationManager authenticationManager, TokenUtils tokenUtils, PasswordEncoder passwordEncoder, IUserRepository userRepository, DataSource dataSource, EntityManager em) {
         _authenticationManager = authenticationManager;
         _tokenUtils = tokenUtils;
         _passwordEncoder = passwordEncoder;
         _userRepository = userRepository;
+        _dataSource = dataSource;
+        _em = em;
     }
 
     @Override
-    public UserResponse login(LoginCredentialsDTO request, HttpServletRequest httpServletRequest) throws GeneralException {
+    public UserResponse login(LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
+        if(request.isSQLI()) {
+            return unsafeLogin(request, httpServletRequest);
+        }
         User user = _userRepository.findOneByUsername(request.getUsername());
 
         if(!isUserFound(user, request)) {
@@ -53,6 +68,51 @@ public class AuthService implements IAuthService {
         checkSimpleUserStatus(user);
         Authentication authentication = loginSimpleUser(request.getUsername(), request.getPassword());
         return createLoginUserResponse(authentication, user);
+    }
+
+    private UserResponse unsafeLogin(LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws SQLException {
+        UserResponseBuilder user = unsafeFindAccountsByUsername(request.getUsername());
+        List<UserResponseBuilder> userList2 = unsafeJpaFindAccountsByUsername(request.getUsername());
+
+        return new UserResponse(user.getId(), user.getUsername(),
+                "fakeToken", user.getUserRole(), 60000);
+    }
+
+    private UserResponseBuilder unsafeFindAccountsByUsername(String username) throws SQLException {
+        String sql = "select * from user_entity where username = '" + username + "'";
+        try (Connection c = _dataSource.getConnection();
+            ResultSet rs = c.createStatement().executeQuery(sql)) {
+            if (rs.next()) {
+                UserResponseBuilder user = UserResponseBuilder.builder()
+                        .id(UUID.fromString(rs.getString("id")))
+                        .username(rs.getString("username"))
+                        .password(rs.getString("password"))
+                        .userRole(rs.getString("user_role"))
+                        .firstName(rs.getString("first_name"))
+                        .lastName(rs.getString("last_name"))
+                        .build();
+                return user;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return null;
+    }
+
+    public List<UserResponseBuilder> unsafeJpaFindAccountsByUsername(String username) {
+        String jql = "from user_entity where username = '" + username + "'";
+        TypedQuery<User> q = _em.createQuery(jql, User.class);
+        return q.getResultList()
+                .stream()
+                .map(user -> UserResponseBuilder.builder()
+                        .id(user.getId())
+                        .username(user.getUsername())
+                        .password(user.getPassword())
+                        .userRole(user.getUserRole().toString())
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -126,7 +186,7 @@ public class AuthService implements IAuthService {
         }
     }
 
-    private boolean isUserFound(User user, LoginCredentialsDTO request) {
+    private boolean isUserFound(User user, LoginCredentialsRequest request) {
         if(user == null || !_passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return false;
         }
