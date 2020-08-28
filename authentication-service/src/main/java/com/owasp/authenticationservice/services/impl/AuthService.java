@@ -96,6 +96,7 @@ public class AuthService implements IAuthService {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+        return null;
     }
 
     public List<UserResponseBuilder> unsafeJpaFindAccountsByUsername(String username) {

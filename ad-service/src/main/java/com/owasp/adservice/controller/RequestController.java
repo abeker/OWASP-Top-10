@@ -1,16 +1,16 @@
 package com.owasp.adservice.controller;
 
 import com.owasp.adservice.dto.request.AdRequestRequest;
+import com.owasp.adservice.dto.request.UnsafeUserRequest;
 import com.owasp.adservice.dto.response.AdRequestResponse;
-import com.owasp.adservice.dto.response.AdResponse;
 import com.owasp.adservice.services.impl.RequestService;
-import com.owasp.adservice.util.enums.RequestStatus;
 import com.owasp.adservice.util.exceptions.GeneralException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -38,10 +38,10 @@ public class RequestController {
         return _requestService.getAgentRequestsByStatus(requestStatus, agentId);
     }
 
-    @GetMapping("/{requestStatus}/simple-user/{id}")
+    @PutMapping("/{requestStatus}/simple-user/{id}")
     @PreAuthorize("hasAuthority('VIEW_USER_REQUESTS')")
-    public List<AdRequestResponse> getSimpleUserRequestsByStatus(@PathVariable("requestStatus") String requestStatus, @PathVariable("id") UUID userId) throws GeneralException {
-        return _requestService.getSimplUserRequestsByStatus(requestStatus, userId);
+    public List<AdRequestResponse> getSimpleUserRequestsByStatus(@RequestBody UnsafeUserRequest userRequest) throws GeneralException {
+        return _requestService.getSimpleUserRequestsByStatus(userRequest.getRequestStatus(), UUID.fromString(userRequest.getCustomer_id()));
     }
 
     @PutMapping("/{requestId}/pay")

@@ -16,7 +16,7 @@ public interface IRequestService {
 
     List<AdRequestResponse> getAgentRequestsByStatus(String requestStatus, UUID agentId);
 
-    List<AdRequestResponse> getSimplUserRequestsByStatus(String requestStatus, UUID userId);
+    List<AdRequestResponse> getSimpleUserRequestsByStatus(String requestStatus, UUID userId);
 
     Collection<AdRequestResponse> payRequest(UUID requestID, String token);
 
