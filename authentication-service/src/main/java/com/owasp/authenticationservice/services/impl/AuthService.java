@@ -12,6 +12,8 @@ import com.owasp.authenticationservice.services.IAuthService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.enums.UserStatus;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.LineIterator;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,11 +29,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -138,6 +145,18 @@ public class AuthService implements IAuthService {
         User user = _userRepository.findOneByUsername(userEmail);
         throwErrorIfUserNull(user);
         return mapUserToUserResponse(user);
+    }
+
+    @Override
+    public boolean checkPassword(String userPassword) throws IOException {
+        String filePath = new File("").getAbsolutePath();
+        File file = new File( filePath + "/authentication-service/weak_passwords.txt");
+
+        return isPasswordWeak(userPassword, file);
+    }
+
+    public boolean isPasswordWeak(String theWord, File theFile) throws FileNotFoundException {
+        return (new Scanner(theFile).useDelimiter("\\Z").next()).contains(theWord);
     }
 
     private void throwErrorIfUserNull(User user) throws GeneralException {

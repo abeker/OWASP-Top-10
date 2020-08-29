@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
 
@@ -65,6 +66,11 @@ public class UserController {
     @GetMapping("/{email}/mail")
     public UserResponse getUserByEmail(@PathVariable("email") String userEmail) throws GeneralException {
         return _authService.getUserByEmail(userEmail);
+    }
+
+    @GetMapping("/check-password/{password}")
+    public boolean checkPassword(@PathVariable("password") String userPassword) throws GeneralException, IOException {
+        return _authService.checkPassword(userPassword);
     }
 
     @GetMapping("/{token}/token-agent")
