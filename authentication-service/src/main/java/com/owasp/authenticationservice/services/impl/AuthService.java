@@ -1,18 +1,25 @@
 package com.owasp.authenticationservice.services.impl;
 
 import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
+import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 import com.owasp.authenticationservice.dto.response.UserResponseBuilder;
 import com.owasp.authenticationservice.entity.*;
 import com.owasp.authenticationservice.repository.IBrowserFingerPrintRepository;
 import com.owasp.authenticationservice.repository.ILoginAttemptRepository;
+import com.owasp.authenticationservice.repository.ISimpleUserRepository;
 import com.owasp.authenticationservice.repository.IUserRepository;
 import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.IAuthService;
+import com.owasp.authenticationservice.services.IEmailService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.enums.UserStatus;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
+import org.passay.CharacterData;
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -44,6 +51,8 @@ import java.util.stream.Collectors;
 @Service
 public class AuthService implements IAuthService {
 
+    public static final String ERROR_CODE = "ERRONEOUS_SPECIAL_CHARS";
+
     private final AuthenticationManager _authenticationManager;
     private final TokenUtils _tokenUtils;
     private final PasswordEncoder _passwordEncoder;
@@ -52,8 +61,10 @@ public class AuthService implements IAuthService {
     private final EntityManager _em;
     private final ILoginAttemptRepository _loginAttemptRepository;
     private final IBrowserFingerPrintRepository _browserFingerPrintRepository;
+    private final ISimpleUserRepository _simpleUserRepository;
+    private final IEmailService _emailService;
 
-    public AuthService(AuthenticationManager authenticationManager, TokenUtils tokenUtils, PasswordEncoder passwordEncoder, IUserRepository userRepository, DataSource dataSource, EntityManager em, ILoginAttemptRepository loginAttemptRepository, IBrowserFingerPrintRepository browserFingerPrintRepository) {
+    public AuthService(AuthenticationManager authenticationManager, TokenUtils tokenUtils, PasswordEncoder passwordEncoder, IUserRepository userRepository, DataSource dataSource, EntityManager em, ILoginAttemptRepository loginAttemptRepository, IBrowserFingerPrintRepository browserFingerPrintRepository, ISimpleUserRepository simpleUserRepository, IEmailService emailService) {
         _authenticationManager = authenticationManager;
         _tokenUtils = tokenUtils;
         _passwordEncoder = passwordEncoder;
@@ -62,6 +73,8 @@ public class AuthService implements IAuthService {
         _em = em;
         _loginAttemptRepository = loginAttemptRepository;
         _browserFingerPrintRepository = browserFingerPrintRepository;
+        _simpleUserRepository = simpleUserRepository;
+        _emailService = emailService;
     }
 
     @Override
@@ -260,6 +273,72 @@ public class AuthService implements IAuthService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean checkSecurityQuestion(String token, String answer) {
+        String username = _tokenUtils.getUsernameFromToken(token);
+        User user = _userRepository.findOneByUsername(username);
+        SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
+        if(simpleUser.getSecurityQuestion().equals(answer)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean changePassword(ChangePasswordRequest changePasswordRequest) {
+        User user = _userRepository.findOneByUsername(changePasswordRequest.getUsername());
+        if(user == null) {
+            return false;
+        }
+        SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
+        if(simpleUser != null) {
+            if(!simpleUser.getSecurityQuestion().equals(changePasswordRequest.getSecurityQuestion())) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+        String newPassword = generateStrongNewPassword();
+        simpleUser.setPassword(_passwordEncoder.encode(newPassword));
+        _simpleUserRepository.save(simpleUser);
+        _emailService.newPasswordAnnouncementMail(simpleUser, newPassword);
+
+        return true;
+    }
+
+    private String generateStrongNewPassword() {
+        PasswordGenerator gen = new PasswordGenerator();
+        CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;
+        CharacterRule lowerCaseRule = new CharacterRule(lowerCaseChars);
+        lowerCaseRule.setNumberOfCharacters(2);
+
+        CharacterData upperCaseChars = EnglishCharacterData.UpperCase;
+        CharacterRule upperCaseRule = new CharacterRule(upperCaseChars);
+        upperCaseRule.setNumberOfCharacters(2);
+
+        CharacterData digitChars = EnglishCharacterData.Digit;
+        CharacterRule digitRule = new CharacterRule(digitChars);
+        digitRule.setNumberOfCharacters(2);
+
+        CharacterData specialChars = new CharacterData() {
+            public String getErrorCode() {
+                return ERROR_CODE;
+            }
+
+            public String getCharacters() {
+                return "!@#$%^&*()_+";
+            }
+        };
+        CharacterRule splCharRule = new CharacterRule(specialChars);
+        splCharRule.setNumberOfCharacters(2);
+
+        String password = gen.generatePassword(10, splCharRule, lowerCaseRule,
+                upperCaseRule, digitRule);
+        return password;
     }
 
     public boolean isPasswordWeak(String theWord, File theFile) throws FileNotFoundException {

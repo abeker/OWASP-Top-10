@@ -1,6 +1,7 @@
 package com.owasp.authenticationservice.services;
 
 import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
+import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 
@@ -22,4 +23,8 @@ public interface IAuthService {
     boolean checkPassword(String userPassword) throws IOException;
 
     boolean canAgainLogin(BrowserFingerprintRequest browserFingerprint, HttpServletRequest httpServletRequest);
+
+    boolean checkSecurityQuestion(String token, String answer);
+
+    boolean changePassword(ChangePasswordRequest changePasswordRequest);
 }

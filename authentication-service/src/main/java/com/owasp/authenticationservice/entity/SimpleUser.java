@@ -22,6 +22,8 @@ public class SimpleUser extends User {
 
     private String address;
 
+    private String securityQuestion;
+
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.PENDING;
 
