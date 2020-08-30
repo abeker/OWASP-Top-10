@@ -65,4 +65,10 @@ public class CreateSimpleUserRequest {
     @Pattern(regexp = "^(?!<.+?>).*$", message = "Address cannot contain html elements.")
     @SQLInjectionSafe
     private String address;
+
+    @NotNull(message = "Security question is mandatory")
+    @Size(min=3, max=30, message = "Security question length must be between 4 and 30 characters.")
+    @Pattern(regexp = "^(?!<.+?>).*$", message = "Security question cannot contain html elements.")
+    @SQLInjectionSafe
+    private String securityQuestion;
 }

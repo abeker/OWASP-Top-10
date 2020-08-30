@@ -121,6 +121,7 @@ public class SimpleUserService implements ISimpleUserService {
         simpleUser.setFirstName(request.getFirstName());
         simpleUser.setLastName(request.getLastName());
         simpleUser.setSsn(request.getSsn());
+        simpleUser.setSecurityQuestion(request.getSecurityQuestion());
         addAuthoritiesSimpleUser(simpleUser);
 
         return simpleUser;

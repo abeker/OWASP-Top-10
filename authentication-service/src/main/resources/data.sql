@@ -29,9 +29,10 @@ insert into authorities_permissions (authority_id, permission_id) values
 -- customer@gmail.com -> Customer123!!!
 insert into user_entity (id, deleted, first_name, last_name, last_password_reset_date, password, username, user_role) values
     ('e47ca3f0-4906-495f-b508-4d9af7013575', false, 'Fake', 'Admin', '2020-06-12 21:58:58.508-07', 'admin', 'fakeadmin@gmail.com', 'ADMIN'),
+    ('e153d906-ba0f-4ac9-88bb-0d9b5817cb78', false, 'User', 'User', '2020-06-12 21:58:58.508-07', 'password', 'user@gmail.com', 'SIMPLE_USER'),
     ('924c26a6-d96b-4ffb-ab8b-250602c03f75', false, 'Ed', 'Snowden', '2020-06-12 21:58:58.508-07', '$2y$10$UFTyoDVYFFUqlb0lnKfoKe7H/EbQOqZH.ZYHf6sOYiOWSRCmpcJ5K', 'admin@gmail.com', 'ADMIN'),
     ('602399f4-183a-4174-95ea-1b42940fa0a9', false, 'Glenn', 'Greenwald', '2020-06-12 21:58:58.508-07', '$2a$10$zQU7XEdDSMvxt13Xkjs3X.CCY64edvCS0ZXcgqPtU8FhSYVUhtnau', 'agent@gmail.com', 'AGENT'),
-    ('f1aed848-878f-4d4a-b198-e707b5dd220c', false, 'Julian', 'Assange', '2020-06-12 21:58:58.508-07', '$2a$10$UJEbOrAMWN/bh8tEPHt.Z.fD2RX.T0e0MXNuZEFCEFTNAjHkdAVju', 'customer@gmail.com', 'SIMPLE_USER');
+    ('f1aed848-878f-4d4a-b198-e707b5dd220c', false, 'Julian', 'Assange', '2020-06-12 21:58:58.508-07', '$2a$10$UJEbOrAMWN/bh8tEPHt.Z.fD2RX.T0e0MXNuZEFCEFTNAjHkdAVju', 'acabeker@gmail.com', 'SIMPLE_USER');
 
 insert into user_authority (user_id, authority_id) values
     ('924c26a6-d96b-4ffb-ab8b-250602c03f75', 1),
@@ -40,11 +41,15 @@ insert into user_authority (user_id, authority_id) values
     ('602399f4-183a-4174-95ea-1b42940fa0a9', 8),
     ('f1aed848-878f-4d4a-b198-e707b5dd220c', 3),
     ('f1aed848-878f-4d4a-b198-e707b5dd220c', 5),
-    ('f1aed848-878f-4d4a-b198-e707b5dd220c', 7);
+    ('f1aed848-878f-4d4a-b198-e707b5dd220c', 7),
+    ('e47ca3f0-4906-495f-b508-4d9af7013575', 1),
+    ('e153d906-ba0f-4ac9-88bb-0d9b5817cb78', 3),
+    ('e153d906-ba0f-4ac9-88bb-0d9b5817cb78', 5),
+    ('e153d906-ba0f-4ac9-88bb-0d9b5817cb78', 7);
 
 insert into admin (id) values ('924c26a6-d96b-4ffb-ab8b-250602c03f75');
 
 insert into agent (address, date_founded, id) values ('Rio Street, Novi Sad, Serbia', '2020-07-20T06:30:00', '602399f4-183a-4174-95ea-1b42940fa0a9');
 
-insert into simple_user (address, confirmation_time, ssn, user_status, id) values
-    ('Townsville', '2020-07-20T06:30:00', '121206780062', 'APPROVED', 'f1aed848-878f-4d4a-b198-e707b5dd220c');
+insert into simple_user (address, confirmation_time, ssn, user_status, id, security_question) values
+    ('Townsville', '2020-07-20T06:30:00', '121206780062', 'APPROVED', 'f1aed848-878f-4d4a-b198-e707b5dd220c', 'Goolmangar Primary School');

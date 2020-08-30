@@ -1,5 +1,7 @@
 package com.owasp.authenticationservice.controller;
 
+import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
+import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.AgentResponse;
 import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
 
@@ -57,6 +60,16 @@ public class UserController {
         return _authService.login(request, httpServletRequest);
     }
 
+    @PutMapping("/check-attempts")
+    public boolean checkAttempts(@RequestBody BrowserFingerprintRequest browserFingerprint, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
+        return _authService.canAgainLogin(browserFingerprint, httpServletRequest);
+    }
+
+    @PutMapping("/change-password")
+    public boolean changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
+        return _authService.changePassword(changePasswordRequest);
+    }
+
     @GetMapping("/{id}")
     public UserResponse getUser(@PathVariable("id") UUID userId) throws GeneralException {
         return _authService.getUser(userId);
@@ -65,6 +78,11 @@ public class UserController {
     @GetMapping("/{email}/mail")
     public UserResponse getUserByEmail(@PathVariable("email") String userEmail) throws GeneralException {
         return _authService.getUserByEmail(userEmail);
+    }
+
+    @GetMapping("/check-password/{password}")
+    public boolean checkPassword(@PathVariable("password") String userPassword) throws GeneralException, IOException {
+        return _authService.checkPassword(userPassword);
     }
 
     @GetMapping("/{token}/token-agent")
