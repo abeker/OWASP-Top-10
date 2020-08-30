@@ -12,4 +12,6 @@ public class LoginCredentialsRequest {
 
     @JsonProperty
     private boolean isSQLI;
+
+    private BrowserFingerprintRequest browserFingerprint;
 }

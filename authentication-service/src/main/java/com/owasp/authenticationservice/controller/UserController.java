@@ -1,5 +1,6 @@
 package com.owasp.authenticationservice.controller;
 
+import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.AgentResponse;
 import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
@@ -56,6 +57,11 @@ public class UserController {
     @PutMapping("/login")
     public UserResponse login(@RequestBody LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
         return _authService.login(request, httpServletRequest);
+    }
+
+    @PutMapping("/check-attempts")
+    public boolean checkAttempts(@RequestBody BrowserFingerprintRequest browserFingerprint, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
+        return _authService.canAgainLogin(browserFingerprint, httpServletRequest);
     }
 
     @GetMapping("/{id}")

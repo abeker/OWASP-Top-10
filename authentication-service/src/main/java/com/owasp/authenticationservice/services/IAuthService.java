@@ -1,5 +1,6 @@
 package com.owasp.authenticationservice.services;
 
+import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 
@@ -19,4 +20,6 @@ public interface IAuthService {
     UserResponse getUserByEmail(String userEmail);
 
     boolean checkPassword(String userPassword) throws IOException;
+
+    boolean canAgainLogin(BrowserFingerprintRequest browserFingerprint, HttpServletRequest httpServletRequest);
 }

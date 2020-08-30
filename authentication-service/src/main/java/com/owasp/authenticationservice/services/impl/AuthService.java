@@ -1,19 +1,18 @@
 package com.owasp.authenticationservice.services.impl;
 
+import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 import com.owasp.authenticationservice.dto.response.UserResponseBuilder;
-import com.owasp.authenticationservice.entity.SimpleUser;
-import com.owasp.authenticationservice.entity.User;
-import com.owasp.authenticationservice.entity.UserDetailsImpl;
+import com.owasp.authenticationservice.entity.*;
+import com.owasp.authenticationservice.repository.IBrowserFingerPrintRepository;
+import com.owasp.authenticationservice.repository.ILoginAttemptRepository;
 import com.owasp.authenticationservice.repository.IUserRepository;
 import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.IAuthService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.enums.UserStatus;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.LineIterator;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,16 +31,16 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("ConstantConditions")
 @Service
 public class AuthService implements IAuthService {
 
@@ -51,14 +50,18 @@ public class AuthService implements IAuthService {
     private final IUserRepository _userRepository;
     private final DataSource _dataSource;
     private final EntityManager _em;
+    private final ILoginAttemptRepository _loginAttemptRepository;
+    private final IBrowserFingerPrintRepository _browserFingerPrintRepository;
 
-    public AuthService(AuthenticationManager authenticationManager, TokenUtils tokenUtils, PasswordEncoder passwordEncoder, IUserRepository userRepository, DataSource dataSource, EntityManager em) {
+    public AuthService(AuthenticationManager authenticationManager, TokenUtils tokenUtils, PasswordEncoder passwordEncoder, IUserRepository userRepository, DataSource dataSource, EntityManager em, ILoginAttemptRepository loginAttemptRepository, IBrowserFingerPrintRepository browserFingerPrintRepository) {
         _authenticationManager = authenticationManager;
         _tokenUtils = tokenUtils;
         _passwordEncoder = passwordEncoder;
         _userRepository = userRepository;
         _dataSource = dataSource;
         _em = em;
+        _loginAttemptRepository = loginAttemptRepository;
+        _browserFingerPrintRepository = browserFingerPrintRepository;
     }
 
     @Override
@@ -67,6 +70,7 @@ public class AuthService implements IAuthService {
             return unsafeLogin(request, httpServletRequest);
         }
         User user = _userRepository.findOneByUsername(request.getUsername());
+        checkLoginAttempts(request, httpServletRequest, user);
 
         if(!isUserFound(user, request)) {
             throw new GeneralException("Bad credentials.", HttpStatus.BAD_REQUEST);
@@ -75,6 +79,93 @@ public class AuthService implements IAuthService {
         checkSimpleUserStatus(user);
         Authentication authentication = loginSimpleUser(request.getUsername(), request.getPassword());
         return createLoginUserResponse(authentication, user);
+    }
+
+    private void checkLoginAttempts(LoginCredentialsRequest request, HttpServletRequest httpServletRequest, User user) {
+        BrowserFingerprint browserFingerprint = createBrowserFingerPrint(request.getBrowserFingerprint(), httpServletRequest);
+        LoginAttempt loginAttempt = getLoginAttemptFromBrowserFingerprint(browserFingerprint);
+        changeLoginAttempts(isUserFound(user, request), loginAttempt, browserFingerprint);
+    }
+
+    private void changeLoginAttempts(boolean isUserFound, LoginAttempt loginAttempt, BrowserFingerprint browserFingerprint) {
+        if(isUserFound) {
+            if(loginAttempt != null) {
+                loginAttempt.setAttempts(0);
+                _loginAttemptRepository.save(loginAttempt);
+            }
+        } else {
+            if(loginAttempt != null) {
+                checkNumberOfAttempts(loginAttempt);
+                loginAttempt.setAttempts(loginAttempt.getAttempts() + 1);
+                _loginAttemptRepository.save(loginAttempt);
+            } else {
+                BrowserFingerprint browserFingerprintSaved = _browserFingerPrintRepository.save(browserFingerprint);
+                LoginAttempt loginAttemptSave = new LoginAttempt();
+                loginAttemptSave.setBrowserFingerprint(browserFingerprintSaved);
+                _loginAttemptRepository.save(loginAttemptSave);
+            }
+        }
+    }
+
+    private void checkNumberOfAttempts(LoginAttempt loginAttempt) {
+        if(loginAttempt.getAttempts() >= 4) {
+            if(loginAttempt.getTimeFirstMistake().isBefore(LocalDateTime.now().minusHours(3600000))) {  // ban na sat vremena prosao
+                loginAttempt.setAttempts(0);
+                _loginAttemptRepository.save(loginAttempt);
+            } else {
+                throw new GeneralException("Login attempts is more than 5.", HttpStatus.BAD_REQUEST);
+            }
+        }
+    }
+
+    private LoginAttempt getLoginAttemptFromBrowserFingerprint(BrowserFingerprint browserFingerprint) {
+        List<LoginAttempt> allLoginAttempts = _loginAttemptRepository.findAll();
+        for (LoginAttempt loginAttempt : allLoginAttempts) {
+            if(isBrowserFingerprintEqual(loginAttempt.getBrowserFingerprint(), browserFingerprint)) {
+                return loginAttempt;
+            }
+        }
+
+        return null;
+    }
+
+    private boolean isBrowserFingerprintEqual(BrowserFingerprint browserFingerprint, BrowserFingerprint browserFingerprintRequest) {
+        return browserFingerprint.getAddress().equalsIgnoreCase(browserFingerprintRequest.getAddress())
+                && browserFingerprint.getBrowserName().equalsIgnoreCase(browserFingerprintRequest.getBrowserName())
+                && browserFingerprint.getBrowserVersion().equalsIgnoreCase(browserFingerprintRequest.getBrowserVersion())
+                && browserFingerprint.getCPU().equalsIgnoreCase(browserFingerprintRequest.getCPU())
+                && browserFingerprint.getFingerprint().equalsIgnoreCase(browserFingerprintRequest.getFingerprint())
+                && browserFingerprint.getLanguage().equalsIgnoreCase(browserFingerprintRequest.getLanguage())
+                && browserFingerprint.getOS().equalsIgnoreCase(browserFingerprintRequest.getOS())
+                && browserFingerprint.getOSVersion().equalsIgnoreCase(browserFingerprintRequest.getOSVersion())
+                && browserFingerprint.getPlugins().equalsIgnoreCase(browserFingerprintRequest.getPlugins())
+                && browserFingerprint.getScreenPrint().equalsIgnoreCase(browserFingerprintRequest.getScreenPrint())
+                && browserFingerprint.getTimeZone().equalsIgnoreCase(browserFingerprintRequest.getTimeZone())
+                && browserFingerprint.getUser_agent().equalsIgnoreCase(browserFingerprintRequest.getUser_agent());
+    }
+
+    private BrowserFingerprint createBrowserFingerPrint(BrowserFingerprintRequest browserFingerprintRequest, HttpServletRequest httpServletRequest) {
+        String user_agent = httpServletRequest.getHeader("User-Agent");
+        String host = httpServletRequest.getHeader("Host");
+        BrowserFingerprint browserFingerprint = new BrowserFingerprint();
+        browserFingerprint.setAddress(host);
+        browserFingerprint.setUser_agent(user_agent);
+        mapBrowserFingerprintDTOToBrowserFingerprint(browserFingerprint, browserFingerprintRequest);
+
+        return browserFingerprint;
+    }
+
+    private void mapBrowserFingerprintDTOToBrowserFingerprint(BrowserFingerprint browserFingerprintForSet, BrowserFingerprintRequest browserFingerprintRequest) {
+        browserFingerprintForSet.setBrowserVersion(browserFingerprintRequest.getBrowserVersion());
+        browserFingerprintForSet.setBrowserName(browserFingerprintRequest.getBrowserName());
+        browserFingerprintForSet.setCPU(browserFingerprintRequest.getCpu());
+        browserFingerprintForSet.setFingerprint(browserFingerprintRequest.getFingerprint());
+        browserFingerprintForSet.setLanguage(browserFingerprintRequest.getLanguage());
+        browserFingerprintForSet.setOS(browserFingerprintRequest.getOs());
+        browserFingerprintForSet.setOSVersion(browserFingerprintRequest.getOsVersion());
+        browserFingerprintForSet.setPlugins(browserFingerprintRequest.getPlugins());
+        browserFingerprintForSet.setScreenPrint(browserFingerprintRequest.getScreenPrint());
+        browserFingerprintForSet.setTimeZone(browserFingerprintRequest.getTimeZone());
     }
 
     private UserResponse unsafeLogin(LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws SQLException {
@@ -153,6 +244,22 @@ public class AuthService implements IAuthService {
         File file = new File( filePath + "/authentication-service/weak_passwords.txt");
 
         return isPasswordWeak(userPassword, file);
+    }
+
+    @Override
+    public boolean canAgainLogin(BrowserFingerprintRequest browserFingerprint, HttpServletRequest httpServletRequest) {
+        BrowserFingerprint browserFingerprintCreated = createBrowserFingerPrint(browserFingerprint, httpServletRequest);
+        LoginAttempt loginAttempt = getLoginAttemptFromBrowserFingerprint(browserFingerprintCreated);
+
+        if(loginAttempt == null) {
+            return true;
+        }
+        try {
+            checkNumberOfAttempts(loginAttempt);
+        } catch (GeneralException e) {
+            return false;
+        }
+        return true;
     }
 
     public boolean isPasswordWeak(String theWord, File theFile) throws FileNotFoundException {
