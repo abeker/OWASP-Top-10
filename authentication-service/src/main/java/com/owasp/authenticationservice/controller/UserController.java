@@ -5,6 +5,7 @@ import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
 import com.owasp.authenticationservice.dto.response.AgentResponse;
 import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
+import com.owasp.authenticationservice.dto.response.UserInfoResponse;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.IAgentService;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
 
+@SuppressWarnings({"unused", "RedundantThrows", "FieldCanBeLocal"})
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -85,6 +87,11 @@ public class UserController {
         return _authService.checkPassword(userPassword);
     }
 
+    @GetMapping("/{username}/info")
+    public UserInfoResponse getUserInfo(@PathVariable("username") String username) {
+        return _userService.getUserInfo(username);
+    }
+
     @GetMapping("/{token}/token-agent")
     public AgentResponse getAgentFromToken(@PathVariable("token") String token) throws GeneralException {
         return _agentService.getAgentFromToken(token);
@@ -94,4 +101,6 @@ public class UserController {
     public SimpleUserResponse getSimpleUserFromToken(@PathVariable("token") String token) throws GeneralException {
         return _simpleUserService.getSimpleUserFromToken(token);
     }
+
+
 }
