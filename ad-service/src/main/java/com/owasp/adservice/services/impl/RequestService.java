@@ -133,8 +133,8 @@ public class RequestService implements IRequestService {
 
     @Override
     public List<AdRequestResponse> getSimpleUserRequestsByStatus(String requestStatusString, UUID userId) {
-        return unsafeRetrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
-//        return retrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
+//        return unsafeRetrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
+        return retrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
     }
 
     private List<AdRequestResponse> unsafeRetrieveSimpleUserRequestsFromStatus(String requestStatusString, UUID userId) {
@@ -287,21 +287,22 @@ public class RequestService implements IRequestService {
     private boolean isCarAvailable(Ad ad, AdRequestRequest requestDTO) {
         List<Request> requestAdList = _requestRepository.findAllByAd(ad);
         for (Request request : requestAdList) {
-            if(request.getStatus().equals(RequestStatus.PAID)) {
-                return false;
-            }
             boolean startEndDate = request.getReturnDate().isBefore(LocalDate.parse(requestDTO.getPickUpDate()));
             if (!startEndDate) {
                 boolean endStartDate = LocalDate.parse(requestDTO.getReturnDate()).isBefore(request.getPickUpDate());
                 if (!endStartDate) {
                     if(request.getReturnDate().isEqual(LocalDate.parse(requestDTO.getPickUpDate()))) {
                         if (!request.getReturnTime().isBefore(LocalTime.parse(requestDTO.getPickUpTime()))) {
-                            return false;
+                            if(request.getStatus().equals(RequestStatus.PAID)) {
+                                return false;
+                            }
                         }
                     }
                     else if(request.getPickUpDate().isEqual(LocalDate.parse(requestDTO.getReturnDate()))) {
                         if (!request.getPickUpTime().isAfter(LocalTime.parse(requestDTO.getReturnTime()))) {
-                            return false;
+                            if(request.getStatus().equals(RequestStatus.PAID)) {
+                                return false;
+                            }
                         }
                     } else {
                         return false;

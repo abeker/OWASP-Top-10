@@ -1,11 +1,13 @@
 package com.owasp.adservice.services.impl;
 
 import com.owasp.adservice.client.AuthClient;
+import com.owasp.adservice.dto.response.CommentResponse;
 import com.owasp.adservice.dto.response.SimpleUserResponse;
 import com.owasp.adservice.entity.Ad;
 import com.owasp.adservice.entity.Comment;
 import com.owasp.adservice.repository.IAdRepository;
 import com.owasp.adservice.repository.ICommentRepository;
+import com.owasp.adservice.services.IAdService;
 import com.owasp.adservice.services.ICommentService;
 import com.owasp.adservice.util.enums.CommentStatus;
 import com.owasp.adservice.util.exceptions.GeneralException;
@@ -14,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class CommentService implements ICommentService {
@@ -22,11 +23,13 @@ public class CommentService implements ICommentService {
     private final ICommentRepository _commentRepository;
     private final AuthClient _authClient;
     private final IAdRepository _adRepository;
+    private final IAdService _adService;
 
-    public CommentService(ICommentRepository commentRepository, AuthClient authClient, IAdRepository adRepository) {
+    public CommentService(ICommentRepository commentRepository, AuthClient authClient, IAdRepository adRepository, IAdService adService) {
         _commentRepository = commentRepository;
         _authClient = authClient;
         _adRepository = adRepository;
+        _adService = adService;
     }
 
     @Override
@@ -39,6 +42,12 @@ public class CommentService implements ICommentService {
             throw new GeneralException("User already comment this ad.", HttpStatus.BAD_REQUEST);
         }
         saveComment(simpleUser, ad, commentText);
+    }
+
+    @Override
+    public List<CommentResponse> getComents(UUID adId) {
+        Ad ad = _adRepository.findOneById(adId);
+        return _adService.mapCommentsToCommentResponse(ad.getComments());
     }
 
     private void saveComment(SimpleUserResponse simpleUser, Ad ad, String commentText) {

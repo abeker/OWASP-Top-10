@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.constraints.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Date;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -77,7 +79,8 @@ public class AdService implements IAdService {
         return adResponse;
     }
 
-    private List<CommentResponse> mapCommentsToCommentResponse(List<Comment> comments) {
+    @Override
+    public List<CommentResponse> mapCommentsToCommentResponse(List<Comment> comments) {
         List<CommentResponse> commentResponseList = new ArrayList<>();
         if(comments != null) {
             for (Comment comment : comments) {
@@ -90,9 +93,10 @@ public class AdService implements IAdService {
     private CommentResponse mapSingleCommentToCommentResponse(Comment comment) {
         CommentResponse commentResponse = new CommentResponse();
         commentResponse.setId(comment.getId());
-        commentResponse.setSimpleUserId(comment.getSimpleUser());
+        commentResponse.setSimpleUser(_authClient.getSimpleUser(comment.getSimpleUser()));
         commentResponse.setCommentStatus(comment.getStatus().toString());
         commentResponse.setText(comment.getText());
+        commentResponse.setPostTime(Date.from(comment.getPostTime().atZone(ZoneId.systemDefault()).toInstant()));
         return commentResponse;
     }
 

@@ -2,6 +2,8 @@ package com.owasp.adservice.dto.response;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -11,8 +13,10 @@ public class CommentResponse {
 
     private String text;
 
-    private UUID simpleUserId;
+    private SimpleUserResponse simpleUser;
 
     private String commentStatus;
+
+    private Date postTime;
 
 }
