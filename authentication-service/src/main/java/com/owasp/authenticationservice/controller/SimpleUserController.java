@@ -5,7 +5,6 @@ import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
 import com.owasp.authenticationservice.services.impl.SimpleUserService;
 import com.owasp.authenticationservice.services.impl.UserService;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

@@ -8,11 +8,14 @@ import com.owasp.authenticationservice.entity.User;
 import com.owasp.authenticationservice.repository.IAuthorityRepository;
 import com.owasp.authenticationservice.repository.ISimpleUserRepository;
 import com.owasp.authenticationservice.repository.IUserRepository;
+import com.owasp.authenticationservice.security.SecurityEscape;
 import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.ISimpleUserService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.enums.UserStatus;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -46,10 +49,21 @@ public class SimpleUserService implements ISimpleUserService {
             throw new GeneralException("User already exist.", HttpStatus.BAD_REQUEST);
         }
 
+        sanitizeInputValues(request);
         SimpleUser createdSimpleUser = createNewSimpleUser(request);
         SimpleUser savedSimpleUser = _simpleUserRepository.save(createdSimpleUser);
 
         return mapSimpleUserToSimpleUserResponse(savedSimpleUser);
+    }
+
+    private void sanitizeInputValues(CreateSimpleUserRequest request) {
+        request.setUsername(SecurityEscape.cleanIt(request.getUsername()));
+        request.setPassword(SecurityEscape.cleanIt(request.getPassword()));
+        request.setFirstName(SecurityEscape.cleanIt(request.getFirstName()));
+        request.setLastName(SecurityEscape.cleanIt(request.getLastName()));
+        request.setAddress(SecurityEscape.cleanIt(request.getAddress()));
+        request.setSecurityQuestion(SecurityEscape.cleanIt(request.getSecurityQuestion()));
+        request.setSsn(SecurityEscape.cleanIt(request.getSsn()));
     }
 
     @Override

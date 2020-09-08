@@ -1,10 +1,10 @@
-package com.rentacar.Zuul;
+package com.owasp.Eureka;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ZuulApplicationTests {
+class EurekaApplicationTests {
 
 	@Test
 	void contextLoads() {

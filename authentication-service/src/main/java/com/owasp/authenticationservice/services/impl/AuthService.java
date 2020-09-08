@@ -20,6 +20,8 @@ import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -63,6 +65,8 @@ public class AuthService implements IAuthService {
     private final IBrowserFingerPrintRepository _browserFingerPrintRepository;
     private final ISimpleUserRepository _simpleUserRepository;
     private final IEmailService _emailService;
+
+    private final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     public AuthService(AuthenticationManager authenticationManager, TokenUtils tokenUtils, PasswordEncoder passwordEncoder, IUserRepository userRepository, DataSource dataSource, EntityManager em, ILoginAttemptRepository loginAttemptRepository, IBrowserFingerPrintRepository browserFingerPrintRepository, ISimpleUserRepository simpleUserRepository, IEmailService emailService) {
         _authenticationManager = authenticationManager;
@@ -253,6 +257,8 @@ public class AuthService implements IAuthService {
 
     @Override
     public boolean checkPassword(String userPassword) throws IOException {
+        logger.debug("error log aca pise");
+
         String filePath = new File("").getAbsolutePath();
         File file = new File( filePath + "/authentication-service/weak_passwords.txt");
 

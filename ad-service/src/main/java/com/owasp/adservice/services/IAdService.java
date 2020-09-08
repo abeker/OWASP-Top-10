@@ -2,7 +2,9 @@ package com.owasp.adservice.services;
 
 import com.owasp.adservice.dto.request.AddAdRequest;
 import com.owasp.adservice.dto.response.AdResponse;
+import com.owasp.adservice.dto.response.CommentResponse;
 import com.owasp.adservice.entity.Ad;
+import com.owasp.adservice.entity.Comment;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -19,4 +21,6 @@ public interface IAdService {
     List<AdResponse> getAgentAds(boolean deleted, String token);
 
     String getAverageRateOfAd(Ad ad);
+
+    public List<CommentResponse> mapCommentsToCommentResponse(List<Comment> comments);
 }

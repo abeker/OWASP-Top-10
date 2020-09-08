@@ -15,8 +15,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="ad-service" target="1.8" />
-      <module name="authentication-service" target="1.8" />
+      <module name="ad-service" target="8" />
+      <module name="authentication-service" target="8" />
       <module name="Eureka" target="1.8" />
       <module name="Owasp-Microservices" target="1.5" />
       <module name="Zuul" target="1.8" />

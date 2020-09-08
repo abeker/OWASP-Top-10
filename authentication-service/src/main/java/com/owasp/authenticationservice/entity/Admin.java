@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
 public class Admin extends User {
 
 }

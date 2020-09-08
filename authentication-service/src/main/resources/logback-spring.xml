@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="15 seconds">
+
+    <property name="LOG_DIR" value="./authentication-service/logs" />
+
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="Debug-Logging" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yyyy;HH:mm:ss} %-5level %logger{15}.%method:%line - %message%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily in folder with current year and month in name -->
+            <fileNamePattern>${LOG_DIR}/debug/%d{yyyy-MM,aux}/%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <!-- each file should be at most 50MB, keep 190 days worth of history, but at most 20GB -->
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>192</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="Info-Logging" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yyyy;HH:mm:ss} %-5level %logger{15}.%method:%line - %message%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily in folder with current year and month in name -->
+            <fileNamePattern>${LOG_DIR}/info/%d{yyyy-MM,aux}/%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <!-- each file should be at most 50MB, keep 190 days worth of history, but at most 20GB -->
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>192</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="Warning-Logging" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yyyy;HH:mm:ss} %-5level %logger{15}.%method:%line - %message%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily in folder with current year and month in name -->
+            <fileNamePattern>${LOG_DIR}/warning/%d{yyyy-MM,aux}/%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <!-- each file should be at most 50MB, keep 190 days worth of history, but at most 20GB -->
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>192</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="Error-Logging" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yyyy;HH:mm:ss} %-5level %logger{15}.%method:%line - %message%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily in folder with current year and month in name -->
+            <fileNamePattern>${LOG_DIR}/error/%d{yyyy-MM,aux}/%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <!-- each file should be at most 50MB, keep 190 days worth of history, but at most 20GB -->
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>192</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+<!--    U developing mode-u (kada razvijam app) imam jednu politiku, dok je u produkciji druga politika -->
+    <springProfile name="dev">
+        <root level="info">
+            <appender-ref ref="Console" />
+            <appender-ref ref="Info-Logging" />
+            <appender-ref ref="Warning-Logging" />
+            <appender-ref ref="Error-Logging" />
+        </root>
+        <logger name="com.owasp.authenticationservice.services.impl" additivity="false" level="debug">
+            <appender-ref ref="Debug-Logging" />
+            <appender-ref ref="Info-Logging" />
+            <appender-ref ref="Warning-Logging" />
+            <appender-ref ref="Error-Logging" />
+        </logger>
+    </springProfile>
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="Info-Logging" />
+            <appender-ref ref="Warning-Logging" />
+            <appender-ref ref="Error-Logging" />
+        </root>
+        <logger name="com.owasp.authenticationservice.services.impl" additivity="false" level="error">
+            <appender-ref ref="Error-Logging" />
+        </logger>
+    </springProfile>
+
+</configuration>
+
