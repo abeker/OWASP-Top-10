@@ -1,0 +1,510 @@
+09-09-2020 00:09:11 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo - The following profiles are active: dev
+09-09-2020 00:09:11 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+09-09-2020 00:09:12 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 347ms. Found 7 JPA repository interfaces.
+09-09-2020 00:09:12 INFO  o.s.c.c.s.GenericScope.setSerializationId - BeanFactory id=79ead676-3d05-39e8-bcc5-44c62dfa8da8
+09-09-2020 00:09:12 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$5c2f8dba] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:09:12 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping.afterPropertiesSet - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+09-09-2020 00:09:12 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@41fe8e5f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:09:12 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:09:13 INFO  o.s.b.w.e.t.TomcatWebServer.initialize - Tomcat initialized with port(s): 8081 (http)
+09-09-2020 00:09:13 INFO  o.a.c.h.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:09:13 INFO  o.a.c.c.StandardService.log - Starting service [Tomcat]
+09-09-2020 00:09:13 INFO  o.a.c.c.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.37]
+09-09-2020 00:09:13 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring embedded WebApplicationContext
+09-09-2020 00:09:13 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2612 ms
+09-09-2020 00:09:13 INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-09-2020 00:09:14 INFO  o.h.j.i.u.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+09-09-2020 00:09:14 INFO  o.h.Version.logVersion - HHH000412: Hibernate ORM core version 5.4.18.Final
+09-09-2020 00:09:14 INFO  o.h.a.c.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+09-09-2020 00:09:14 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-09-2020 00:09:14 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-09-2020 00:09:14 INFO  o.h.d.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+09-09-2020 00:09:15 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/', GET], []
+09-09-2020 00:09:15 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/webjars/**', GET], []
+09-09-2020 00:09:15 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/*.html', GET], []
+09-09-2020 00:09:15 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+09-09-2020 00:09:15 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.html', GET], []
+09-09-2020 00:09:15 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.css', GET], []
+09-09-2020 00:09:15 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.js', GET], []
+09-09-2020 00:09:15 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@18a096b5, org.springframework.security.web.context.SecurityContextPersistenceFilter@79a13920, org.springframework.security.web.header.HeaderWriterFilter@114a5e0, org.springframework.web.filter.CorsFilter@670b3ca, org.springframework.security.web.authentication.logout.LogoutFilter@7f3ca64a, com.owasp.authenticationservice.auth.TokenAuthenticationFilter@79b18230, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5f61371d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@faea4da, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d4f5506, org.springframework.security.web.session.SessionManagementFilter@251c4280, org.springframework.security.web.access.ExceptionTranslationFilter@664e848c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@28cd2c2]
+09-09-2020 00:09:15 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:09:15 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:09:17 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09-09-2020 00:09:17 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-09-2020 00:09:17 INFO  o.s.c.n.e.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+09-09-2020 00:09:17 INFO  c.n.d.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+09-09-2020 00:09:18 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+09-09-2020 00:09:18 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+09-09-2020 00:09:18 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+09-09-2020 00:09:18 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+09-09-2020 00:09:18 INFO  c.n.d.s.r.a.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.fetchRegistry - Disable delta property : false
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application is null : false
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application version is -1: true
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+09-09-2020 00:09:19 INFO  c.n.d.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1599602959350 with initial instances count: 1
+09-09-2020 00:09:19 INFO  o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application AUTH with eureka with status UP
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1599602959356, current=UP, previous=STARTING]
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081: registering service...
+09-09-2020 00:09:19 INFO  o.a.c.h.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:09:19 INFO  o.s.b.w.e.t.TomcatWebServer.start - Tomcat started on port(s): 8081 (http) with context path ''
+09-09-2020 00:09:19 INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 8081
+09-09-2020 00:09:19 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration status: 204
+09-09-2020 00:09:19 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Triggering deferred initialization of Spring Data repositories…
+09-09-2020 00:09:20 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Spring Data repositories initialized!
+09-09-2020 00:09:20 INFO  c.o.a.AuthenticationServiceApplication.logStarted - Started AuthenticationServiceApplication in 11.403 seconds (JVM running for 11.953)
+09-09-2020 00:09:41 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-09-2020 00:09:41 INFO  o.s.w.s.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+09-09-2020 00:09:41 INFO  o.s.w.s.DispatcherServlet.initServletBean - Completed initialization in 34 ms
+09-09-2020 00:11:33 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo - The following profiles are active: dev
+09-09-2020 00:11:33 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+09-09-2020 00:11:34 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 251ms. Found 7 JPA repository interfaces.
+09-09-2020 00:11:34 INFO  o.s.c.c.s.GenericScope.setSerializationId - BeanFactory id=79ead676-3d05-39e8-bcc5-44c62dfa8da8
+09-09-2020 00:11:34 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$81724b8b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:11:34 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping.afterPropertiesSet - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+09-09-2020 00:11:34 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@14b7786' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:11:34 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:11:35 INFO  o.s.b.w.e.t.TomcatWebServer.initialize - Tomcat initialized with port(s): 8081 (http)
+09-09-2020 00:11:35 INFO  o.a.c.h.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:11:35 INFO  o.a.c.c.StandardService.log - Starting service [Tomcat]
+09-09-2020 00:11:35 INFO  o.a.c.c.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.37]
+09-09-2020 00:11:35 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring embedded WebApplicationContext
+09-09-2020 00:11:35 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2192 ms
+09-09-2020 00:11:35 INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-09-2020 00:11:35 INFO  o.h.j.i.u.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+09-09-2020 00:11:35 INFO  o.h.Version.logVersion - HHH000412: Hibernate ORM core version 5.4.18.Final
+09-09-2020 00:11:36 INFO  o.h.a.c.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+09-09-2020 00:11:36 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-09-2020 00:11:36 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-09-2020 00:11:36 INFO  o.h.d.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+09-09-2020 00:11:36 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/', GET], []
+09-09-2020 00:11:36 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/webjars/**', GET], []
+09-09-2020 00:11:36 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/*.html', GET], []
+09-09-2020 00:11:36 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+09-09-2020 00:11:36 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.html', GET], []
+09-09-2020 00:11:36 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.css', GET], []
+09-09-2020 00:11:36 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.js', GET], []
+09-09-2020 00:11:36 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@f2b90fc, org.springframework.security.web.context.SecurityContextPersistenceFilter@202d9236, org.springframework.security.web.header.HeaderWriterFilter@4bb1b96b, org.springframework.web.filter.CorsFilter@3bd6ba24, org.springframework.security.web.authentication.logout.LogoutFilter@5ba90d8a, com.owasp.authenticationservice.auth.TokenAuthenticationFilter@2bb41f5c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6d6ac396, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6ad1701a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@24c685e7, org.springframework.security.web.session.SessionManagementFilter@4a070cf0, org.springframework.security.web.access.ExceptionTranslationFilter@7a2fce12, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4f281aaf]
+09-09-2020 00:11:37 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:11:37 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:11:38 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09-09-2020 00:11:38 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-09-2020 00:11:38 INFO  o.s.c.n.e.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+09-09-2020 00:11:38 INFO  c.n.d.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+09-09-2020 00:11:38 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+09-09-2020 00:11:38 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+09-09-2020 00:11:39 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+09-09-2020 00:11:39 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+09-09-2020 00:11:39 INFO  c.n.d.s.r.a.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.fetchRegistry - Disable delta property : false
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application is null : false
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application version is -1: true
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+09-09-2020 00:11:39 INFO  c.n.d.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1599603099698 with initial instances count: 3
+09-09-2020 00:11:39 INFO  o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application AUTH with eureka with status UP
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1599603099703, current=UP, previous=STARTING]
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081: registering service...
+09-09-2020 00:11:39 INFO  o.a.c.h.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:11:39 INFO  o.s.b.w.e.t.TomcatWebServer.start - Tomcat started on port(s): 8081 (http) with context path ''
+09-09-2020 00:11:39 INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 8081
+09-09-2020 00:11:39 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration status: 204
+09-09-2020 00:11:40 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Triggering deferred initialization of Spring Data repositories…
+09-09-2020 00:11:40 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Spring Data repositories initialized!
+09-09-2020 00:11:40 INFO  c.o.a.AuthenticationServiceApplication.logStarted - Started AuthenticationServiceApplication in 8.69 seconds (JVM running for 9.231)
+09-09-2020 00:11:43 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-09-2020 00:11:43 INFO  o.s.w.s.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+09-09-2020 00:11:43 INFO  o.s.w.s.DispatcherServlet.initServletBean - Completed initialization in 10 ms
+09-09-2020 00:12:37 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo - The following profiles are active: dev
+09-09-2020 00:12:38 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+09-09-2020 00:12:38 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 241ms. Found 7 JPA repository interfaces.
+09-09-2020 00:12:38 INFO  o.s.cloud.context.scope.GenericScope.setSerializationId - BeanFactory id=79ead676-3d05-39e8-bcc5-44c62dfa8da8
+09-09-2020 00:12:38 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$2ed24b4c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:12:38 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping.afterPropertiesSet - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+09-09-2020 00:12:38 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@78010562' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:12:38 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:12:39 INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8081 (http)
+09-09-2020 00:12:39 INFO  o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:12:39 INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+09-09-2020 00:12:39 INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.37]
+09-09-2020 00:12:39 INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+09-09-2020 00:12:39 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2128 ms
+09-09-2020 00:12:39 INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-09-2020 00:12:39 INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+09-09-2020 00:12:39 INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate ORM core version 5.4.18.Final
+09-09-2020 00:12:40 INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+09-09-2020 00:12:40 INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-09-2020 00:12:40 INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-09-2020 00:12:40 INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+09-09-2020 00:12:40 INFO  o.s.s.web.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/', GET], []
+09-09-2020 00:12:40 INFO  o.s.s.web.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/webjars/**', GET], []
+09-09-2020 00:12:40 INFO  o.s.s.web.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/*.html', GET], []
+09-09-2020 00:12:40 INFO  o.s.s.web.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+09-09-2020 00:12:40 INFO  o.s.s.web.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.html', GET], []
+09-09-2020 00:12:40 INFO  o.s.s.web.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.css', GET], []
+09-09-2020 00:12:40 INFO  o.s.s.web.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.js', GET], []
+09-09-2020 00:12:40 INFO  o.s.s.web.DefaultSecurityFilterChain.<init> - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@b4732dc, org.springframework.security.web.context.SecurityContextPersistenceFilter@35bfa1bb, org.springframework.security.web.header.HeaderWriterFilter@22da2fe6, org.springframework.web.filter.CorsFilter@54db056b, org.springframework.security.web.authentication.logout.LogoutFilter@3d615b2e, com.owasp.authenticationservice.auth.TokenAuthenticationFilter@45292ec1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@68b11545, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2eda4eeb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3a7c678b, org.springframework.security.web.session.SessionManagementFilter@319642db, org.springframework.security.web.access.ExceptionTranslationFilter@6ad1701a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@69f2cb04]
+09-09-2020 00:12:40 INFO  c.n.c.sources.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:12:40 INFO  c.n.c.sources.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:12:42 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09-09-2020 00:12:42 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-09-2020 00:12:42 INFO  o.s.c.n.eureka.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+09-09-2020 00:12:42 INFO  c.netflix.discovery.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+09-09-2020 00:12:42 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+09-09-2020 00:12:42 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+09-09-2020 00:12:42 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+09-09-2020 00:12:42 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+09-09-2020 00:12:43 INFO  c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.fetchRegistry - Disable delta property : false
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.fetchRegistry - Application is null : false
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.fetchRegistry - Application version is -1: true
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+09-09-2020 00:12:43 INFO  c.n.discovery.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1599603163637 with initial instances count: 3
+09-09-2020 00:12:43 INFO  o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application AUTH with eureka with status UP
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1599603163642, current=UP, previous=STARTING]
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081: registering service...
+09-09-2020 00:12:43 INFO  o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:12:43 INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8081 (http) with context path ''
+09-09-2020 00:12:43 INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 8081
+09-09-2020 00:12:43 INFO  c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration status: 204
+09-09-2020 00:12:43 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Triggering deferred initialization of Spring Data repositories…
+09-09-2020 00:12:44 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Spring Data repositories initialized!
+09-09-2020 00:12:44 INFO  c.o.a.AuthenticationServiceApplication.logStarted - Started AuthenticationServiceApplication in 8.431 seconds (JVM running for 8.968)
+09-09-2020 00:12:46 INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-09-2020 00:12:46 INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+09-09-2020 00:12:46 INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Completed initialization in 20 ms
+09-09-2020 00:15:50 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo - The following profiles are active: dev
+09-09-2020 00:15:51 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+09-09-2020 00:15:51 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 225ms. Found 7 JPA repository interfaces.
+09-09-2020 00:15:51 INFO  o.s.c.c.s.GenericScope.setSerializationId - BeanFactory id=79ead676-3d05-39e8-bcc5-44c62dfa8da8
+09-09-2020 00:15:51 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$650a799f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:15:51 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping.afterPropertiesSet - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+09-09-2020 00:15:51 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2e6f610d' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:15:51 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:15:52 INFO  o.s.b.w.e.t.TomcatWebServer.initialize - Tomcat initialized with port(s): 8081 (http)
+09-09-2020 00:15:52 INFO  o.a.c.h.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:15:52 INFO  o.a.c.c.StandardService.log - Starting service [Tomcat]
+09-09-2020 00:15:52 INFO  o.a.c.c.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.37]
+09-09-2020 00:15:52 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring embedded WebApplicationContext
+09-09-2020 00:15:52 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2122 ms
+09-09-2020 00:15:52 INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-09-2020 00:15:52 INFO  o.h.j.i.u.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+09-09-2020 00:15:52 INFO  o.h.Version.logVersion - HHH000412: Hibernate ORM core version 5.4.18.Final
+09-09-2020 00:15:53 INFO  o.h.a.c.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+09-09-2020 00:15:53 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-09-2020 00:15:53 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-09-2020 00:15:53 INFO  o.h.d.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+09-09-2020 00:15:53 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/', GET], []
+09-09-2020 00:15:53 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/webjars/**', GET], []
+09-09-2020 00:15:53 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/*.html', GET], []
+09-09-2020 00:15:53 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+09-09-2020 00:15:53 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.html', GET], []
+09-09-2020 00:15:53 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.css', GET], []
+09-09-2020 00:15:53 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.js', GET], []
+09-09-2020 00:15:53 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3e900e1a, org.springframework.security.web.context.SecurityContextPersistenceFilter@525b1b70, org.springframework.security.web.header.HeaderWriterFilter@4d464510, org.springframework.web.filter.CorsFilter@71e35c4, org.springframework.security.web.authentication.logout.LogoutFilter@7dee835, com.owasp.authenticationservice.auth.TokenAuthenticationFilter@196624bf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@16f0ec18, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@623e0631, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@50085d9c, org.springframework.security.web.session.SessionManagementFilter@570ba13, org.springframework.security.web.access.ExceptionTranslationFilter@58833798, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@23cd5d42]
+09-09-2020 00:15:53 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:15:54 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:15:55 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09-09-2020 00:15:55 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-09-2020 00:15:55 INFO  o.s.c.n.e.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+09-09-2020 00:15:55 INFO  c.n.d.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+09-09-2020 00:15:55 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+09-09-2020 00:15:55 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+09-09-2020 00:15:55 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+09-09-2020 00:15:55 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+09-09-2020 00:15:56 INFO  c.n.d.s.r.a.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.fetchRegistry - Disable delta property : false
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application is null : false
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application version is -1: true
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+09-09-2020 00:15:56 INFO  c.n.d.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1599603356465 with initial instances count: 3
+09-09-2020 00:15:56 INFO  o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application AUTH with eureka with status UP
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1599603356469, current=UP, previous=STARTING]
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081: registering service...
+09-09-2020 00:15:56 INFO  o.a.c.h.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:15:56 INFO  o.s.b.w.e.t.TomcatWebServer.start - Tomcat started on port(s): 8081 (http) with context path ''
+09-09-2020 00:15:56 INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 8081
+09-09-2020 00:15:56 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration status: 204
+09-09-2020 00:15:56 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Triggering deferred initialization of Spring Data repositories…
+09-09-2020 00:15:57 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Spring Data repositories initialized!
+09-09-2020 00:15:57 INFO  c.o.a.AuthenticationServiceApplication.logStarted - Started AuthenticationServiceApplication in 8.279 seconds (JVM running for 8.776)
+09-09-2020 00:15:59 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-09-2020 00:15:59 INFO  o.s.w.s.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+09-09-2020 00:15:59 INFO  o.s.w.s.DispatcherServlet.initServletBean - Completed initialization in 9 ms
+09-09-2020 00:16:13 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo - The following profiles are active: dev
+09-09-2020 00:16:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+09-09-2020 00:16:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 249ms. Found 7 JPA repository interfaces.
+09-09-2020 00:16:14 INFO  o.s.c.c.s.GenericScope.setSerializationId - BeanFactory id=79ead676-3d05-39e8-bcc5-44c62dfa8da8
+09-09-2020 00:16:15 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$a9d0fb8e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:16:15 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping.afterPropertiesSet - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+09-09-2020 00:16:15 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1c9e07c6' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:16:15 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:16:15 INFO  o.s.b.w.e.t.TomcatWebServer.initialize - Tomcat initialized with port(s): 8081 (http)
+09-09-2020 00:16:15 INFO  o.a.c.h.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:16:15 INFO  o.a.c.c.StandardService.log - Starting service [Tomcat]
+09-09-2020 00:16:15 INFO  o.a.c.c.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.37]
+09-09-2020 00:16:15 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring embedded WebApplicationContext
+09-09-2020 00:16:15 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2178 ms
+09-09-2020 00:16:16 INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-09-2020 00:16:16 INFO  o.h.j.i.u.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+09-09-2020 00:16:16 INFO  o.h.Version.logVersion - HHH000412: Hibernate ORM core version 5.4.18.Final
+09-09-2020 00:16:16 INFO  o.h.a.c.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+09-09-2020 00:16:16 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-09-2020 00:16:16 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-09-2020 00:16:16 INFO  o.h.d.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+09-09-2020 00:16:17 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/', GET], []
+09-09-2020 00:16:17 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/webjars/**', GET], []
+09-09-2020 00:16:17 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/*.html', GET], []
+09-09-2020 00:16:17 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+09-09-2020 00:16:17 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.html', GET], []
+09-09-2020 00:16:17 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.css', GET], []
+09-09-2020 00:16:17 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.js', GET], []
+09-09-2020 00:16:17 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@61191222, org.springframework.security.web.context.SecurityContextPersistenceFilter@445821a6, org.springframework.security.web.header.HeaderWriterFilter@68b11545, org.springframework.web.filter.CorsFilter@35a60674, org.springframework.security.web.authentication.logout.LogoutFilter@114a5e0, com.owasp.authenticationservice.auth.TokenAuthenticationFilter@58833798, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@35d26ad2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@66e21568, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7f3ca64a, org.springframework.security.web.session.SessionManagementFilter@9a20cbd, org.springframework.security.web.access.ExceptionTranslationFilter@35bfa1bb, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@778a1250]
+09-09-2020 00:16:17 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:16:17 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:16:18 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09-09-2020 00:16:18 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-09-2020 00:16:19 INFO  o.s.c.n.e.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+09-09-2020 00:16:19 INFO  c.n.d.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+09-09-2020 00:16:19 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+09-09-2020 00:16:19 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+09-09-2020 00:16:20 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+09-09-2020 00:16:20 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+09-09-2020 00:16:20 INFO  c.n.d.s.r.a.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.fetchRegistry - Disable delta property : false
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application is null : false
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application version is -1: true
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+09-09-2020 00:16:20 INFO  c.n.d.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1599603380967 with initial instances count: 3
+09-09-2020 00:16:20 INFO  o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application AUTH with eureka with status UP
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1599603380987, current=UP, previous=STARTING]
+09-09-2020 00:16:20 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081: registering service...
+09-09-2020 00:16:20 INFO  o.a.c.h.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:16:21 INFO  o.s.b.w.e.t.TomcatWebServer.start - Tomcat started on port(s): 8081 (http) with context path ''
+09-09-2020 00:16:21 INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 8081
+09-09-2020 00:16:21 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration status: 204
+09-09-2020 00:16:21 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Triggering deferred initialization of Spring Data repositories…
+09-09-2020 00:16:22 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Spring Data repositories initialized!
+09-09-2020 00:16:22 INFO  c.o.a.AuthenticationServiceApplication.logStarted - Started AuthenticationServiceApplication in 9.959 seconds (JVM running for 10.467)
+09-09-2020 00:16:23 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-09-2020 00:16:23 INFO  o.s.w.s.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+09-09-2020 00:16:23 INFO  o.s.w.s.DispatcherServlet.initServletBean - Completed initialization in 8 ms
+09-09-2020 00:20:47 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo - The following profiles are active: dev
+09-09-2020 00:20:48 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+09-09-2020 00:20:48 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 199ms. Found 7 JPA repository interfaces.
+09-09-2020 00:20:48 INFO  o.s.c.c.s.GenericScope.setSerializationId - BeanFactory id=79ead676-3d05-39e8-bcc5-44c62dfa8da8
+09-09-2020 00:20:48 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$2b1644dc] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:20:48 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping.afterPropertiesSet - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+09-09-2020 00:20:48 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1b5c3e5f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:20:48 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:20:49 INFO  o.s.b.w.e.t.TomcatWebServer.initialize - Tomcat initialized with port(s): 8081 (http)
+09-09-2020 00:20:49 INFO  o.a.c.h.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:20:49 INFO  o.a.c.c.StandardService.log - Starting service [Tomcat]
+09-09-2020 00:20:49 INFO  o.a.c.c.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.37]
+09-09-2020 00:20:49 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring embedded WebApplicationContext
+09-09-2020 00:20:49 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2110 ms
+09-09-2020 00:20:49 INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-09-2020 00:20:49 INFO  o.h.j.i.u.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+09-09-2020 00:20:49 INFO  o.h.Version.logVersion - HHH000412: Hibernate ORM core version 5.4.18.Final
+09-09-2020 00:20:50 INFO  o.h.a.c.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+09-09-2020 00:20:50 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-09-2020 00:20:50 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-09-2020 00:20:50 INFO  o.h.d.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+09-09-2020 00:20:51 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/', GET], []
+09-09-2020 00:20:51 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/webjars/**', GET], []
+09-09-2020 00:20:51 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/*.html', GET], []
+09-09-2020 00:20:51 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+09-09-2020 00:20:51 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.html', GET], []
+09-09-2020 00:20:51 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.css', GET], []
+09-09-2020 00:20:51 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.js', GET], []
+09-09-2020 00:20:51 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@bb25753, org.springframework.security.web.context.SecurityContextPersistenceFilter@50110971, org.springframework.security.web.header.HeaderWriterFilter@19e21f89, org.springframework.web.filter.CorsFilter@3bbf6abe, org.springframework.security.web.authentication.logout.LogoutFilter@202d9236, com.owasp.authenticationservice.auth.TokenAuthenticationFilter@ee21292, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6661d8c0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@315c081, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@40c06358, org.springframework.security.web.session.SessionManagementFilter@59c500f7, org.springframework.security.web.access.ExceptionTranslationFilter@23c767e6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2c0c4c0a]
+09-09-2020 00:20:51 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:20:51 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:20:52 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09-09-2020 00:20:52 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-09-2020 00:20:52 INFO  o.s.c.n.e.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+09-09-2020 00:20:52 INFO  c.n.d.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+09-09-2020 00:20:52 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+09-09-2020 00:20:52 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+09-09-2020 00:20:53 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+09-09-2020 00:20:53 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+09-09-2020 00:20:53 INFO  c.n.d.s.r.a.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.fetchRegistry - Disable delta property : false
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application is null : false
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application version is -1: true
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+09-09-2020 00:20:53 INFO  c.n.d.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1599603653876 with initial instances count: 3
+09-09-2020 00:20:53 INFO  o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application AUTH with eureka with status UP
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1599603653881, current=UP, previous=STARTING]
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081: registering service...
+09-09-2020 00:20:53 INFO  o.a.c.h.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:20:53 INFO  o.s.b.w.e.t.TomcatWebServer.start - Tomcat started on port(s): 8081 (http) with context path ''
+09-09-2020 00:20:53 INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 8081
+09-09-2020 00:20:53 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration status: 204
+09-09-2020 00:20:54 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Triggering deferred initialization of Spring Data repositories…
+09-09-2020 00:20:54 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Spring Data repositories initialized!
+09-09-2020 00:20:54 INFO  c.o.a.AuthenticationServiceApplication.logStarted - Started AuthenticationServiceApplication in 8.531 seconds (JVM running for 9.05)
+09-09-2020 00:20:56 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-09-2020 00:20:56 INFO  o.s.w.s.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+09-09-2020 00:20:56 INFO  o.s.w.s.DispatcherServlet.initServletBean - Completed initialization in 7 ms
+09-09-2020 00:21:42 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo - The following profiles are active: dev
+09-09-2020 00:21:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+09-09-2020 00:21:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 224ms. Found 7 JPA repository interfaces.
+09-09-2020 00:21:43 INFO  o.s.c.c.s.GenericScope.setSerializationId - BeanFactory id=79ead676-3d05-39e8-bcc5-44c62dfa8da8
+09-09-2020 00:21:43 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$4a36c7f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:21:43 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping.afterPropertiesSet - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+09-09-2020 00:21:43 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1a2909ae' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:21:43 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020 00:21:44 INFO  o.s.b.w.e.t.TomcatWebServer.initialize - Tomcat initialized with port(s): 8081 (http)
+09-09-2020 00:21:44 INFO  o.a.c.h.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:21:44 INFO  o.a.c.c.StandardService.log - Starting service [Tomcat]
+09-09-2020 00:21:44 INFO  o.a.c.c.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.37]
+09-09-2020 00:21:44 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring embedded WebApplicationContext
+09-09-2020 00:21:44 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2200 ms
+09-09-2020 00:21:44 INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+09-09-2020 00:21:44 INFO  o.h.j.i.u.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+09-09-2020 00:21:44 INFO  o.h.Version.logVersion - HHH000412: Hibernate ORM core version 5.4.18.Final
+09-09-2020 00:21:45 INFO  o.h.a.c.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+09-09-2020 00:21:45 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Starting...
+09-09-2020 00:21:45 INFO  c.z.h.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+09-09-2020 00:21:45 INFO  o.h.d.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+09-09-2020 00:21:45 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/', GET], []
+09-09-2020 00:21:45 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/webjars/**', GET], []
+09-09-2020 00:21:45 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/*.html', GET], []
+09-09-2020 00:21:45 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+09-09-2020 00:21:45 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.html', GET], []
+09-09-2020 00:21:45 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.css', GET], []
+09-09-2020 00:21:45 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: Ant [pattern='/**/*.js', GET], []
+09-09-2020 00:21:45 INFO  o.s.s.w.DefaultSecurityFilterChain.<init> - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5efeb117, org.springframework.security.web.context.SecurityContextPersistenceFilter@1f66d8e1, org.springframework.security.web.header.HeaderWriterFilter@6b2dd3df, org.springframework.web.filter.CorsFilter@1d12e953, org.springframework.security.web.authentication.logout.LogoutFilter@59498d94, com.owasp.authenticationservice.auth.TokenAuthenticationFilter@160b4809, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3421debd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4a070cf0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@149b4d20, org.springframework.security.web.session.SessionManagementFilter@4bb1b96b, org.springframework.security.web.access.ExceptionTranslationFilter@6b5ab2f2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@697d6ded]
+09-09-2020 00:21:45 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:21:45 INFO  c.n.c.s.URLConfigurationSource.<init> - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020 00:21:46 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09-09-2020 00:21:46 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-09-2020 00:21:47 INFO  o.s.c.n.e.InstanceInfoFactory.create - Setting initial instance status as: STARTING
+09-09-2020 00:21:47 INFO  c.n.d.DiscoveryClient.<init> - Initializing Eureka in region us-east-1
+09-09-2020 00:21:47 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON encoding codec LegacyJacksonJson
+09-09-2020 00:21:47 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using JSON decoding codec LegacyJacksonJson
+09-09-2020 00:21:47 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML encoding codec XStreamXml
+09-09-2020 00:21:47 INFO  c.n.d.p.DiscoveryJerseyProvider.<init> - Using XML decoding codec XStreamXml
+09-09-2020 00:21:47 INFO  c.n.d.s.r.a.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.fetchRegistry - Disable delta property : false
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.fetchRegistry - Single vip registry refresh property : null
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.fetchRegistry - Force full registry fetch : false
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application is null : false
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.fetchRegistry - Registered Applications size is zero : true
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.fetchRegistry - Application version is -1: true
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry - The response status is 200
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+09-09-2020 00:21:48 INFO  c.n.d.InstanceInfoReplicator.<init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.<init> - Discovery Client initialized at timestamp 1599603708263 with initial instances count: 3
+09-09-2020 00:21:48 INFO  o.s.c.n.e.s.EurekaServiceRegistry.register - Registering application AUTH with eureka with status UP
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1599603708267, current=UP, previous=STARTING]
+09-09-2020 00:21:48 INFO  o.a.c.h.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8081"]
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081: registering service...
+09-09-2020 00:21:48 INFO  o.s.b.w.e.t.TomcatWebServer.start - Tomcat started on port(s): 8081 (http) with context path ''
+09-09-2020 00:21:48 INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent - Updating port to 8081
+09-09-2020 00:21:48 INFO  c.n.d.DiscoveryClient.register - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration status: 204
+09-09-2020 00:21:48 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Triggering deferred initialization of Spring Data repositories…
+09-09-2020 00:21:49 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Spring Data repositories initialized!
+09-09-2020 00:21:49 INFO  c.o.a.AuthenticationServiceApplication.logStarted - Started AuthenticationServiceApplication in 8.344 seconds (JVM running for 8.837)
+09-09-2020 00:21:54 INFO  o.a.c.c.C.[.[.[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-09-2020 00:21:54 INFO  o.s.w.s.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+09-09-2020 00:21:54 INFO  o.s.w.s.DispatcherServlet.initServletBean - Completed initialization in 7 ms
+09-09-2020;00:23:07 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo:655 - The following profiles are active: dev
+09-09-2020;00:23:16 INFO  c.o.a.AuthenticationServiceApplication.logStartupProfileInfo:655 - The following profiles are active: dev
+09-09-2020;00:23:16 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:127 - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+09-09-2020;00:23:16 INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn:187 - Finished Spring Data repository scanning in 231ms. Found 7 JPA repository interfaces.
+09-09-2020;00:23:17 INFO  o.s.c.c.s.GenericScope.setSerializationId:295 - BeanFactory id=79ead676-3d05-39e8-bcc5-44c62dfa8da8
+09-09-2020;00:23:17 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:335 - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$fa8b3353] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020;00:23:17 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping.afterPropertiesSet:236 - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+09-09-2020;00:23:17 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:335 - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@35f639fa' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020;00:23:17 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:335 - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09-09-2020;00:23:18 INFO  o.s.b.w.e.t.TomcatWebServer.initialize:108 - Tomcat initialized with port(s): 8081 (http)
+09-09-2020;00:23:18 INFO  o.a.c.h.Http11NioProtocol.log:173 - Initializing ProtocolHandler ["http-nio-8081"]
+09-09-2020;00:23:18 INFO  o.a.c.c.StandardService.log:173 - Starting service [Tomcat]
+09-09-2020;00:23:18 INFO  o.a.c.c.StandardEngine.log:173 - Starting Servlet engine: [Apache Tomcat/9.0.37]
+09-09-2020;00:23:18 INFO  o.a.c.c.C.[.[.[/].log:173 - Initializing Spring embedded WebApplicationContext
+09-09-2020;00:23:18 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext:285 - Root WebApplicationContext: initialization completed in 2070 ms
+09-09-2020;00:23:18 INFO  o.s.s.c.ThreadPoolTaskExecutor.initialize:181 - Initializing ExecutorService 'applicationTaskExecutor'
+09-09-2020;00:23:18 INFO  o.h.j.i.u.LogHelper.logPersistenceUnitInformation:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+09-09-2020;00:23:18 INFO  o.h.Version.logVersion:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+09-09-2020;00:23:18 INFO  o.h.a.c.Version.<clinit>:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+09-09-2020;00:23:19 INFO  c.z.h.HikariDataSource.getConnection:110 - HikariPool-1 - Starting...
+09-09-2020;00:23:19 INFO  c.z.h.HikariDataSource.getConnection:123 - HikariPool-1 - Start completed.
+09-09-2020;00:23:19 INFO  o.h.d.Dialect.<init>:172 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+09-09-2020;00:23:19 INFO  o.s.s.w.DefaultSecurityFilterChain.<init>:43 - Creating filter chain: Ant [pattern='/', GET], []
+09-09-2020;00:23:19 INFO  o.s.s.w.DefaultSecurityFilterChain.<init>:43 - Creating filter chain: Ant [pattern='/webjars/**', GET], []
+09-09-2020;00:23:19 INFO  o.s.s.w.DefaultSecurityFilterChain.<init>:43 - Creating filter chain: Ant [pattern='/*.html', GET], []
+09-09-2020;00:23:19 INFO  o.s.s.w.DefaultSecurityFilterChain.<init>:43 - Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+09-09-2020;00:23:19 INFO  o.s.s.w.DefaultSecurityFilterChain.<init>:43 - Creating filter chain: Ant [pattern='/**/*.html', GET], []
+09-09-2020;00:23:19 INFO  o.s.s.w.DefaultSecurityFilterChain.<init>:43 - Creating filter chain: Ant [pattern='/**/*.css', GET], []
+09-09-2020;00:23:19 INFO  o.s.s.w.DefaultSecurityFilterChain.<init>:43 - Creating filter chain: Ant [pattern='/**/*.js', GET], []
+09-09-2020;00:23:19 INFO  o.s.s.w.DefaultSecurityFilterChain.<init>:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@611b35d6, org.springframework.security.web.context.SecurityContextPersistenceFilter@6b5ab2f2, org.springframework.security.web.header.HeaderWriterFilter@7f42e06e, org.springframework.web.filter.CorsFilter@358ab600, org.springframework.security.web.authentication.logout.LogoutFilter@519c6fcc, com.owasp.authenticationservice.auth.TokenAuthenticationFilter@2282400e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b2dd3df, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5bcec67e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@543d5863, org.springframework.security.web.session.SessionManagementFilter@310b2b6f, org.springframework.security.web.access.ExceptionTranslationFilter@7e7743ec, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@66e21568]
+09-09-2020;00:23:19 INFO  c.n.c.s.URLConfigurationSource.<init>:122 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020;00:23:19 INFO  c.n.c.s.URLConfigurationSource.<init>:122 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+09-09-2020;00:23:20 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09-09-2020;00:23:20 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09-09-2020;00:23:21 INFO  o.s.c.n.e.InstanceInfoFactory.create:72 - Setting initial instance status as: STARTING
+09-09-2020;00:23:21 INFO  c.n.d.DiscoveryClient.<init>:368 - Initializing Eureka in region us-east-1
+09-09-2020;00:23:21 INFO  c.n.d.p.DiscoveryJerseyProvider.<init>:70 - Using JSON encoding codec LegacyJacksonJson
+09-09-2020;00:23:21 INFO  c.n.d.p.DiscoveryJerseyProvider.<init>:71 - Using JSON decoding codec LegacyJacksonJson
+09-09-2020;00:23:21 INFO  c.n.d.p.DiscoveryJerseyProvider.<init>:80 - Using XML encoding codec XStreamXml
+09-09-2020;00:23:21 INFO  c.n.d.p.DiscoveryJerseyProvider.<init>:81 - Using XML decoding codec XStreamXml
+09-09-2020;00:23:22 INFO  c.n.d.s.r.a.ConfigClusterResolver.getClusterEndpoints:43 - Resolving eureka endpoints via configuration
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.fetchRegistry:981 - Disable delta property : false
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.fetchRegistry:982 - Single vip registry refresh property : null
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.fetchRegistry:983 - Force full registry fetch : false
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.fetchRegistry:984 - Application is null : false
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.fetchRegistry:985 - Registered Applications size is zero : true
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.fetchRegistry:987 - Application version is -1: true
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry:1070 - Getting all instance registry info from the eureka server
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.getAndStoreFullRegistry:1079 - The response status is 200
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.initScheduledTasks:1294 - Starting heartbeat executor: renew interval is: 30
+09-09-2020;00:23:22 INFO  c.n.d.InstanceInfoReplicator.<init>:60 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.<init>:468 - Discovery Client initialized at timestamp 1599603802816 with initial instances count: 3
+09-09-2020;00:23:22 INFO  o.s.c.n.e.s.EurekaServiceRegistry.register:41 - Registering application AUTH with eureka with status UP
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.notify:1330 - Saw local status change event StatusChangeEvent [timestamp=1599603802822, current=UP, previous=STARTING]
+09-09-2020;00:23:22 INFO  o.a.c.h.Http11NioProtocol.log:173 - Starting ProtocolHandler ["http-nio-8081"]
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.register:847 - DiscoveryClient_AUTH/host.docker.internal:auth:8081: registering service...
+09-09-2020;00:23:22 INFO  o.s.b.w.e.t.TomcatWebServer.start:220 - Tomcat started on port(s): 8081 (http) with context path ''
+09-09-2020;00:23:22 INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration.onApplicationEvent:145 - Updating port to 8081
+09-09-2020;00:23:22 INFO  c.n.d.DiscoveryClient.register:856 - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration status: 204
+09-09-2020;00:23:23 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent:49 - Triggering deferred initialization of Spring Data repositories…
+09-09-2020;00:23:23 INFO  o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent:53 - Spring Data repositories initialized!
+09-09-2020;00:23:23 INFO  c.o.a.AuthenticationServiceApplication.logStarted:61 - Started AuthenticationServiceApplication in 9.111 seconds (JVM running for 9.625)

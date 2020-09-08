@@ -1,4 +1,4 @@
-package com.rentacar.Zuul;
+package com.owasp.Zuul;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -6,7 +6,6 @@ import feign.FeignException;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.logging.Logger;
 
 @SuppressWarnings({"IfStatementWithIdenticalBranches", "SpellCheckingInspection"})
 @Component
