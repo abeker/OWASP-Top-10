@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.UUID;
 
+@SuppressWarnings("unused")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ads")
@@ -31,8 +31,10 @@ public class AdController {
 
     @PostMapping(consumes = { "multipart/form-data" })
     @PreAuthorize("hasAuthority('CREATE_AD')")
-    public ResponseEntity<?> createAd(@RequestPart("imageFile") List<MultipartFile> fileList, @RequestPart("request") AddAdRequest request) throws Exception{
-        return new ResponseEntity<>(_adService.createAd(fileList, request), HttpStatus.CREATED);
+    public ResponseEntity<?> createAd(@RequestHeader("Auth-Token") String token,
+                                      @RequestPart("imageFile") List<MultipartFile> fileList,
+                                      @RequestPart("request") AddAdRequest request) {
+        return new ResponseEntity<>(_adService.createAd(fileList, request, token), HttpStatus.CREATED);
     }
 
     @GetMapping("/{agentId}/ads")

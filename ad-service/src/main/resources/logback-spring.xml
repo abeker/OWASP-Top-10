@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="15 seconds">
 
-    <property name="LOG_DIR" value="./authentication-service/logs" />
+    <property name="LOG_DIR" value="./ad-service/logs" />
 
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
@@ -88,7 +88,7 @@
         </rollingPolicy>
     </appender>
 
-<!--    U developing mode-u (kada razvijam app) imam jednu politiku, dok je u produkciji druga politika -->
+    <!--    U developing mode-u (kada razvijam app) imam jednu politiku, dok je u produkciji druga politika -->
     <springProfile name="dev">
         <root level="info">
             <appender-ref ref="Console" />
@@ -96,7 +96,7 @@
             <appender-ref ref="Warning-Logging" />
             <appender-ref ref="Error-Logging" />
         </root>
-        <logger name="com.owasp.authenticationservice.services.impl" additivity="false" level="debug">
+        <logger name="com.owasp.adservice.services.impl" additivity="false" level="debug">
             <appender-ref ref="Debug-Logging" />
             <appender-ref ref="Info-Logging" />
             <appender-ref ref="Warning-Logging" />
@@ -109,7 +109,7 @@
             <appender-ref ref="Warning-Logging" />
             <appender-ref ref="Error-Logging" />
         </root>
-        <logger name="com.owasp.authenticationservice.services.impl" additivity="false" level="error">
+        <logger name="com.owasp.adservice.services.impl" additivity="false" level="error">
             <appender-ref ref="Error-Logging" />
         </logger>
     </springProfile>

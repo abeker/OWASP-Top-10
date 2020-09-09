@@ -11,14 +11,19 @@ import com.owasp.adservice.services.IAdService;
 import com.owasp.adservice.services.ICommentService;
 import com.owasp.adservice.util.enums.CommentStatus;
 import com.owasp.adservice.util.exceptions.GeneralException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 @Service
 public class CommentService implements ICommentService {
+
+    private final Logger logger = LoggerFactory.getLogger(CommentService.class);
 
     private final ICommentRepository _commentRepository;
     private final AuthClient _authClient;
@@ -37,10 +42,13 @@ public class CommentService implements ICommentService {
         SimpleUserResponse simpleUser = _authClient.getSimpleUserFromToken(token);
         Ad ad = _adRepository.findOneById(adId);
         if(simpleUser == null) {
+            logger.warn("user not found");
             throw new GeneralException("User doesn't exist.", HttpStatus.BAD_REQUEST);
         } else if (isUserCommentAd(ad, simpleUser)) {
+            logger.warn("[{}] already post comment", simpleUser.getUsername());
             throw new GeneralException("User already comment this ad.", HttpStatus.BAD_REQUEST);
         }
+        logger.info("[{}] post comment", simpleUser.getUsername());
         saveComment(simpleUser, ad, commentText);
     }
 

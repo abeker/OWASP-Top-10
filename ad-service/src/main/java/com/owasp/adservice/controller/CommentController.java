@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/comments")

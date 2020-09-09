@@ -16,7 +16,7 @@ public interface IAdService {
 
     AdResponse mapAdToAdResponse(Ad ad);
 
-    AdResponse createAd(List<MultipartFile> fileList, AddAdRequest request);
+    AdResponse createAd(List<MultipartFile> fileList, AddAdRequest request, String token);
 
     List<AdResponse> getAgentAds(boolean deleted, String token);
 

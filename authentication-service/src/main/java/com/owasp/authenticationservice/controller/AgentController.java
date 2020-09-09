@@ -23,8 +23,9 @@ public class AgentController {
 
     @PostMapping("")
     @PreAuthorize("hasAuthority('CREATE_AGENT')")
-    public AgentResponse createAgent(@RequestBody CreateAgentRequest request) throws GeneralException {
-        return _agentService.createAgent(request);
+    public AgentResponse createAgent(@RequestHeader("Auth-Token") String token,
+                                     @RequestBody CreateAgentRequest request) throws GeneralException {
+        return _agentService.createAgent(request, token);
     }
 
     @GetMapping("/{id}")

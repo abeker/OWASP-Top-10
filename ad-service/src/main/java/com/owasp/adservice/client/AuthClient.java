@@ -25,7 +25,10 @@ public interface AuthClient {
     @GetMapping("/users/{token}/token-simple-user")
     SimpleUserResponse getSimpleUserFromToken(@PathVariable("token") String token);
 
-    @PostMapping("simple-users/{id}/add-roles")
+    @PostMapping("/simple-users/{id}/add-roles")
     void addRolesAfterPay(@PathVariable("id") UUID userId);
+
+    @GetMapping("/users/{token}/current-user")
+    String getCurrentUser(@PathVariable("token") String token);
 
 }

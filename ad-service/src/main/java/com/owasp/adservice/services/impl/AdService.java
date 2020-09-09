@@ -10,10 +10,11 @@ import com.owasp.adservice.util.enums.FuelType;
 import com.owasp.adservice.util.enums.GearshiftType;
 import com.owasp.adservice.util.enums.NumberOfGears;
 import com.owasp.adservice.util.enums.RequestStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Date;
@@ -28,6 +29,8 @@ import java.util.zip.Inflater;
 
 @Service
 public class AdService implements IAdService {
+
+    private final Logger logger = LoggerFactory.getLogger(AdService.class);
 
     public final IAdRepository _adRepository;
     private final AuthClient _authClient;
@@ -123,7 +126,7 @@ public class AdService implements IAdService {
     }
 
     @Override
-    public AdResponse createAd(List<MultipartFile> fileList, AddAdRequest request) {
+    public AdResponse createAd(List<MultipartFile> fileList, AddAdRequest request, String token) {
         Car car = saveCar(request);
         Car savedCar = _carRepository.save(car);
 
@@ -131,6 +134,7 @@ public class AdService implements IAdService {
         Ad savedAd = _adRepository.save(ad);
         savePhotos(fileList, savedAd);
 
+        logger.info("[{}] create ad ({})", _authClient.getCurrentUser(token), savedAd.getId());
         return mapAdToAdResponse(savedAd);
     }
 

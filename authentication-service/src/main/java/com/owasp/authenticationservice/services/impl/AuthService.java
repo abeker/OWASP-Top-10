@@ -49,10 +49,11 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "unused"})
 @Service
 public class AuthService implements IAuthService {
 
+    private final Logger logger = LoggerFactory.getLogger(AuthService.class);
     public static final String ERROR_CODE = "ERRONEOUS_SPECIAL_CHARS";
 
     private final AuthenticationManager _authenticationManager;
@@ -65,8 +66,6 @@ public class AuthService implements IAuthService {
     private final IBrowserFingerPrintRepository _browserFingerPrintRepository;
     private final ISimpleUserRepository _simpleUserRepository;
     private final IEmailService _emailService;
-
-    private final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     public AuthService(AuthenticationManager authenticationManager, TokenUtils tokenUtils, PasswordEncoder passwordEncoder, IUserRepository userRepository, DataSource dataSource, EntityManager em, ILoginAttemptRepository loginAttemptRepository, IBrowserFingerPrintRepository browserFingerPrintRepository, ISimpleUserRepository simpleUserRepository, IEmailService emailService) {
         _authenticationManager = authenticationManager;
@@ -82,14 +81,16 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public UserResponse login(LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
+    public UserResponse login(LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws GeneralException {
         if(request.isSQLI()) {
-            return unsafeLogin(request, httpServletRequest);
+            logger.error("[{}] SQLI attack", request.getUsername());
+            return unsafeLogin(request);
         }
         User user = _userRepository.findOneByUsername(request.getUsername());
         checkLoginAttempts(request, httpServletRequest, user);
 
         if(!isUserFound(user, request)) {
+            logger.warn("[{}] bad credentials", request.getUsername());
             throw new GeneralException("Bad credentials.", HttpStatus.BAD_REQUEST);
         }
 
@@ -101,35 +102,44 @@ public class AuthService implements IAuthService {
     private void checkLoginAttempts(LoginCredentialsRequest request, HttpServletRequest httpServletRequest, User user) {
         BrowserFingerprint browserFingerprint = createBrowserFingerPrint(request.getBrowserFingerprint(), httpServletRequest);
         LoginAttempt loginAttempt = getLoginAttemptFromBrowserFingerprint(browserFingerprint);
-        changeLoginAttempts(isUserFound(user, request), loginAttempt, browserFingerprint);
+        changeLoginAttempts(isUserFound(user, request), loginAttempt, browserFingerprint, request);
     }
 
-    private void changeLoginAttempts(boolean isUserFound, LoginAttempt loginAttempt, BrowserFingerprint browserFingerprint) {
+    private void changeLoginAttempts(boolean isUserFound, LoginAttempt loginAttempt, BrowserFingerprint browserFingerprint, LoginCredentialsRequest request) {
         if(isUserFound) {
             if(loginAttempt != null) {
+                logger.info("[{}] reset login attempts" + request.getUsername());
                 loginAttempt.setAttempts(0);
                 _loginAttemptRepository.save(loginAttempt);
             }
         } else {
             if(loginAttempt != null) {
-                checkNumberOfAttempts(loginAttempt);
+                checkNumberOfAttempts(loginAttempt, request);
                 loginAttempt.setAttempts(loginAttempt.getAttempts() + 1);
+                logger.info("[{}] unsuccessfull login attempt({})", request.getUsername(), loginAttempt.getAttempts());
                 _loginAttemptRepository.save(loginAttempt);
             } else {
                 BrowserFingerprint browserFingerprintSaved = _browserFingerPrintRepository.save(browserFingerprint);
                 LoginAttempt loginAttemptSave = new LoginAttempt();
                 loginAttemptSave.setBrowserFingerprint(browserFingerprintSaved);
+                logger.info("[{}] unsuccessfull login attempt({})" + request.getUsername(), loginAttempt.getAttempts());
                 _loginAttemptRepository.save(loginAttemptSave);
             }
         }
     }
 
-    private void checkNumberOfAttempts(LoginAttempt loginAttempt) {
+    private void checkNumberOfAttempts(LoginAttempt loginAttempt, LoginCredentialsRequest request) {
         if(loginAttempt.getAttempts() >= 4) {
             if(loginAttempt.getTimeFirstMistake().isBefore(LocalDateTime.now().minusHours(3600000))) {  // ban na sat vremena prosao
+                if (request != null) {
+                    logger.info("[{}] reset login attempts" + request.getUsername());
+                }
                 loginAttempt.setAttempts(0);
                 _loginAttemptRepository.save(loginAttempt);
             } else {
+                if (request != null) {
+                    logger.error("[{}] overhead login attempts", request.getUsername());
+                }
                 throw new GeneralException("Login attempts is more than 5.", HttpStatus.BAD_REQUEST);
             }
         }
@@ -185,7 +195,7 @@ public class AuthService implements IAuthService {
         browserFingerprintForSet.setTimeZone(browserFingerprintRequest.getTimeZone());
     }
 
-    private UserResponse unsafeLogin(LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws SQLException {
+    private UserResponse unsafeLogin(LoginCredentialsRequest request) {
         UserResponseBuilder user = unsafeFindAccountsByUsername(request.getUsername());
         List<UserResponseBuilder> userList2 = unsafeJpaFindAccountsByUsername(request.getUsername());
 
@@ -193,12 +203,12 @@ public class AuthService implements IAuthService {
                 "fakeToken", user.getUserRole(), 60000);
     }
 
-    private UserResponseBuilder unsafeFindAccountsByUsername(String username) throws SQLException {
+    private UserResponseBuilder unsafeFindAccountsByUsername(String username) {
         String sql = "select * from user_entity where username = '" + username + "'";
         try (Connection c = _dataSource.getConnection();
             ResultSet rs = c.createStatement().executeQuery(sql)) {
             if (rs.next()) {
-                UserResponseBuilder user = UserResponseBuilder.builder()
+                return UserResponseBuilder.builder()
                         .id(UUID.fromString(rs.getString("id")))
                         .username(rs.getString("username"))
                         .password(rs.getString("password"))
@@ -206,7 +216,6 @@ public class AuthService implements IAuthService {
                         .firstName(rs.getString("first_name"))
                         .lastName(rs.getString("last_name"))
                         .build();
-                return user;
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -234,9 +243,9 @@ public class AuthService implements IAuthService {
     public String getPermission(String token) {
         String username = _tokenUtils.getUsernameFromToken(token);
         User user = _userRepository.findOneByUsername(username);
-        String retVal = "";
+        StringBuilder retVal = new StringBuilder();
         for (GrantedAuthority authority : user.getAuthorities()) {
-            retVal += authority.getAuthority()+",";
+            retVal.append(authority.getAuthority()).append(",");
         }
         return retVal.substring(0,retVal.length()-1);
     }
@@ -244,21 +253,19 @@ public class AuthService implements IAuthService {
     @Override
     public UserResponse getUser(UUID userId) {
         User user = _userRepository.findOneById(userId);
-        throwErrorIfUserNull(user);
+        throwExceptionIfUserNull(user);
         return mapUserToUserResponse(user);
     }
 
     @Override
     public UserResponse getUserByEmail(String userEmail) {
         User user = _userRepository.findOneByUsername(userEmail);
-        throwErrorIfUserNull(user);
+        throwExceptionIfUserNull(user);
         return mapUserToUserResponse(user);
     }
 
     @Override
     public boolean checkPassword(String userPassword) throws IOException {
-        logger.debug("error log aca pise");
-
         String filePath = new File("").getAbsolutePath();
         File file = new File( filePath + "/authentication-service/weak_passwords.txt");
 
@@ -274,7 +281,7 @@ public class AuthService implements IAuthService {
             return true;
         }
         try {
-            checkNumberOfAttempts(loginAttempt);
+            checkNumberOfAttempts(loginAttempt, null);
         } catch (GeneralException e) {
             return false;
         }
@@ -286,28 +293,31 @@ public class AuthService implements IAuthService {
         String username = _tokenUtils.getUsernameFromToken(token);
         User user = _userRepository.findOneByUsername(username);
         SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
-        if(simpleUser.getSecurityQuestion().equals(answer)) {
-            return true;
+        if(!simpleUser.getSecurityQuestion().equals(answer)) {
+            logger.warn("[{}] security question incorrect", username);
+            return false;
         }
-
-        return false;
+        return true;
     }
 
     @Override
     public boolean changePassword(ChangePasswordRequest changePasswordRequest) {
         User user = _userRepository.findOneByUsername(changePasswordRequest.getUsername());
         if(user == null) {
+            logger.warn("user [{}] not found", changePasswordRequest.getUsername());
             return false;
         }
         SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
         if(simpleUser != null) {
             if(!simpleUser.getSecurityQuestion().equals(changePasswordRequest.getSecurityQuestion())) {
+                logger.warn("[{}] security question incorrect", user.getUsername());
                 return false;
             }
         } else {
             return false;
         }
 
+        logger.info("[{}] changed password", user.getUsername());
         String newPassword = generateStrongNewPassword();
         simpleUser.setPassword(_passwordEncoder.encode(newPassword));
         _simpleUserRepository.save(simpleUser);
@@ -342,16 +352,15 @@ public class AuthService implements IAuthService {
         CharacterRule splCharRule = new CharacterRule(specialChars);
         splCharRule.setNumberOfCharacters(2);
 
-        String password = gen.generatePassword(10, splCharRule, lowerCaseRule,
+        return gen.generatePassword(10, splCharRule, lowerCaseRule,
                 upperCaseRule, digitRule);
-        return password;
     }
 
     public boolean isPasswordWeak(String theWord, File theFile) throws FileNotFoundException {
         return (new Scanner(theFile).useDelimiter("\\Z").next()).contains(theWord);
     }
 
-    private void throwErrorIfUserNull(User user) throws GeneralException {
+    private void throwExceptionIfUserNull(User user) throws GeneralException {
         if(user == null) {
             throw new GeneralException("This user doesn't exist.", HttpStatus.BAD_REQUEST);
         }
@@ -375,8 +384,10 @@ public class AuthService implements IAuthService {
             authentication = _authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(mail, password));
         }catch (BadCredentialsException e){
+            logger.warn("[{}] registration pending", mail);
             throw new GeneralException("Bad credentials.", HttpStatus.BAD_REQUEST);
         }catch (DisabledException e){
+            logger.warn("[{}] bad credentials", mail);
             throw new GeneralException("Your registration request hasn't been approved yet.", HttpStatus.BAD_REQUEST);
         }catch (Exception e) {
             e.printStackTrace();
@@ -389,19 +400,18 @@ public class AuthService implements IAuthService {
     private void checkSimpleUserStatus(User user) {
         if(user.getUserRole() == UserRole.SIMPLE_USER){
             if( ((SimpleUser)user).getUserStatus().equals(UserStatus.PENDING) ) {
+                logger.warn("[{}] registration pending", user.getUsername());
                 throw new GeneralException("Your registration hasn't been approved yet.", HttpStatus.BAD_REQUEST);
             }
             if( ((SimpleUser)user).getUserStatus().equals(UserStatus.DENIED) ) {
+                logger.warn("[{}] registration denied", user.getUsername());
                 throw new GeneralException("Your registration has been denied.", HttpStatus.BAD_REQUEST);
             }
         }
     }
 
     private boolean isUserFound(User user, LoginCredentialsRequest request) {
-        if(user == null || !_passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            return false;
-        }
-        return true;
+        return user != null && _passwordEncoder.matches(request.getPassword(), user.getPassword());
     }
 
     private UserResponse mapUserToUserResponse(User user) {
