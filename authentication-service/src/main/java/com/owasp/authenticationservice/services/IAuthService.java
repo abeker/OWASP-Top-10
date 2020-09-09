@@ -3,6 +3,7 @@ package com.owasp.authenticationservice.services;
 import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
 import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
+import com.owasp.authenticationservice.dto.response.UserQuestionResponse;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,4 +28,6 @@ public interface IAuthService {
     boolean checkSecurityQuestion(String token, String answer);
 
     boolean changePassword(ChangePasswordRequest changePasswordRequest);
+
+    UserQuestionResponse getUserQuestionByEmail(String userEmail);
 }

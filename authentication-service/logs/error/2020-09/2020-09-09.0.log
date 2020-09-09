@@ -1,0 +1,18 @@
+09-09-2020;18:57:02 ERROR o.s.b.d.LoggingFailureAnalysisReporter.report:40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+09-09-2020;19:04:00 ERROR c.o.a.s.i.AuthService.login:86 - [a' or '1'='1] SQLI attack
+09-09-2020;19:09:51 ERROR c.o.a.s.i.AuthService.login:86 - [a' or '1'='1] SQLI attack
+09-09-2020;19:14:36 ERROR c.o.a.s.i.AuthService.login:86 - [a' or '1'='1] SQLI attack
+09-09-2020;19:17:16 ERROR c.o.a.s.i.AuthService.login:86 - [a' or '1'='1] SQLI attack

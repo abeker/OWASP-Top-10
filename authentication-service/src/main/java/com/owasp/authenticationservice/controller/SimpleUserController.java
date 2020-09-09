@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping("/simple-users")
 public class SimpleUserController {
@@ -34,8 +35,9 @@ public class SimpleUserController {
     }
 
     @GetMapping("/{userStatus}/status")
-    public List<SimpleUserResponse> getSimpleUserByStatus(@PathVariable("userStatus") String userStatus) {
-        return _simpleUserService.getSimpleUserByStatus(userStatus);
+    public List<SimpleUserResponse> getSimpleUserByStatus(@RequestHeader("Auth-Token") String token,
+                                                          @PathVariable("userStatus") String userStatus) {
+        return _simpleUserService.getSimpleUserByStatus(userStatus, token);
     }
 
     @PostMapping("/{id}/add-roles")

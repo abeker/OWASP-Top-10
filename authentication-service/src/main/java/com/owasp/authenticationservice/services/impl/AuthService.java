@@ -3,6 +3,7 @@ package com.owasp.authenticationservice.services.impl;
 import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
 import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
+import com.owasp.authenticationservice.dto.response.UserQuestionResponse;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 import com.owasp.authenticationservice.dto.response.UserResponseBuilder;
 import com.owasp.authenticationservice.entity.*;
@@ -122,7 +123,7 @@ public class AuthService implements IAuthService {
                 BrowserFingerprint browserFingerprintSaved = _browserFingerPrintRepository.save(browserFingerprint);
                 LoginAttempt loginAttemptSave = new LoginAttempt();
                 loginAttemptSave.setBrowserFingerprint(browserFingerprintSaved);
-                logger.info("[{}] unsuccessfull login attempt({})" + request.getUsername(), loginAttempt.getAttempts());
+                logger.info("[{}] unsuccessfull login attempt(1)" + request.getUsername());
                 _loginAttemptRepository.save(loginAttemptSave);
             }
         }
@@ -265,6 +266,21 @@ public class AuthService implements IAuthService {
     }
 
     @Override
+    public UserQuestionResponse getUserQuestionByEmail(String userEmail) {
+        User user = _userRepository.findOneByUsername(userEmail);
+        throwExceptionIfUserNull(user);
+        SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
+        throwExceptionIfNotSimpleUser(simpleUser);
+        return new UserQuestionResponse(simpleUser.getSecurityQuestion().getQuestion());
+    }
+
+    private void throwExceptionIfNotSimpleUser(SimpleUser simpleUser) {
+        if(simpleUser == null) {
+            throw new GeneralException("This is not simple user", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
     public boolean checkPassword(String userPassword) throws IOException {
         String filePath = new File("").getAbsolutePath();
         File file = new File( filePath + "/authentication-service/weak_passwords.txt");
@@ -307,9 +323,10 @@ public class AuthService implements IAuthService {
             logger.warn("user [{}] not found", changePasswordRequest.getUsername());
             return false;
         }
+
         SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
         if(simpleUser != null) {
-            if(!simpleUser.getSecurityQuestion().equals(changePasswordRequest.getSecurityQuestion())) {
+            if(!_passwordEncoder.matches(changePasswordRequest.getSecurityQuestion(), simpleUser.getSecurityQuestion().getAnswer())) {
                 logger.warn("[{}] security question incorrect", user.getUsername());
                 return false;
             }

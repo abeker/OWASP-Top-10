@@ -3,10 +3,7 @@ package com.owasp.authenticationservice.controller;
 import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
 import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
-import com.owasp.authenticationservice.dto.response.AgentResponse;
-import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
-import com.owasp.authenticationservice.dto.response.UserInfoResponse;
-import com.owasp.authenticationservice.dto.response.UserResponse;
+import com.owasp.authenticationservice.dto.response.*;
 import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.IAgentService;
 import com.owasp.authenticationservice.services.IAuthService;
@@ -81,6 +78,12 @@ public class UserController {
     public UserResponse getUserByEmail(@PathVariable("email") String userEmail) throws GeneralException {
         return _authService.getUserByEmail(userEmail);
     }
+
+    @GetMapping("/{email}/security-question")
+    public UserQuestionResponse getUserQuestionByEmail(@PathVariable("email") String userEmail) throws GeneralException {
+        return _authService.getUserQuestionByEmail(userEmail);
+    }
+
 
     @GetMapping("/check-password/{password}")
     public boolean checkPassword(@PathVariable("password") String userPassword) throws GeneralException, IOException {

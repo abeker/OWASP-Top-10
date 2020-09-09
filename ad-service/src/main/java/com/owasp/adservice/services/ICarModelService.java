@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ICarModelService {
 
-    List<CarModelResponse> getCarModels();
+    List<CarModelResponse> getCarModels(String token);
 
 }

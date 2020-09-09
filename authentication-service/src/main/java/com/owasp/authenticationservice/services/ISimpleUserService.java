@@ -10,7 +10,7 @@ public interface ISimpleUserService {
 
     SimpleUserResponse createSimpleUser(CreateSimpleUserRequest request);
 
-    List<SimpleUserResponse> getSimpleUserByStatus(String userStatus);
+    List<SimpleUserResponse> getSimpleUserByStatus(String userStatus, String token);
 
     SimpleUserResponse getSimpleUser(UUID id);
 

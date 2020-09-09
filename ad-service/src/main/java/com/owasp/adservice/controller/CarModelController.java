@@ -1,6 +1,7 @@
 package com.owasp.adservice.controller;
 
 import com.owasp.adservice.dto.response.CarModelResponse;
+import com.owasp.adservice.services.ICarModelService;
 import com.owasp.adservice.services.impl.CarModelService;
 import com.owasp.adservice.util.exceptions.GeneralException;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/car-models")
 public class CarModelController {
 
-    private final CarModelService _carModelService;
+    private final ICarModelService _carModelService;
 
     public CarModelController(CarModelService carModelService) {
         _carModelService = carModelService;
@@ -21,6 +22,6 @@ public class CarModelController {
 
     @GetMapping
     public List<CarModelResponse> getAds(@RequestHeader("Auth-Token") String token) throws GeneralException {
-        return _carModelService.getCarModels();
+        return _carModelService.getCarModels(token);
     }
 }

@@ -66,7 +66,7 @@ public class UserService implements IUserService {
         } else if(user.getUserRole().equals(UserRole.SIMPLE_USER)) {
             SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
             userInfoResponse.setAddress(simpleUser.getAddress());
-            userInfoResponse.setSecurityQuestion(simpleUser.getSecurityQuestion());
+            userInfoResponse.setSecurityQuestion(simpleUser.getSecurityQuestion().getQuestion());
             userInfoResponse.setSsn(simpleUser.getSsn());
         }
 

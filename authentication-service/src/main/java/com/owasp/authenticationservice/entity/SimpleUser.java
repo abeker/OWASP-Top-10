@@ -22,7 +22,9 @@ public class SimpleUser extends User {
 
     private String address;
 
-    private String securityQuestion;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "security_question_id", referencedColumnName = "id")
+    private SecurityQuestion securityQuestion;
 
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.PENDING;

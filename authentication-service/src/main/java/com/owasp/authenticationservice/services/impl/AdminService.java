@@ -41,7 +41,7 @@ public class AdminService implements IAdminService {
         addAuthoritiesWhenApproved(simpleUser);
         _simpleUserRepository.save(simpleUser);
         logger.info("[{}] approve registration request ({})", _userService.getCurrentUser(token), simpleUser.getUsername());
-        return _simpleUserService.getSimpleUserByStatus("PENDING");
+        return _simpleUserService.getSimpleUserByStatus("PENDING", token);
     }
 
     private void addAuthoritiesWhenApproved(SimpleUser simpleUser) {
@@ -57,7 +57,7 @@ public class AdminService implements IAdminService {
         simpleUser.setUserStatus(UserStatus.DENIED);
         _simpleUserRepository.save(simpleUser);
         logger.info("[{}] deny registration request ({})", _userService.getCurrentUser(token), simpleUser.getUsername());
-        return _simpleUserService.getSimpleUserByStatus("PENDING");
+        return _simpleUserService.getSimpleUserByStatus("PENDING", token);
     }
 
 }

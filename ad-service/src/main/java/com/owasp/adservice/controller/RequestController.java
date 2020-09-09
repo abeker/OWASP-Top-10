@@ -36,7 +36,9 @@ public class RequestController {
 
     @GetMapping("/{requestStatus}/agent/{id}")
     @PreAuthorize("hasAuthority('VIEW_AGENT_REQUESTS')")
-    public List<AdRequestResponse> getAgentRequestsByStatus(@PathVariable("requestStatus") String requestStatus, @PathVariable("id") UUID agentId) throws GeneralException {
+    public List<AdRequestResponse> getAgentRequestsByStatus(@RequestHeader("Auth-Token") String token,
+                                                            @PathVariable("requestStatus") String requestStatus,
+                                                            @PathVariable("id") UUID agentId) throws GeneralException {
         return _requestService.getAgentRequestsByStatus(requestStatus, agentId);
     }
 
@@ -48,25 +50,29 @@ public class RequestController {
 
     @PutMapping("/{requestId}/pay")
     @PreAuthorize("hasAuthority('PAY_REQUEST')")
-    public ResponseEntity<Collection<AdRequestResponse>> userPay(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+    public ResponseEntity<Collection<AdRequestResponse>> userPay(@RequestHeader("Auth-Token") String token,
+                                                                 @RequestBody String requestID){
         return new ResponseEntity<>(_requestService.payRequest(UUID.fromString(requestID), token), HttpStatus.OK);
     }
 
     @PutMapping("/{requestId}/drop")
     @PreAuthorize("hasAuthority('DROP_REQUEST')")
-    public ResponseEntity<Collection<AdRequestResponse>> userDrop(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+    public ResponseEntity<Collection<AdRequestResponse>> userDrop(@RequestHeader("Auth-Token") String token,
+                                                                  @RequestBody String requestID){
         return new ResponseEntity<>(_requestService.dropRequest(UUID.fromString(requestID), token), HttpStatus.OK);
     }
 
     @PutMapping("/{requestID}/approve")
     @PreAuthorize("hasAuthority('APPROVE_REQUEST')")
-    public ResponseEntity<Collection<AdRequestResponse>> approveRequest(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+    public ResponseEntity<Collection<AdRequestResponse>> approveRequest(@RequestHeader("Auth-Token") String token,
+                                                                        @RequestBody String requestID){
         return new ResponseEntity<>(_requestService.approveRequest(UUID.fromString(requestID), token), HttpStatus.OK);
     }
 
     @PutMapping("/{requestID}/deny")
     @PreAuthorize("hasAuthority('DENY_REQUEST')")
-    public ResponseEntity<Collection<AdRequestResponse>> denyRequest(@RequestHeader("Auth-Token") String token, @RequestBody String requestID){
+    public ResponseEntity<Collection<AdRequestResponse>> denyRequest(@RequestHeader("Auth-Token") String token,
+                                                                     @RequestBody String requestID){
         return new ResponseEntity<>(_requestService.denyRequest(UUID.fromString(requestID), token), HttpStatus.OK);
     }
 
