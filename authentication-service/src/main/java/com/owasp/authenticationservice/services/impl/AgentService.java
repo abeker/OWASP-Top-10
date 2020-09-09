@@ -12,6 +12,8 @@ import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.IAgentService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,26 +26,32 @@ import java.util.UUID;
 @Service
 public class AgentService implements IAgentService {
 
+    private final Logger logger = LoggerFactory.getLogger(AgentService.class);
+
     private final IAgentRepository _agentRepository;
     private final IUserRepository _userRepository;
     private final PasswordEncoder _passwordEncoder;
     private final IAuthorityRepository _authorityRepository;
+    private final UserService _userService;
     private final TokenUtils _tokenUtils;
 
-    public AgentService(IAgentRepository agentRepository, IUserRepository userRepository, PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, TokenUtils tokenUtils) {
+    public AgentService(IAgentRepository agentRepository, IUserRepository userRepository, PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, UserService userService, TokenUtils tokenUtils) {
         _agentRepository = agentRepository;
         _userRepository = userRepository;
         _passwordEncoder = passwordEncoder;
         _authorityRepository = authorityRepository;
+        _userService = userService;
         _tokenUtils = tokenUtils;
     }
 
     @Override
-    public AgentResponse createAgent(CreateAgentRequest request) {
+    public AgentResponse createAgent(CreateAgentRequest request, String token) {
         if(!request.getPassword().equals(request.getRePassword())){
+            logger.warn("[{}] passwords missmatch", _userService.getCurrentUser(token));
             throw new GeneralException("Passwords don't match.", HttpStatus.BAD_REQUEST);
         }
         if(isAgentExist(request.getUsername())) {
+            logger.warn("[{}] agent exist", _userService.getCurrentUser(token));
             throw new GeneralException("Agent already exist.", HttpStatus.BAD_REQUEST);
         }
 

@@ -14,8 +14,8 @@ import com.owasp.authenticationservice.services.ISimpleUserService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.enums.UserStatus;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class SimpleUserService implements ISimpleUserService {
+
+    private final Logger logger = LoggerFactory.getLogger(SimpleUserService.class);
 
     private final PasswordEncoder _passwordEncoder;
     private final IAuthorityRepository _authorityRepository;
@@ -43,13 +45,16 @@ public class SimpleUserService implements ISimpleUserService {
     @Override
     public SimpleUserResponse createSimpleUser(CreateSimpleUserRequest request) throws GeneralException {
         if(!request.getPassword().equals(request.getRePassword())){
+            logger.warn("[{}] passwords missmatch", request.getUsername());
             throw new GeneralException("Passwords don't match.", HttpStatus.BAD_REQUEST);
         }
         if (isSimpleUserExist(request.getUsername())) {
+            logger.warn("[{}] user exists", request.getUsername());
             throw new GeneralException("User already exist.", HttpStatus.BAD_REQUEST);
         }
 
         sanitizeInputValues(request);
+        logger.info("[{}] created registration request", request.getUsername());
         SimpleUser createdSimpleUser = createNewSimpleUser(request);
         SimpleUser savedSimpleUser = _simpleUserRepository.save(createdSimpleUser);
 
@@ -99,6 +104,7 @@ public class SimpleUserService implements ISimpleUserService {
     public void addRolesAfterPay(UUID userId) {
         SimpleUser simpleUser = _simpleUserRepository.findOneById(userId);
         if(simpleUser != null) {
+            logger.info("[{}] add roles after pay", "admin");
             Set<Authority> authorities = simpleUser.getRoles();
             authorities.add(_authorityRepository.findByName("ROLE_COMMENT_USER"));
             authorities.add(_authorityRepository.findByName("ROLE_REVIEWER_USER"));
@@ -170,7 +176,7 @@ public class SimpleUserService implements ISimpleUserService {
         List<Authority> authorities = new ArrayList<>();
         authorities.add(_authorityRepository.findByName("ROLE_SIMPLE_USER"));
         authorities.add(_authorityRepository.findByName("ROLE_RENT_USER"));
-        authorities.add(_authorityRepository.findByName("ROLE_REQUEST"));       // treba dda se dodaje kada se rentira
+        authorities.add(_authorityRepository.findByName("ROLE_REQUEST"));
         user.setAuthorities(new HashSet<>(authorities));
     }
 

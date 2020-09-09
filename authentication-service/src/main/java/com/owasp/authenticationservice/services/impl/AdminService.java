@@ -3,41 +3,44 @@ package com.owasp.authenticationservice.services.impl;
 import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
 import com.owasp.authenticationservice.entity.Authority;
 import com.owasp.authenticationservice.entity.SimpleUser;
-import com.owasp.authenticationservice.repository.IAdminRepository;
 import com.owasp.authenticationservice.repository.IAuthorityRepository;
 import com.owasp.authenticationservice.repository.ISimpleUserRepository;
-import com.owasp.authenticationservice.repository.IUserRepository;
 import com.owasp.authenticationservice.services.IAdminService;
 import com.owasp.authenticationservice.util.enums.UserStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class AdminService implements IAdminService {
 
-    private final IAdminRepository _adminRepository;
-    private final IUserRepository _userRepository;
+    private final Logger logger = LoggerFactory.getLogger(AdminService.class);
+
     private final ISimpleUserRepository _simpleUserRepository;
     private final SimpleUserService _simpleUserService;
     private final IAuthorityRepository _authorityRepository;
+    private final UserService _userService;
 
-    public AdminService(IAdminRepository adminRepository, IUserRepository userRepository, ISimpleUserRepository simpleUserRepository, SimpleUserService simpleUserService, IAuthorityRepository authorityRepository) {
-        _adminRepository = adminRepository;
-        _userRepository = userRepository;
+    public AdminService(ISimpleUserRepository simpleUserRepository, SimpleUserService simpleUserService, IAuthorityRepository authorityRepository, UserService userService) {
         _simpleUserRepository = simpleUserRepository;
         _simpleUserService = simpleUserService;
         _authorityRepository = authorityRepository;
+        _userService = userService;
     }
 
     @Override
-    public List<SimpleUserResponse> approveRegistrationRequest(UUID id) {
+    public List<SimpleUserResponse> approveRegistrationRequest(UUID id, String token) {
         SimpleUser simpleUser = _simpleUserRepository.findOneById(id);
         simpleUser.setUserStatus(UserStatus.APPROVED);
         simpleUser.setConfirmationTime(LocalDateTime.now());
         addAuthoritiesWhenApproved(simpleUser);
         _simpleUserRepository.save(simpleUser);
+        logger.info("[{}] approve registration request ({})", _userService.getCurrentUser(token), simpleUser.getUsername());
         return _simpleUserService.getSimpleUserByStatus("PENDING");
     }
 
@@ -49,10 +52,12 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public List<SimpleUserResponse> denyRegistrationRequest(UUID id) {
+    public List<SimpleUserResponse> denyRegistrationRequest(UUID id, String token) {
         SimpleUser simpleUser = _simpleUserRepository.findOneById(id);
         simpleUser.setUserStatus(UserStatus.DENIED);
         _simpleUserRepository.save(simpleUser);
+        logger.info("[{}] deny registration request ({})", _userService.getCurrentUser(token), simpleUser.getUsername());
         return _simpleUserService.getSimpleUserByStatus("PENDING");
     }
+
 }

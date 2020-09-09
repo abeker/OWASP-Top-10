@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+@SuppressWarnings({"unused", "rawtypes"})
 @ControllerAdvice
 class ErrorHandlingControllerAdvice {
 

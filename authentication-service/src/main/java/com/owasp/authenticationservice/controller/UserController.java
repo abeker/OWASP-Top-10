@@ -88,7 +88,8 @@ public class UserController {
     }
 
     @GetMapping("/{username}/info")
-    public UserInfoResponse getUserInfo(@PathVariable("username") String username) {
+    public UserInfoResponse getUserInfo(@RequestHeader("Auth-Token") String token,
+                                        @PathVariable("username") String username) {
         return _userService.getUserInfo(username);
     }
 
@@ -100,6 +101,11 @@ public class UserController {
     @GetMapping("/{token}/token-simple-user")
     public SimpleUserResponse getSimpleUserFromToken(@PathVariable("token") String token) throws GeneralException {
         return _simpleUserService.getSimpleUserFromToken(token);
+    }
+
+    @GetMapping("/{token}/current-user")
+    public String getCurrentUser(@PathVariable("token") String token) throws GeneralException {
+        return _userService.getCurrentUser(token);
     }
 
 

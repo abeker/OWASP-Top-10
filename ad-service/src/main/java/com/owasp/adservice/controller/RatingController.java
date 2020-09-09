@@ -1,13 +1,13 @@
 package com.owasp.adservice.controller;
 
 import com.owasp.adservice.services.IRatingService;
-import com.owasp.adservice.services.impl.RatingService;
 import com.owasp.adservice.util.exceptions.GeneralException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ratings")

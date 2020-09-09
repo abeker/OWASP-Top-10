@@ -14,6 +14,8 @@ import com.owasp.adservice.services.IAdService;
 import com.owasp.adservice.services.IRequestService;
 import com.owasp.adservice.util.enums.RequestStatus;
 import com.owasp.adservice.util.exceptions.GeneralException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +28,11 @@ import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("SameParameterValue")
+@SuppressWarnings({"SameParameterValue", "unused"})
 @Service
 public class RequestService implements IRequestService {
+
+    private final Logger logger = LoggerFactory.getLogger(RequestService.class);
 
     private final IRequestRepository _requestRepository;
     private final IAdRepository _adRepository;
@@ -45,13 +49,14 @@ public class RequestService implements IRequestService {
     }
 
     @Override
-    public void proccessRequest(List<AdRequestRequest> requestList) throws GeneralException {
+    public void proccessRequest(List<AdRequestRequest> requestList, String token) throws GeneralException {
         for (AdRequestRequest request : requestList) {
             Ad ad = _adRepository.findOneById(request.getAdID());
             if(isCarAvailable(ad, request)) {
-                createRequest(request);
+                createRequest(request, _authClient.getCurrentUser(token));
             }
             else {
+                logger.warn("[{}] car is not available", _authClient.getCurrentUser(token));
                 throw new GeneralException("Car " + ad.getCar().getCarModel().getCarBrand().getName() + " " +
                      ad.getCar().getCarModel().getName() + " is not available in this period.", HttpStatus.BAD_REQUEST);
             }
@@ -184,6 +189,7 @@ public class RequestService implements IRequestService {
             _authClient.addRolesAfterPay(simpleUserResponse.getId());
         }
 
+        logger.info("[{}] pay request ({})", simpleUserResponse.getUsername(), requestID);
         changeStatusOfRequests(request, RequestStatus.RESERVED, RequestStatus.CANCELED);
         return getSimpleUserRequestsByStatus("RESERVED", simpleUserResponse.getId());
     }
@@ -198,6 +204,7 @@ public class RequestService implements IRequestService {
             _requestRepository.save(request);
         }
 
+        logger.info("[{}] drop request ({})", simpleUserResponse.getUsername(), requestID);
         return getSimpleUserRequestsByStatus(retStatus.toString(), simpleUserResponse.getId());
     }
 
@@ -206,6 +213,7 @@ public class RequestService implements IRequestService {
         AgentResponse agentResponse = _authClient.getAgentFromToken(token);
         Request request = _requestRepository.findOneById(requestID);
         request.setStatus(RequestStatus.RESERVED);
+        logger.info("[{}] approve request ({})", agentResponse.getUsername(), requestID);
         _requestRepository.save(request);
 
         TimerTask taskPaid = new TimerTask() {
@@ -213,6 +221,7 @@ public class RequestService implements IRequestService {
                 System.out.println("Approved request performed on: " + LocalTime.now() + ", " +
                         "Request id: " + Thread.currentThread().getName());
                 if(!request.getStatus().equals(RequestStatus.PAID)) {
+                    logger.warn("[system] drop request, 12h not paid ({})", request.getId());
                     request.setStatus(RequestStatus.CANCELED);
                     _requestRepository.save(request);
                 }
@@ -235,6 +244,7 @@ public class RequestService implements IRequestService {
             _requestRepository.save(request);
         }
 
+        logger.info("[{}] deny request ({})", agentResponse.getUsername(), requestID);
         return getAgentRequestsByStatus("PENDING", agentResponse.getId());
     }
 
@@ -315,13 +325,14 @@ public class RequestService implements IRequestService {
     }
 
     @Override
-    public void createRequest(AdRequestRequest requestDTO) {
+    public void createRequest(AdRequestRequest requestDTO, String currentUser) {
         Request request = new Request();
         UUID simpleUserId = null;
         if(requestDTO.getCustomerID() != null) {
             simpleUserId = requestDTO.getCustomerID();
         }
 
+        logger.info("[{}] create ad request", currentUser);
         request.setCustomerID(simpleUserId);
         createRequestDetails(request, requestDTO);
         _requestRepository.save(request);
@@ -335,6 +346,7 @@ public class RequestService implements IRequestService {
                 System.out.println("Request performed on: " + LocalTime.now() + ", " +
                         "Request id: " + Thread.currentThread().getName());
                 if(request.getStatus().equals(RequestStatus.PENDING)) {
+                    logger.warn("[system] drop request - 24h not checked ({})", request.getId());
                     request.setStatus(RequestStatus.CANCELED);
                     _requestRepository.save(request);
                 }

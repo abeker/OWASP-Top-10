@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IAdminService {
-    List<SimpleUserResponse> approveRegistrationRequest(UUID id);
+    List<SimpleUserResponse> approveRegistrationRequest(UUID id, String token);
 
-    List<SimpleUserResponse> denyRegistrationRequest(UUID id);
+    List<SimpleUserResponse> denyRegistrationRequest(UUID id, String token);
 }

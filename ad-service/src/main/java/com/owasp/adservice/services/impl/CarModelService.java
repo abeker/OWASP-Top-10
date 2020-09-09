@@ -22,7 +22,7 @@ public class CarModelService implements ICarModelService {
     public List<CarModelResponse> getCarModels() {
         List<CarModel> carModels = _carModelRepository.findAllByDeleted(false);
         return carModels.stream()
-                .map(carModel -> mapCarModelToCarModelResponse(carModel))
+                .map(this::mapCarModelToCarModelResponse)
                 .collect(Collectors.toList());
     }
 

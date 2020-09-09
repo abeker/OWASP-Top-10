@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface IAgentService {
 
-    AgentResponse createAgent(CreateAgentRequest request);
+    AgentResponse createAgent(CreateAgentRequest request, String token);
 
     AgentResponse getAgent(UUID id);
 

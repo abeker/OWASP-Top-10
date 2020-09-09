@@ -10,9 +10,9 @@ import java.util.UUID;
 
 public interface IRequestService {
 
-    void createRequest(AdRequestRequest requestList);
+    void createRequest(AdRequestRequest requestList, String currentUser);
 
-    void proccessRequest(List<AdRequestRequest> requestList) throws GeneralException;
+    void proccessRequest(List<AdRequestRequest> requestList, String token) throws GeneralException;
 
     List<AdRequestResponse> getAgentRequestsByStatus(String requestStatus, UUID agentId);
 

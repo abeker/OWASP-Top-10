@@ -3,6 +3,7 @@ package com.owasp.adservice.controller;
 import com.owasp.adservice.dto.request.AdRequestRequest;
 import com.owasp.adservice.dto.request.UnsafeUserRequest;
 import com.owasp.adservice.dto.response.AdRequestResponse;
+import com.owasp.adservice.services.IRequestService;
 import com.owasp.adservice.services.impl.RequestService;
 import com.owasp.adservice.util.exceptions.GeneralException;
 import org.springframework.http.HttpStatus;
@@ -10,17 +11,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/requests")
 public class RequestController {
 
-    private final RequestService _requestService;
+    private final IRequestService _requestService;
 
     public RequestController(RequestService requestService) {
         _requestService = requestService;
@@ -28,8 +29,9 @@ public class RequestController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('CREATE_REQUEST')")
-    public void createRequest(@RequestBody List<AdRequestRequest> requestList) throws GeneralException {
-        _requestService.proccessRequest(requestList);
+    public void createRequest(@RequestHeader("Auth-Token") String token,
+                              @RequestBody List<AdRequestRequest> requestList) throws GeneralException {
+        _requestService.proccessRequest(requestList, token);
     }
 
     @GetMapping("/{requestStatus}/agent/{id}")
