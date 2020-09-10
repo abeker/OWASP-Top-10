@@ -86,6 +86,9 @@ public class AuthService implements IAuthService {
         if(request.isSQLI()) {
             logger.error("[{}] SQLI attack", request.getUsername());
             return unsafeLogin(request);
+        } else if(request.isDictionaryAttack()) {
+//            logger.error("[{}] dictionary attack", request.getUsername());
+            return unsafeDictionaryLogin(request);
         }
         User user = _userRepository.findOneByUsername(request.getUsername());
         checkLoginAttempts(request, httpServletRequest, user);
@@ -194,6 +197,18 @@ public class AuthService implements IAuthService {
         browserFingerprintForSet.setPlugins(browserFingerprintRequest.getPlugins());
         browserFingerprintForSet.setScreenPrint(browserFingerprintRequest.getScreenPrint());
         browserFingerprintForSet.setTimeZone(browserFingerprintRequest.getTimeZone());
+    }
+
+    private UserResponse unsafeDictionaryLogin(LoginCredentialsRequest request) {
+        User user = _userRepository.findOneByUsername(request.getUsername());
+        if(!isUserFound(user, request)) {
+            logger.warn("[{}] bad credentials", request.getUsername());
+            throw new GeneralException("Bad credentials.", HttpStatus.BAD_REQUEST);
+        }
+
+        checkSimpleUserStatus(user);
+        Authentication authentication = loginSimpleUser(request.getUsername(), request.getPassword());
+        return createLoginUserResponse(authentication, user);
     }
 
     private UserResponse unsafeLogin(LoginCredentialsRequest request) {

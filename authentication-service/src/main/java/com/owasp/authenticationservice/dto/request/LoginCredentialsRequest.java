@@ -10,6 +10,8 @@ public class LoginCredentialsRequest {
 
     private String password;
 
+    private boolean dictionaryAttack;
+
     @JsonProperty
     private boolean isSQLI;
 

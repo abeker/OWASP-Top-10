@@ -24,12 +24,15 @@ insert into authorities_permissions (authority_id, permission_id) values
     (7, 19), (7, 23), (7, 25), (7, 26),
     (8, 1), (8, 2), (8, 3), (8, 4), (8, 5);
 
+-- D0g......
 -- admin@gmail.com -> Admin123!!!
 -- agent@gmail.com -> Agent123!!!
 -- customer@gmail.com -> Customer123!!!
 insert into user_entity (id, deleted, first_name, last_name, last_password_reset_date, password, username, user_role) values
     ('e47ca3f0-4906-495f-b508-4d9af7013575', false, 'Fake', 'Admin', '2020-06-12 21:58:58.508-07', 'admin', 'fakeadmin@gmail.com', 'ADMIN'),
     ('e153d906-ba0f-4ac9-88bb-0d9b5817cb78', false, 'User', 'User', '2020-06-12 21:58:58.508-07', 'password', 'user@gmail.com', 'SIMPLE_USER'),
+    ('b4eedb26-7fba-4483-b507-53c7980062de', false, 'Lindsay', 'Mills', '2020-06-12 21:58:58.508-07', '$2y$12$1jHiEZMTYoRA5.dsP7Cq.eu0SmwRTSigPE4afsZnnr7kM2.Zz6oZ2', 'lindseym@gmail.com', 'SIMPLE_USER'),
+
     ('924c26a6-d96b-4ffb-ab8b-250602c03f75', false, 'Ed', 'Snowden', '2020-06-12 21:58:58.508-07', '$2y$10$UFTyoDVYFFUqlb0lnKfoKe7H/EbQOqZH.ZYHf6sOYiOWSRCmpcJ5K', 'admin@gmail.com', 'ADMIN'),
     ('602399f4-183a-4174-95ea-1b42940fa0a9', false, 'Glenn', 'Greenwald', '2020-06-12 21:58:58.508-07', '$2a$10$zQU7XEdDSMvxt13Xkjs3X.CCY64edvCS0ZXcgqPtU8FhSYVUhtnau', 'agent@gmail.com', 'AGENT'),
     ('f1aed848-878f-4d4a-b198-e707b5dd220c', false, 'Julian', 'Assange', '2020-06-12 21:58:58.508-07', '$2a$10$UJEbOrAMWN/bh8tEPHt.Z.fD2RX.T0e0MXNuZEFCEFTNAjHkdAVju', 'customer@gmail.com', 'SIMPLE_USER');
@@ -48,12 +51,15 @@ insert into user_authority (user_id, authority_id) values
     ('e153d906-ba0f-4ac9-88bb-0d9b5817cb78', 7);
 
 -- Goolmangar Primary School
+-- Edward
 insert into security_question (id, answer, question, deleted) values
-    ('2b25f4ca-d167-4a8f-8071-5ffd177ff29b', '$2y$12$LXlQgMdb5s0oJ6G3xBXRRuCCLMS7pHy8xxKfxhh9Y0KsZjj5mEEea', 'Name of your first school?', false);
+    ('2b25f4ca-d167-4a8f-8071-5ffd177ff29b', '$2y$12$LXlQgMdb5s0oJ6G3xBXRRuCCLMS7pHy8xxKfxhh9Y0KsZjj5mEEea', 'Name of your first school?', false),
+    ('38009534-bc9b-4371-92ed-4c2dd3b3bb55', '$2y$12$8iy30khbIhWfmMhaKDIyw..jowtXIHi95/FTpof9WbEP6PASyhEEC', 'Name of your first friend?', false);
 
 insert into admin (id) values ('924c26a6-d96b-4ffb-ab8b-250602c03f75');
 
 insert into agent (address, date_founded, id) values ('Rio Street, Novi Sad, Serbia', '2020-07-20T06:30:00', '602399f4-183a-4174-95ea-1b42940fa0a9');
 
 insert into simple_user (address, confirmation_time, ssn, user_status, id, security_question_id) values
-    ('Townsville', '2020-07-20T06:30:00', '121206780062', 'APPROVED', 'f1aed848-878f-4d4a-b198-e707b5dd220c', '2b25f4ca-d167-4a8f-8071-5ffd177ff29b');
+    ('Townsville', '2020-07-20T06:30:00', '121206780062', 'APPROVED', 'f1aed848-878f-4d4a-b198-e707b5dd220c', '2b25f4ca-d167-4a8f-8071-5ffd177ff29b'),
+    ('Maryland', '2020-07-20T06:30:00', '200298580062', 'APPROVED', 'b4eedb26-7fba-4483-b507-53c7980062de', '38009534-bc9b-4371-92ed-4c2dd3b3bb55');
