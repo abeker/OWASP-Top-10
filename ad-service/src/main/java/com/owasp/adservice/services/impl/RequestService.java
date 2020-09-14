@@ -142,8 +142,8 @@ public class RequestService implements IRequestService {
     public List<AdRequestResponse> getSimpleUserRequestsByStatus(String requestStatusString, UUID userId) {
         SimpleUserResponse simpleUserResponse = _authClient.getSimpleUser(userId);
         logger.info("[{}] retrieve {} requests", simpleUserResponse.getUsername(), requestStatusString);
-//        return unsafeRetrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
-        return retrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
+        return unsafeRetrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
+//        return retrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
     }
 
     private List<AdRequestResponse> unsafeRetrieveSimpleUserRequestsFromStatus(String requestStatusString, UUID userId) {

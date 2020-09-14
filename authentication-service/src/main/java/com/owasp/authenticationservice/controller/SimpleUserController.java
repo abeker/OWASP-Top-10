@@ -25,7 +25,7 @@ public class SimpleUserController {
     }
 
     @PostMapping("")
-    public SimpleUserResponse createSimpleUser(@Valid @RequestBody CreateSimpleUserRequest request) throws GeneralException {
+    public SimpleUserResponse createSimpleUser(@Valid @RequestBody CreateSimpleUserRequest request) {
         return _simpleUserService.createSimpleUser(request);
     }
 

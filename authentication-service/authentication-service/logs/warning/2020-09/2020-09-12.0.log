@@ -1,0 +1,282 @@
+12-09-2020;19:33:07 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+12-09-2020;19:33:10 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+12-09-2020;19:33:10 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+12-09-2020;19:33:11 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+12-09-2020;19:33:17 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:33:17 WARN  c.n.d.DiscoveryClient.get:300 - Using default backup registry implementation which does not do anything.
+12-09-2020;19:33:18 WARN  c.n.d.DiscoveryClient.notify:1328 - Saw local status change event StatusChangeEvent [timestamp=1599931998997, current=DOWN, previous=UP]
+12-09-2020;19:33:21 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:33:21 WARN  c.n.d.DiscoveryClient.register:852 - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration failed Cannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:33:21 WARN  c.n.d.InstanceInfoReplicator.run:125 - There was a problem with the instance info replicator
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:33:25 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:33:25 WARN  c.n.d.DiscoveryClient.register:852 - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration failed Cannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:33:25 WARN  c.n.d.InstanceInfoReplicator.run:125 - There was a problem with the instance info replicator
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:33:26 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:43:39 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+12-09-2020;19:43:42 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+12-09-2020;19:43:42 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "admin" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "agent" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "login_attempt" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "admin" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "agent" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authorities_permissions" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authority" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "browser_fingerprint" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "login_attempt" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "permission" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "security_question" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "simple_user" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_authority" does not exist, skipping
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:43:42 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_entity" does not exist, skipping
+12-09-2020;19:43:44 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+12-09-2020;19:43:49 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:43:49 WARN  c.n.d.DiscoveryClient.get:300 - Using default backup registry implementation which does not do anything.
+12-09-2020;19:43:53 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:43:53 WARN  c.n.d.DiscoveryClient.register:852 - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration failed Cannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:43:53 WARN  c.n.d.InstanceInfoReplicator.run:125 - There was a problem with the instance info replicator
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:44:51 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+12-09-2020;19:44:53 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+12-09-2020;19:44:53 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+12-09-2020;19:44:55 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+12-09-2020;19:45:00 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:45:00 WARN  c.n.d.DiscoveryClient.get:300 - Using default backup registry implementation which does not do anything.
+12-09-2020;19:45:03 WARN  c.n.d.DiscoveryClient.notify:1328 - Saw local status change event StatusChangeEvent [timestamp=1599932703023, current=DOWN, previous=UP]
+12-09-2020;19:45:04 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:45:04 WARN  c.n.d.DiscoveryClient.register:852 - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration failed Cannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:45:04 WARN  c.n.d.InstanceInfoReplicator.run:125 - There was a problem with the instance info replicator
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:45:08 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:45:08 WARN  c.n.d.DiscoveryClient.register:852 - DiscoveryClient_AUTH/host.docker.internal:auth:8081 - registration failed Cannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:45:08 WARN  c.n.d.InstanceInfoReplicator.run:125 - There was a problem with the instance info replicator
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:850)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121)
+	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+12-09-2020;19:45:10 WARN  c.n.d.s.t.d.RetryableEurekaHttpClient.execute:130 - Request execution failed with message: java.net.ConnectException: Connection refused: connect
+12-09-2020;19:46:12 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+12-09-2020;19:46:15 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+12-09-2020;19:46:15 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "admin" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "agent" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "login_attempt" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "admin" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "agent" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authorities_permissions" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authority" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "browser_fingerprint" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "login_attempt" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "permission" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "security_question" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "simple_user" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_authority" does not exist, skipping
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+12-09-2020;19:46:15 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_entity" does not exist, skipping
+12-09-2020;19:46:17 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+12-09-2020;19:46:19 WARN  c.n.d.DiscoveryClient.notify:1328 - Saw local status change event StatusChangeEvent [timestamp=1599932779681, current=DOWN, previous=UP]
