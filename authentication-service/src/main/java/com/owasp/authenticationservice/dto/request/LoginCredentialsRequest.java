@@ -11,6 +11,9 @@ public class LoginCredentialsRequest {
     private String password;
 
     @JsonProperty
+    private boolean isDictionaryAttack;
+
+    @JsonProperty
     private boolean isSQLI;
 
     private BrowserFingerprintRequest browserFingerprint;

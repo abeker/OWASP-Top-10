@@ -3,14 +3,18 @@ package com.owasp.authenticationservice.services.impl;
 import com.owasp.authenticationservice.dto.request.CreateSimpleUserRequest;
 import com.owasp.authenticationservice.dto.response.SimpleUserResponse;
 import com.owasp.authenticationservice.entity.Authority;
+import com.owasp.authenticationservice.entity.SecurityQuestion;
 import com.owasp.authenticationservice.entity.SimpleUser;
 import com.owasp.authenticationservice.entity.User;
 import com.owasp.authenticationservice.repository.IAuthorityRepository;
+import com.owasp.authenticationservice.repository.ISecurityQuestionRepository;
 import com.owasp.authenticationservice.repository.ISimpleUserRepository;
 import com.owasp.authenticationservice.repository.IUserRepository;
 import com.owasp.authenticationservice.security.SecurityEscape;
 import com.owasp.authenticationservice.security.TokenUtils;
+import com.owasp.authenticationservice.services.IAuthService;
 import com.owasp.authenticationservice.services.ISimpleUserService;
+import com.owasp.authenticationservice.services.IUserService;
 import com.owasp.authenticationservice.util.enums.UserRole;
 import com.owasp.authenticationservice.util.enums.UserStatus;
 import com.owasp.authenticationservice.util.exceptions.GeneralException;
@@ -20,6 +24,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,13 +39,19 @@ public class SimpleUserService implements ISimpleUserService {
     private final ISimpleUserRepository _simpleUserRepository;
     private final IUserRepository _userRepository;
     private final TokenUtils _tokenUtils;
+    private final IUserService _userService;
+    private final ISecurityQuestionRepository _securityQuestionRepository;
+    private final IAuthService _authService;
 
-    public SimpleUserService(PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, ISimpleUserRepository simpleUserRepository, IUserRepository userRepository, TokenUtils tokenUtils) {
+    public SimpleUserService(PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, ISimpleUserRepository simpleUserRepository, IUserRepository userRepository, TokenUtils tokenUtils, IUserService userService, ISecurityQuestionRepository securityQuestionRepository, IAuthService authService) {
         _passwordEncoder = passwordEncoder;
         _authorityRepository = authorityRepository;
         _simpleUserRepository = simpleUserRepository;
         _userRepository = userRepository;
         _tokenUtils = tokenUtils;
+        _userService = userService;
+        _securityQuestionRepository = securityQuestionRepository;
+        _authService = authService;
     }
 
     @Override
@@ -55,10 +67,29 @@ public class SimpleUserService implements ISimpleUserService {
 
         sanitizeInputValues(request);
         logger.info("[{}] created registration request", request.getUsername());
+
+        boolean isPasswordWeak = checkPasswordWeakness(request.getPassword());
+        if(isPasswordWeak) {
+            logger.warn("[{}] weak password", request.getUsername());
+            throw new GeneralException("Password is too weak.", HttpStatus.BAD_REQUEST);
+        }
+
         SimpleUser createdSimpleUser = createNewSimpleUser(request);
         SimpleUser savedSimpleUser = _simpleUserRepository.save(createdSimpleUser);
 
         return mapSimpleUserToSimpleUserResponse(savedSimpleUser);
+    }
+
+    private boolean checkPasswordWeakness(String password) {
+        String filePath = new File("").getAbsolutePath();
+        File file = new File( filePath + "/authentication-service/weak_passwords.txt");
+
+        try {
+            return _authService.isPasswordWeak(password, file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 
     private void sanitizeInputValues(CreateSimpleUserRequest request) {
@@ -67,12 +98,12 @@ public class SimpleUserService implements ISimpleUserService {
         request.setFirstName(SecurityEscape.cleanIt(request.getFirstName()));
         request.setLastName(SecurityEscape.cleanIt(request.getLastName()));
         request.setAddress(SecurityEscape.cleanIt(request.getAddress()));
-        request.setSecurityQuestion(SecurityEscape.cleanIt(request.getSecurityQuestion()));
+        request.setSecurityAnswer(SecurityEscape.cleanIt(request.getSecurityAnswer()));
         request.setSsn(SecurityEscape.cleanIt(request.getSsn()));
     }
 
     @Override
-    public List<SimpleUserResponse> getSimpleUserByStatus(String userStatusString) {
+    public List<SimpleUserResponse> getSimpleUserByStatus(String userStatusString, String token) {
         UserStatus userStatus = getUserStatusFromString(userStatusString);
 
         List<SimpleUser> allSimpleUsers = _simpleUserRepository.findAll()
@@ -83,6 +114,7 @@ public class SimpleUserService implements ISimpleUserService {
         for (SimpleUser simpleUser : allSimpleUsers) {
             simpleUserResponseList.add(mapSimpleUserToSimpleUserResponse(simpleUser));
         }
+        logger.info("[{}] retrieve registration requests", _userService.getCurrentUser(token));
         return simpleUserResponseList;
     }
 
@@ -141,10 +173,18 @@ public class SimpleUserService implements ISimpleUserService {
         simpleUser.setFirstName(request.getFirstName());
         simpleUser.setLastName(request.getLastName());
         simpleUser.setSsn(request.getSsn());
-        simpleUser.setSecurityQuestion(request.getSecurityQuestion());
+        SecurityQuestion savedSecurityQuestion = createSecurityQuestion(request.getSecurityQuestion(), request.getSecurityAnswer());
+        simpleUser.setSecurityQuestion(savedSecurityQuestion);
         addAuthoritiesSimpleUser(simpleUser);
 
         return simpleUser;
+    }
+
+    private SecurityQuestion createSecurityQuestion(String question, String answer) {
+        SecurityQuestion securityQuestion = new SecurityQuestion();
+        securityQuestion.setQuestion(question);
+        securityQuestion.setAnswer(_passwordEncoder.encode(answer));
+        return _securityQuestionRepository.save(securityQuestion);
     }
 
     private SimpleUser unsafeCreateNewSimpleUser(CreateSimpleUserRequest request) {

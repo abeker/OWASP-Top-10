@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 
 @Data
 public class CreateSimpleUserRequest {
-
     @NotNull(message = "Username is mandatory")
     @Size(min=8, max=30, message = "Username length must be between 8 and 30 characters.")
     @Pattern.List({
@@ -66,9 +65,15 @@ public class CreateSimpleUserRequest {
     @SQLInjectionSafe
     private String address;
 
-    @NotNull(message = "Security question is mandatory")
-    @Size(min=3, max=30, message = "Security question length must be between 4 and 30 characters.")
+    @NotNull(message = "Security answer is mandatory")
+    @Size(min=3, max=30, message = "Security answer length must be between 4 and 30 characters.")
     @Pattern(regexp = "^(?!<.+?>).*$", message = "Security question cannot contain html elements.")
     @SQLInjectionSafe
     private String securityQuestion;
+
+    @NotNull(message = "Security answer is mandatory")
+    @Size(min=3, max=30, message = "Security answer length must be between 4 and 30 characters.")
+    @Pattern(regexp = "^(?!<.+?>).*$", message = "Security question cannot contain html elements.")
+    @SQLInjectionSafe
+    private String securityAnswer;
 }

@@ -3,9 +3,12 @@ package com.owasp.authenticationservice.services;
 import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
 import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
+import com.owasp.authenticationservice.dto.response.UserQuestionResponse;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
@@ -27,4 +30,8 @@ public interface IAuthService {
     boolean checkSecurityQuestion(String token, String answer);
 
     boolean changePassword(ChangePasswordRequest changePasswordRequest);
+
+    boolean isPasswordWeak(String password, File file) throws FileNotFoundException;
+
+    UserQuestionResponse getUserQuestionByEmail(String userEmail);
 }

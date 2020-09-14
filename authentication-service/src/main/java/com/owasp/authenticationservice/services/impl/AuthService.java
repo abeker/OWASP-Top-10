@@ -3,6 +3,7 @@ package com.owasp.authenticationservice.services.impl;
 import com.owasp.authenticationservice.dto.request.BrowserFingerprintRequest;
 import com.owasp.authenticationservice.dto.request.ChangePasswordRequest;
 import com.owasp.authenticationservice.dto.request.LoginCredentialsRequest;
+import com.owasp.authenticationservice.dto.response.UserQuestionResponse;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 import com.owasp.authenticationservice.dto.response.UserResponseBuilder;
 import com.owasp.authenticationservice.entity.*;
@@ -85,6 +86,9 @@ public class AuthService implements IAuthService {
         if(request.isSQLI()) {
             logger.error("[{}] SQLI attack", request.getUsername());
             return unsafeLogin(request);
+        } else if(request.isDictionaryAttack()) {
+//            logger.error("[{}] dictionary attack", request.getUsername());
+            return unsafeDictionaryLogin(request);
         }
         User user = _userRepository.findOneByUsername(request.getUsername());
         checkLoginAttempts(request, httpServletRequest, user);
@@ -122,7 +126,7 @@ public class AuthService implements IAuthService {
                 BrowserFingerprint browserFingerprintSaved = _browserFingerPrintRepository.save(browserFingerprint);
                 LoginAttempt loginAttemptSave = new LoginAttempt();
                 loginAttemptSave.setBrowserFingerprint(browserFingerprintSaved);
-                logger.info("[{}] unsuccessfull login attempt({})" + request.getUsername(), loginAttempt.getAttempts());
+                logger.info("[{}] unsuccessfull login attempt(1)" + request.getUsername());
                 _loginAttemptRepository.save(loginAttemptSave);
             }
         }
@@ -195,16 +199,32 @@ public class AuthService implements IAuthService {
         browserFingerprintForSet.setTimeZone(browserFingerprintRequest.getTimeZone());
     }
 
-    private UserResponse unsafeLogin(LoginCredentialsRequest request) {
-        UserResponseBuilder user = unsafeFindAccountsByUsername(request.getUsername());
-        List<UserResponseBuilder> userList2 = unsafeJpaFindAccountsByUsername(request.getUsername());
+    private UserResponse unsafeDictionaryLogin(LoginCredentialsRequest request) {
+        User user = _userRepository.findOneByUsername(request.getUsername());
+        if(!isUserFound(user, request)) {
+            logger.warn("[{}] bad credentials", request.getUsername());
+            throw new GeneralException("Bad credentials.", HttpStatus.BAD_REQUEST);
+        }
 
-        return new UserResponse(user.getId(), user.getUsername(),
-                "fakeToken", user.getUserRole(), 60000);
+        checkSimpleUserStatus(user);
+        Authentication authentication = loginSimpleUser(request.getUsername(), request.getPassword());
+        return createLoginUserResponse(authentication, user);
     }
 
-    private UserResponseBuilder unsafeFindAccountsByUsername(String username) {
-        String sql = "select * from user_entity where username = '" + username + "'";
+    private UserResponse unsafeLogin(LoginCredentialsRequest request) throws GeneralException {
+        UserResponseBuilder user = unsafeFindAccountsByUsernameAndPassword(request.getUsername(), request.getPassword());
+        List<UserResponseBuilder> userList2 = unsafeJpaFindAccountsByUsername(request.getUsername());
+
+        if(user != null) {
+            return new UserResponse(user.getId(), user.getUsername(),
+                    "fakeToken", user.getUserRole(), 60000);
+        } else {
+            throw new GeneralException("unsucessful login", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    private UserResponseBuilder unsafeFindAccountsByUsernameAndPassword(String username, String password) {
+        String sql = "select * from user_entity where username = '" + username + "' and password = '"+ password + "';";
         try (Connection c = _dataSource.getConnection();
             ResultSet rs = c.createStatement().executeQuery(sql)) {
             if (rs.next()) {
@@ -265,6 +285,21 @@ public class AuthService implements IAuthService {
     }
 
     @Override
+    public UserQuestionResponse getUserQuestionByEmail(String userEmail) {
+        User user = _userRepository.findOneByUsername(userEmail);
+        throwExceptionIfUserNull(user);
+        SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
+        throwExceptionIfNotSimpleUser(simpleUser);
+        return new UserQuestionResponse(simpleUser.getSecurityQuestion().getQuestion());
+    }
+
+    private void throwExceptionIfNotSimpleUser(SimpleUser simpleUser) {
+        if(simpleUser == null) {
+            throw new GeneralException("This is not simple user", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
     public boolean checkPassword(String userPassword) throws IOException {
         String filePath = new File("").getAbsolutePath();
         File file = new File( filePath + "/authentication-service/weak_passwords.txt");
@@ -307,9 +342,10 @@ public class AuthService implements IAuthService {
             logger.warn("user [{}] not found", changePasswordRequest.getUsername());
             return false;
         }
+
         SimpleUser simpleUser = _simpleUserRepository.findOneById(user.getId());
         if(simpleUser != null) {
-            if(!simpleUser.getSecurityQuestion().equals(changePasswordRequest.getSecurityQuestion())) {
+            if(!_passwordEncoder.matches(changePasswordRequest.getSecurityQuestion(), simpleUser.getSecurityQuestion().getAnswer())) {
                 logger.warn("[{}] security question incorrect", user.getUsername());
                 return false;
             }
@@ -356,6 +392,7 @@ public class AuthService implements IAuthService {
                 upperCaseRule, digitRule);
     }
 
+    @Override
     public boolean isPasswordWeak(String theWord, File theFile) throws FileNotFoundException {
         return (new Scanner(theFile).useDelimiter("\\Z").next()).contains(theWord);
     }

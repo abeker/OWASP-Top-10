@@ -69,6 +69,8 @@ public class RequestService implements IRequestService {
         List<Request> activeRequests = getActiveRequests();
         List<Request> agentRequests = getAgentRequests(activeRequests, requestStatus, agentId);
 
+        AgentResponse agentResponse = _authClient.getAgent(agentId);
+        logger.info("[{}] retrieve {} requests", agentResponse.getUsername(), requestStatusString);
         return mapRequestsToAdRequestResponse(agentRequests);
     }
 
@@ -138,8 +140,10 @@ public class RequestService implements IRequestService {
 
     @Override
     public List<AdRequestResponse> getSimpleUserRequestsByStatus(String requestStatusString, UUID userId) {
-//        return unsafeRetrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
-        return retrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
+        SimpleUserResponse simpleUserResponse = _authClient.getSimpleUser(userId);
+        logger.info("[{}] retrieve {} requests", simpleUserResponse.getUsername(), requestStatusString);
+        return unsafeRetrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
+//        return retrieveSimpleUserRequestsFromStatus(requestStatusString, userId);
     }
 
     private List<AdRequestResponse> unsafeRetrieveSimpleUserRequestsFromStatus(String requestStatusString, UUID userId) {
