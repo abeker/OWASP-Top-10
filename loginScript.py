@@ -30,7 +30,7 @@ async def login_amy(async_queue):
             async with session.put(login_url, json={
                 'username': 'lindseym@gmail.com', 
                 'password': password,
-                'dictionaryAttack': True
+                'isDictionaryAttack': True
                 }) as response:
                 status = response.status
                 if status >= 200 and status < 300:

@@ -12,6 +12,7 @@ import com.owasp.authenticationservice.repository.ISimpleUserRepository;
 import com.owasp.authenticationservice.repository.IUserRepository;
 import com.owasp.authenticationservice.security.SecurityEscape;
 import com.owasp.authenticationservice.security.TokenUtils;
+import com.owasp.authenticationservice.services.IAuthService;
 import com.owasp.authenticationservice.services.ISimpleUserService;
 import com.owasp.authenticationservice.services.IUserService;
 import com.owasp.authenticationservice.util.enums.UserRole;
@@ -23,6 +24,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,8 +41,9 @@ public class SimpleUserService implements ISimpleUserService {
     private final TokenUtils _tokenUtils;
     private final IUserService _userService;
     private final ISecurityQuestionRepository _securityQuestionRepository;
+    private final IAuthService _authService;
 
-    public SimpleUserService(PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, ISimpleUserRepository simpleUserRepository, IUserRepository userRepository, TokenUtils tokenUtils, IUserService userService, ISecurityQuestionRepository securityQuestionRepository) {
+    public SimpleUserService(PasswordEncoder passwordEncoder, IAuthorityRepository authorityRepository, ISimpleUserRepository simpleUserRepository, IUserRepository userRepository, TokenUtils tokenUtils, IUserService userService, ISecurityQuestionRepository securityQuestionRepository, IAuthService authService) {
         _passwordEncoder = passwordEncoder;
         _authorityRepository = authorityRepository;
         _simpleUserRepository = simpleUserRepository;
@@ -47,6 +51,7 @@ public class SimpleUserService implements ISimpleUserService {
         _tokenUtils = tokenUtils;
         _userService = userService;
         _securityQuestionRepository = securityQuestionRepository;
+        _authService = authService;
     }
 
     @Override
@@ -62,10 +67,29 @@ public class SimpleUserService implements ISimpleUserService {
 
         sanitizeInputValues(request);
         logger.info("[{}] created registration request", request.getUsername());
+
+        boolean isPasswordWeak = checkPasswordWeakness(request.getPassword());
+        if(isPasswordWeak) {
+            logger.warn("[{}] weak password", request.getUsername());
+            throw new GeneralException("Password is too weak.", HttpStatus.BAD_REQUEST);
+        }
+
         SimpleUser createdSimpleUser = createNewSimpleUser(request);
         SimpleUser savedSimpleUser = _simpleUserRepository.save(createdSimpleUser);
 
         return mapSimpleUserToSimpleUserResponse(savedSimpleUser);
+    }
+
+    private boolean checkPasswordWeakness(String password) {
+        String filePath = new File("").getAbsolutePath();
+        File file = new File( filePath + "/authentication-service/weak_passwords.txt");
+
+        try {
+            return _authService.isPasswordWeak(password, file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 
     private void sanitizeInputValues(CreateSimpleUserRequest request) {

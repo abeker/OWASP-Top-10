@@ -1,0 +1,15 @@
+admin
+user
+agent
+user@gmail.com
+simpleuser
+simple_user
+admin@gmail.com
+agent@gmail.com
+simpleuser@gmail.com
+simple_user@gmail.com
+admin@hotmail.com
+user@hotmail.com
+agent@hotmail.com
+simpleuser@hotmail.com
+simple_user@hotmail.com

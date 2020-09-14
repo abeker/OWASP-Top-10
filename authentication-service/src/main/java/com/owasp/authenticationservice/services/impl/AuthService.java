@@ -211,16 +211,20 @@ public class AuthService implements IAuthService {
         return createLoginUserResponse(authentication, user);
     }
 
-    private UserResponse unsafeLogin(LoginCredentialsRequest request) {
-        UserResponseBuilder user = unsafeFindAccountsByUsername(request.getUsername());
+    private UserResponse unsafeLogin(LoginCredentialsRequest request) throws GeneralException {
+        UserResponseBuilder user = unsafeFindAccountsByUsernameAndPassword(request.getUsername(), request.getPassword());
         List<UserResponseBuilder> userList2 = unsafeJpaFindAccountsByUsername(request.getUsername());
 
-        return new UserResponse(user.getId(), user.getUsername(),
-                "fakeToken", user.getUserRole(), 60000);
+        if(user != null) {
+            return new UserResponse(user.getId(), user.getUsername(),
+                    "fakeToken", user.getUserRole(), 60000);
+        } else {
+            throw new GeneralException("unsucessful login", HttpStatus.BAD_REQUEST);
+        }
     }
 
-    private UserResponseBuilder unsafeFindAccountsByUsername(String username) {
-        String sql = "select * from user_entity where username = '" + username + "'";
+    private UserResponseBuilder unsafeFindAccountsByUsernameAndPassword(String username, String password) {
+        String sql = "select * from user_entity where username = '" + username + "' and password = '"+ password + "';";
         try (Connection c = _dataSource.getConnection();
             ResultSet rs = c.createStatement().executeQuery(sql)) {
             if (rs.next()) {
@@ -388,6 +392,7 @@ public class AuthService implements IAuthService {
                 upperCaseRule, digitRule);
     }
 
+    @Override
     public boolean isPasswordWeak(String theWord, File theFile) throws FileNotFoundException {
         return (new Scanner(theFile).useDelimiter("\\Z").next()).contains(theWord);
     }
