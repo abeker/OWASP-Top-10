@@ -24,19 +24,19 @@ import org.passay.PasswordGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -293,6 +293,16 @@ public class AuthService implements IAuthService {
         return new UserQuestionResponse(simpleUser.getSecurityQuestion().getQuestion());
     }
 
+    @Override
+    public void invalidateSession(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !(auth instanceof AnonymousAuthenticationToken)) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        } else {
+            throw new GeneralException("Fail logout", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     private void throwExceptionIfNotSimpleUser(SimpleUser simpleUser) {
         if(simpleUser == null) {
             throw new GeneralException("This is not simple user", HttpStatus.BAD_REQUEST);
@@ -430,7 +440,8 @@ public class AuthService implements IAuthService {
             e.printStackTrace();
         }
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        securityContext.setAuthentication(authentication);
         return authentication;
     }
 

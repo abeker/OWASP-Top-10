@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
@@ -25,90 +26,99 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService _userService;
-    private final IAuthService _authService;
-    private final TokenUtils _tokenUtils;
-    private final IAgentService _agentService;
-    private final ISimpleUserService _simpleUserService;
+    private final UserService userService;
+    private final IAuthService authService;
+    private final TokenUtils tokenUtils;
+    private final IAgentService agentService;
+    private final ISimpleUserService simpleUserService;
 
-    public UserController(UserService userService, IAuthService authService, TokenUtils tokenUtils, IAgentService agentService, ISimpleUserService simpleUserService) {
-        _userService = userService;
-        _authService = authService;
-        _tokenUtils = tokenUtils;
-        _agentService = agentService;
-        _simpleUserService = simpleUserService;
+    public UserController(UserService userService, IAuthService authService, TokenUtils tokenUtils,
+                          IAgentService agentService, ISimpleUserService simpleUserService) {
+        this.userService = userService;
+        this.authService = authService;
+        this.tokenUtils = tokenUtils;
+        this.agentService = agentService;
+        this.simpleUserService = simpleUserService;
     }
 
     @GetMapping("/verify")
     public String verify(@RequestHeader("Auth-Token") String token) throws NotFoundException {
-        return _tokenUtils.getUsernameFromToken(token);
+        return tokenUtils.getUsernameFromToken(token);
     }
 
     @GetMapping("/permission")
     public String getPermissions(@RequestHeader("Auth-Token") String token) throws NotFoundException {
-        return _authService.getPermission(token);
+        return authService.getPermission(token);
     }
 
     @GetMapping("/hello")
-    public ResponseEntity<?> hello(){
+    public ResponseEntity<?> hello() {
         return new ResponseEntity<>("Hello from auth service", HttpStatus.OK);
     }
 
     @PutMapping("/login")
-    public UserResponse login(@RequestBody LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
-        return _authService.login(request, httpServletRequest);
+    public UserResponse login(@RequestBody LoginCredentialsRequest request, HttpServletRequest httpServletRequest)
+            throws GeneralException, SQLException {
+        return authService.login(request, httpServletRequest);
+    }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        authService.invalidateSession(request, response);
     }
 
     @PutMapping("/check-attempts")
-    public boolean checkAttempts(@RequestBody BrowserFingerprintRequest browserFingerprint, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
-        return _authService.canAgainLogin(browserFingerprint, httpServletRequest);
+    public boolean checkAttempts(@RequestBody BrowserFingerprintRequest browserFingerprint,
+                                 HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
+        return authService.canAgainLogin(browserFingerprint, httpServletRequest);
     }
 
     @PutMapping("/change-password")
     public boolean changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
-        return _authService.changePassword(changePasswordRequest);
+        return authService.changePassword(changePasswordRequest);
     }
 
     @GetMapping("/{id}")
     public UserResponse getUser(@PathVariable("id") UUID userId) throws GeneralException {
-        return _authService.getUser(userId);
+        return authService.getUser(userId);
     }
 
     @GetMapping("/{email}/mail")
     public UserResponse getUserByEmail(@PathVariable("email") String userEmail) throws GeneralException {
-        return _authService.getUserByEmail(userEmail);
+        return authService.getUserByEmail(userEmail);
     }
 
     @GetMapping("/{email}/security-question")
-    public UserQuestionResponse getUserQuestionByEmail(@PathVariable("email") String userEmail) throws GeneralException {
-        return _authService.getUserQuestionByEmail(userEmail);
+    public UserQuestionResponse getUserQuestionByEmail(@PathVariable("email") String userEmail)
+            throws GeneralException {
+        return authService.getUserQuestionByEmail(userEmail);
     }
 
 
     @GetMapping("/check-password/{password}")
     public boolean checkPassword(@PathVariable("password") String userPassword) throws GeneralException, IOException {
-        return _authService.checkPassword(userPassword);
+        return authService.checkPassword(userPassword);
     }
 
     @GetMapping("/{username}/info")
     public UserInfoResponse getUserInfo(@RequestHeader("Auth-Token") String token,
                                         @PathVariable("username") String username) {
-        return _userService.getUserInfo(username);
+        return userService.getUserInfo(username);
     }
 
     @GetMapping("/{token}/token-agent")
     public AgentResponse getAgentFromToken(@PathVariable("token") String token) throws GeneralException {
-        return _agentService.getAgentFromToken(token);
+        return agentService.getAgentFromToken(token);
     }
 
     @GetMapping("/{token}/token-simple-user")
     public SimpleUserResponse getSimpleUserFromToken(@PathVariable("token") String token) throws GeneralException {
-        return _simpleUserService.getSimpleUserFromToken(token);
+        return simpleUserService.getSimpleUserFromToken(token);
     }
 
     @GetMapping("/{token}/current-user")
     public String getCurrentUser(@PathVariable("token") String token) throws GeneralException {
-        return _userService.getCurrentUser(token);
+        return userService.getCurrentUser(token);
     }
 
 

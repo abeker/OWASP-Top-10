@@ -7,6 +7,7 @@ import com.owasp.authenticationservice.dto.response.UserQuestionResponse;
 import com.owasp.authenticationservice.dto.response.UserResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,4 +35,6 @@ public interface IAuthService {
     boolean isPasswordWeak(String password, File file) throws FileNotFoundException;
 
     UserQuestionResponse getUserQuestionByEmail(String userEmail);
+
+    void invalidateSession(HttpServletRequest request, HttpServletResponse response);
 }
