@@ -1,0 +1,270 @@
+15-09-2020;18:57:47 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15-09-2020;18:57:51 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;18:57:51 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "admin" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "agent" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "login_attempt" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "admin" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "agent" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authorities_permissions" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authority" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "browser_fingerprint" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "login_attempt" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "permission" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "security_question" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "simple_user" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_authority" does not exist, skipping
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;18:57:52 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_entity" does not exist, skipping
+15-09-2020;18:57:53 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+15-09-2020;18:57:57 WARN  c.n.d.DiscoveryClient.notify:1351 - Saw local status change event StatusChangeEvent [timestamp=1600189077810, current=DOWN, previous=UP]
+15-09-2020;18:59:56 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15-09-2020;18:59:59 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;18:59:59 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "admin" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "agent" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "login_attempt" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "admin" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "agent" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authorities_permissions" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authority" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "browser_fingerprint" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "login_attempt" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "permission" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "security_question" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "simple_user" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_authority" does not exist, skipping
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:00:01 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_entity" does not exist, skipping
+15-09-2020;19:00:02 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+15-09-2020;19:00:06 WARN  c.n.d.DiscoveryClient.notify:1351 - Saw local status change event StatusChangeEvent [timestamp=1600189206756, current=DOWN, previous=UP]
+15-09-2020;19:05:00 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15-09-2020;19:05:02 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:05:02 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "admin" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "agent" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "login_attempt" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "admin" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "agent" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authorities_permissions" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authority" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "browser_fingerprint" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "login_attempt" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "permission" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "security_question" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "simple_user" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_authority" does not exist, skipping
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:05:03 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_entity" does not exist, skipping
+15-09-2020;19:05:04 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+15-09-2020;19:05:07 WARN  c.n.d.DiscoveryClient.notify:1351 - Saw local status change event StatusChangeEvent [timestamp=1600189507026, current=DOWN, previous=UP]
+15-09-2020;19:12:53 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15-09-2020;19:12:56 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:12:56 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "admin" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "agent" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "login_attempt" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "admin" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "agent" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authorities_permissions" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authority" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "browser_fingerprint" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "login_attempt" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "permission" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "security_question" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "simple_user" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_authority" does not exist, skipping
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:12:56 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_entity" does not exist, skipping
+15-09-2020;19:12:58 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+15-09-2020;19:13:00 WARN  c.n.d.DiscoveryClient.notify:1351 - Saw local status change event StatusChangeEvent [timestamp=1600189980751, current=DOWN, previous=UP]
+15-09-2020;19:15:22 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15-09-2020;19:15:25 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:15:25 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "admin" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "agent" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "login_attempt" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "admin" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "agent" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authorities_permissions" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authority" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "browser_fingerprint" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "login_attempt" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "permission" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "security_question" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "simple_user" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_authority" does not exist, skipping
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:15:26 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_entity" does not exist, skipping
+15-09-2020;19:15:28 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+15-09-2020;19:15:30 WARN  c.n.d.DiscoveryClient.notify:1351 - Saw local status change event StatusChangeEvent [timestamp=1600190130720, current=DOWN, previous=UP]
+15-09-2020;19:16:55 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15-09-2020;19:16:59 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:16:59 WARN  c.n.c.s.URLConfigurationSource.<init>:121 - No URLs will be polled as dynamic configuration sources.
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "admin" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "agent" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "authorities_permissions" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "login_attempt" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "simple_user" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - relation "user_authority" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "admin" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "agent" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authorities_permissions" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "authority" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "browser_fingerprint" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "login_attempt" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "permission" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "security_question" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "simple_user" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_authority" does not exist, skipping
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:230 - SQL Warning Code: 0, SQLState: 00000
+15-09-2020;19:16:59 WARN  o.h.e.j.s.SqlExceptionHelper.logWarning:231 - table "user_entity" does not exist, skipping
+15-09-2020;19:17:01 WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger.logWarning:86 - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+15-09-2020;19:17:03 WARN  c.n.d.DiscoveryClient.notify:1351 - Saw local status change event StatusChangeEvent [timestamp=1600190223748, current=DOWN, previous=UP]

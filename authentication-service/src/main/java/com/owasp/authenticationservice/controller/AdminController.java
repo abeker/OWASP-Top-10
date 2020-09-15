@@ -14,23 +14,23 @@ import java.util.UUID;
 @RequestMapping("/admins")
 public class AdminController {
 
-    private final AdminService _adminService;
+    private final AdminService adminService;
 
     public AdminController(AdminService adminService) {
-        _adminService = adminService;
+        this.adminService = adminService;
     }
 
     @PutMapping("/approve")
     @PreAuthorize("hasAuthority('APPROVE_USER_REQUEST')")
     public List<SimpleUserResponse> approveRegistrationRequest(@RequestHeader("Auth-Token") String token,
                                                                @RequestBody String id) throws GeneralException {
-        return _adminService.approveRegistrationRequest(UUID.fromString(id), token);
+        return adminService.approveRegistrationRequest(UUID.fromString(id), token);
     }
 
     @PutMapping("/deny")
     @PreAuthorize("hasAuthority('DENY_USER_REQUEST')")
     public List<SimpleUserResponse> denyRegistrationRequest(@RequestHeader("Auth-Token") String token,
                                                             @RequestBody String id) throws GeneralException {
-        return _adminService.denyRegistrationRequest(UUID.fromString(id), token);
+        return adminService.denyRegistrationRequest(UUID.fromString(id), token);
     }
 }

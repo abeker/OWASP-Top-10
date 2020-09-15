@@ -99,12 +99,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-			<version>2.2.5.RELEASE</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>${freemarker.version}</version>
@@ -126,6 +120,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>2.2.5.RELEASE</version>
 		</dependency>
 		<!--Mail Template-->
 		<dependency>
@@ -157,10 +152,11 @@
 				<configuration>
 					<format>ALL</format>
 					<outputDirectory>${project.build.directory}</outputDirectory>
-					<suppressionFile>
-						${project.basedir}/suppress.xml
-					</suppressionFile>
-					<excludes>${project.basedir}/suppression-dependencies.xml</excludes>
+					<suppressionFiles>
+						<suppressionFile>${project.basedir}/suppression-dependencies.xml</suppressionFile>
+					</suppressionFiles>
+					<skipProvidedScope>true</skipProvidedScope>
+					<skipRuntimeScope>true</skipRuntimeScope>
 				</configuration>
 			</plugin>
 			<plugin>

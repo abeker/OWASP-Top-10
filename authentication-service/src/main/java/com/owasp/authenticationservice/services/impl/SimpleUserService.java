@@ -10,7 +10,7 @@ import com.owasp.authenticationservice.repository.IAuthorityRepository;
 import com.owasp.authenticationservice.repository.ISecurityQuestionRepository;
 import com.owasp.authenticationservice.repository.ISimpleUserRepository;
 import com.owasp.authenticationservice.repository.IUserRepository;
-import com.owasp.authenticationservice.security.SecurityEscape;
+import com.owasp.authenticationservice.guard.SecurityEscape;
 import com.owasp.authenticationservice.security.TokenUtils;
 import com.owasp.authenticationservice.services.IAuthService;
 import com.owasp.authenticationservice.services.ISimpleUserService;
@@ -114,7 +114,9 @@ public class SimpleUserService implements ISimpleUserService {
         for (SimpleUser simpleUser : allSimpleUsers) {
             simpleUserResponseList.add(mapSimpleUserToSimpleUserResponse(simpleUser));
         }
-        logger.info("[{}] retrieve registration requests", _userService.getCurrentUser(token));
+        if(!token.equals("fakeToken")) {
+            logger.info("[{}] retrieve registration requests", _userService.getCurrentUser(token));
+        }
         return simpleUserResponseList;
     }
 

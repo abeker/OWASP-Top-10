@@ -1,4 +1,4 @@
-package com.owasp.authenticationservice.security;
+package com.owasp.authenticationservice.guard;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.jsoup.Jsoup;
