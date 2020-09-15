@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.UUID;
@@ -57,6 +58,11 @@ public class UserController {
     @PutMapping("/login")
     public UserResponse login(@RequestBody LoginCredentialsRequest request, HttpServletRequest httpServletRequest) throws GeneralException, SQLException {
         return _authService.login(request, httpServletRequest);
+    }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        _authService.invalidateSession(request, response);
     }
 
     @PutMapping("/check-attempts")
